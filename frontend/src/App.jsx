@@ -58,20 +58,28 @@ function App() {
           {/* Public Routes */}
           <Route
             path="/"
-            element={authUser ? <Navigate to="/dashboard" /> : <LandingPage />}
+            element={authUser ? <Navigate to={authUser.isVerified ? "/dashboard" : "/verify"} /> : <LandingPage />}
           />
           <Route
             path="/login"
-            element={!authUser ? <LoginPage /> : <Navigate to="/dashboard" />}
+            element={!authUser ? <LoginPage /> : <Navigate to={authUser.isVerified ? "/dashboard" : "/verify"} />}
           />
           <Route
             path="/signup"
-            element={!authUser ? <SignUpPage /> : <Navigate to="/dashboard" />}
+            element={!authUser ? <SignUpPage /> : <Navigate to={authUser.isVerified ? "/dashboard" : "/verify"} />}
           />
           <Route
             path="/verify"
             element={
-              !authUser ? <EmailVerification /> : <Navigate to="/dashboard" />
+              authUser ? (
+                authUser.isVerified ? (
+                  <Navigate to="/dashboard" />
+                ) : (
+                  <EmailVerification />
+                )
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
 
@@ -79,38 +87,38 @@ function App() {
           <Route element={<ProtectedLayout />}>
             <Route
               path="/dashboard"
-              element={authUser ? <Dashboard /> : <Navigate to="/login" />}
+              element={authUser ? (authUser.isVerified ? <Dashboard /> : <Navigate to="/verify" />) : <Navigate to="/login" />}
             />
             <Route
               path="/recruitment"
-              element={authUser ? <Recruitment /> : <Navigate to="/login" />}
+              element={authUser ? (authUser.isVerified ? <Recruitment /> : <Navigate to="/verify" />) : <Navigate to="/login" />}
             />
             <Route
               path="/outplacement"
-              element={authUser ? <Outplacement /> : <Navigate to="/login" />}
+              element={authUser ? (authUser.isVerified ? <Outplacement /> : <Navigate to="/verify" />) : <Navigate to="/login" />}
             />
             <Route
               path="/marketplace"
-              element={authUser ? <Marketplace /> : <Navigate to="/login" />}
+              element={authUser ? (authUser.isVerified ? <Marketplace /> : <Navigate to="/verify" />) : <Navigate to="/login" />}
             />
             <Route
               path="/events"
-              element={authUser ? <Events /> : <Navigate to="/login" />}
+              element={authUser ? (authUser.isVerified ? <Events /> : <Navigate to="/verify" />) : <Navigate to="/login" />}
             />
             <Route
               path="/pricing"
-              element={authUser ? <Pricing /> : <Navigate to="/login" />}
+              element={authUser ? (authUser.isVerified ? <Pricing /> : <Navigate to="/verify" />) : <Navigate to="/login" />}
             />
             <Route
               path="/profile"
-              element={authUser ? <Profile /> : <Navigate to="/login" />}
+              element={authUser ? (authUser.isVerified ? <Profile /> : <Navigate to="/verify" />) : <Navigate to="/login" />}
             />
           </Route>
 
           {/* Catch-all route */}
           <Route
             path="*"
-            element={<Navigate to={authUser ? '/dashboard' : '/'} />}
+            element={<Navigate to={authUser ? (authUser.isVerified ? '/dashboard' : '/verify') : '/'} />}
           />
         </Routes>
       </AnimatePresence>

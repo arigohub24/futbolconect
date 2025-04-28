@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -11,6 +10,7 @@ import {
   Twitter,
   Instagram,
   Linkedin,
+  ChevronRight,
   Mail,
   Phone,
   Users,
@@ -105,67 +105,157 @@ const LandingPage = () => {
     { name: "Contact", href: "#contact" },
   ];
 
+  const logoVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.5 
+      }
+    }
+  };
+
+  const navItemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.3
+      }
+    })
+  };
+
+  const mobileMenuVariants = {
+    hidden: { height: 0, opacity: 0 },
+    visible: { 
+      height: "auto", 
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        staggerChildren: 0.1
+      }
+    },
+    exit: { 
+      height: 0, 
+      opacity: 0,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
+  const mobileItemVariants = {
+    hidden: { x: -20, opacity: 0 },
+    visible: { 
+      x: 0, 
+      opacity: 1,
+      transition: { duration: 0.2 }
+    },
+    exit: { 
+      x: -20, 
+      opacity: 0,
+      transition: { duration: 0.1 }
+    }
+  };
+
+  const buttonHoverEffect = {
+    scale: 1.03,
+    boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)",
+    transition: { duration: 0.2 }
+  };
+
+    // Handle logo click to reload the page
+    const handleLogoClick = () => {
+      window.location.reload();
+    };
+    
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* Navigation */}
-      <nav
-        className={`fixed w-full z-50 transition-all duration-300 ${
+        <nav
+        className={`fixed w-full z-50 transition-all duration-500 ${
           scrolled ? "bg-white shadow-md py-3" : "bg-transparent py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+              <motion.div 
+            initial="hidden" 
+            animate="visible" 
+            variants={logoVariants}
+            className="cursor-pointer"
+            onClick={handleLogoClick}
           >
-            <motion.span
-              className="text-2xl font-bold tracking-tight flex items-center"
+            <motion.span 
+              className="text-2xl font-bold tracking-tight flex items-center" 
               whileHover={{ scale: 1.05 }}
             >
-              <motion.span
-                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-lg mr-1"
-                whileHover={{ boxShadow: "0 0 15px rgba(59, 130, 246, 0.6)" }}
+              <motion.span 
+                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-lg mr-1" 
+                whileHover={{ 
+                  boxShadow: "0 0 8px rgba(59, 130, 246, 0.6)", 
+                  scale: 1.05 
+                }} 
+                whileTap={{ scale: 0.98 }}
               >
                 Futbol
               </motion.span>
-              <span className="text-blue-600">Connect</span>
+              <span className={`${scrolled ? 'text-blue-600' : 'text-white'} transition-colors duration-300`}>
+                Connect
+              </span>
             </motion.span>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <ul className="flex space-x-8">
-              {navItems.map((item) => (
-                <li key={item.name}>
-                  <a
+              {navItems.map((item, i) => (
+                <motion.li 
+                  key={item.name}
+                  custom={i}
+                  initial="hidden"
+                  animate="visible"
+                  variants={navItemVariants}
+                >
+                  <motion.a
                     href={item.href}
-                    className={`font-medium hover:text-blue-500 transition-colors ${
+                    className={`font-medium transition-colors duration-300 ${
                       scrolled ? "text-slate-700" : "text-white"
                     }`}
+                    whileHover={{ 
+                      color: '#3b82f6', 
+                      scale: 1.05,
+                      transition: { duration: 0.2 }
+                    }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     {item.name}
-                  </a>
-                </li>
+                  </motion.a>
+                </motion.li>
               ))}
             </ul>
             <div className="flex space-x-4">
               <motion.a
                 href="/login"
-                className={`border px-4 py-2 rounded-lg text-sm font-medium ${
+                className={`border px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   scrolled
-                    ? "border-blue-600 text-blue-600"
-                    : "border-white text-white"
+                    ? "border-blue-600 text-blue-600 hover:bg-blue-50"
+                    : "border-white text-white hover:bg-white/10"
                 }`}
-                whileHover={{ scale: 1.05 }}
+                whileHover={buttonHoverEffect}
                 whileTap={{ scale: 0.95 }}
               >
                 Log in
               </motion.a>
               <motion.a
-                href="/register"
-                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium"
-                whileHover={{ scale: 1.05 }}
+                href="/signup"
+                className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300"
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0px 8px 20px rgba(59, 130, 246, 0.4)"
+                }}
                 whileTap={{ scale: 0.95 }}
               >
                 Get Started
@@ -174,56 +264,97 @@ const LandingPage = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
+          <motion.div 
+            className="md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <motion.button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-600 hover:text-blue-600 transition-colors duration-200 focus:outline-none"
+              className="text-gray-600 hover:text-blue-600 transition-colors duration-200 focus:outline-none p-2 rounded-full"
+              whileHover={{ 
+                backgroundColor: scrolled ? 'rgba(59, 130, 246, 0.1)' : 'rgba(255, 255, 255, 0.1)'
+              }}
+              whileTap={{ scale: 0.9 }}
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? (
-                <X size={24} className={scrolled ? "text-slate-800" : "text-white"} />
-              ) : (
-                <Menu size={24} className={scrolled ? "text-slate-800" : "text-white"} />
-              )}
-            </button>
-          </div>
+              <AnimatePresence mode="wait">
+                {mobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={24} className={scrolled ? "text-slate-800" : "text-white"} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu size={24} className={scrolled ? "text-slate-800" : "text-white"} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          </motion.div>
         </div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden bg-white"
+              variants={mobileMenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="md:hidden bg-white shadow-lg rounded-b-2xl"
             >
-              <div className="px-4 pt-2 pb-4 space-y-2">
-                {navItems.map((item) => (
-                  <a
+              <div className="px-4 pt-3 pb-5 space-y-1">
+                {navItems.map((item, i) => (
+                  <motion.div
                     key={item.name}
-                    href={item.href}
-                    className="block py-2 px-3 text-slate-700 font-medium hover:bg-slate-100 rounded-md"
-                    onClick={() => setMobileMenuOpen(false)}
+                    variants={mobileItemVariants}
+                    custom={i}
                   >
-                    {item.name}
-                  </a>
+                    <motion.a
+                      href={item.href}
+                      className="block py-3 px-4 text-slate-700 font-medium hover:bg-blue-50 rounded-xl flex items-center justify-between"
+                      onClick={() => setMobileMenuOpen(false)}
+                      whileHover={{ x: 5 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span>{item.name}</span>
+                      <ChevronRight size={16} className="text-blue-500" />
+                    </motion.a>
+                  </motion.div>
                 ))}
-                <div className="pt-2 space-y-2">
+                <div className="pt-4 space-y-3">
                   <motion.a
                     href="/login"
-                    className="block border border-blue-600 text-blue-600 py-2 px-3 rounded-lg text-base font-medium text-center"
-                    whileHover={{ scale: 1.02 }}
+                    className="block border border-blue-600 text-blue-600 py-3 px-4 rounded-xl text-center font-medium hover:bg-blue-50 transition-colors"
+                    whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
+                    variants={mobileItemVariants}
                   >
                     Log in
                   </motion.a>
                   <motion.a
-                    href="/register"
-                    className="block bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-3 rounded-lg text-base font-medium text-center"
-                    whileHover={{ scale: 1.02 }}
+                    href="/signup"
+                    className="block bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-4 rounded-xl text-center font-medium shadow-md"
+                    whileHover={{ 
+                      scale: 1.02, 
+                      y: -2,
+                      boxShadow: "0px 8px 15px rgba(59, 130, 246, 0.3)" 
+                    }}
                     whileTap={{ scale: 0.98 }}
+                    variants={mobileItemVariants}
                   >
                     Get Started
                   </motion.a>
@@ -233,8 +364,9 @@ const LandingPage = () => {
           )}
         </AnimatePresence>
       </nav>
+
       {/* Hero Section */}
-            <div
+        <div
               id="home"
               className="relative flex items-center justify-center min-h-screen bg-slate-900 overflow-hidden"
             >
@@ -282,7 +414,7 @@ const LandingPage = () => {
                   {/* Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4 mb-16">
                     <motion.a
-                      href="/register"
+                      href="/signup"
                       className="flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition-all duration-200 shadow-lg"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -319,6 +451,7 @@ const LandingPage = () => {
                 </motion.div>
               </div>
             </div>
+
       {/* Features Section */}
       <div
         id="features"
@@ -388,6 +521,7 @@ const LandingPage = () => {
           </motion.div>
         </div>
       </div>
+
 
       {/* How It Works Section */}
       <div
@@ -506,6 +640,7 @@ const LandingPage = () => {
         </div>
       </div>
 
+
       {/* Stats Section */}
       <div className="py-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -546,6 +681,7 @@ const LandingPage = () => {
           </motion.div>
         </div>
       </div>
+
 
       {/* Testimonials Section */}
       <div
@@ -670,6 +806,7 @@ const LandingPage = () => {
         </div>
       </div>
 
+
       {/* CTA Section */}
       <div
         id="contact"
@@ -787,6 +924,7 @@ const LandingPage = () => {
           </motion.div>
         </div>
       </div>
+
 
       {/* Footer */}
       <footer className="bg-gradient-to-b from-slate-900 to-slate-800 text-gray-300 py-12 relative overflow-hidden">
@@ -958,6 +1096,7 @@ const LandingPage = () => {
         </div>
       </footer>
 
+
       {/* Demo Modal */}
       {showDemoModal && (
         <motion.div
@@ -985,7 +1124,7 @@ const LandingPage = () => {
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src="https://www.youtube.com/watch?v=lij3byeS8Ak"
                 title="Platform Demo"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
