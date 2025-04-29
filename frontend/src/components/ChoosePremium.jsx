@@ -157,7 +157,7 @@ const ChoosePremium = () => {
             Unlock Premium
           </h1>
           <p className="text-gray-600 mb-8 text-lg max-w-2xl">
-            Join TransferRoom Premium with your subscription details below.
+            Join Futbol conect Premium with your subscription details below.
           </p>
         </motion.div>
 
