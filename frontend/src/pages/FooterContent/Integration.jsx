@@ -3,104 +3,79 @@ import { Link } from 'react-router-dom';
 
 const Integration = () => {
   const integrations = [
-    {
-      title: 'Wearable Devices',
-      description: 'Sync with wearables like smartwatches to track performance metrics in real-time.',
-      icon: '⌚',
-    },
-    {
-      title: 'Video Platforms',
-      description: 'Integrate with video analysis tools to upload and review match footage seamlessly.',
-      icon: '🎥',
-    },
-    {
-      title: 'Social Media',
-      description: 'Share highlights and connect with fans directly through social media integrations.',
-      icon: '📱',
-    },
-    {
-      title: 'Club Management',
-      description: 'Connect with club software for streamlined communication and scheduling.',
-      icon: '🏟️',
-    },
+    { title: 'Wearable Devices', description: 'Sync with wearables to track performance metrics in real-time.', icon: '⌚' },
+    { title: 'Video Platforms', description: 'Upload and review match footage seamlessly.', icon: '🎥' },
+    { title: 'Social Media', description: 'Share highlights and connect with fans.', icon: '📱' },
+    { title: 'Club Management', description: 'Streamlined communication and scheduling.', icon: '🏟️' },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
 
   return (
-    <div className="min-h-screen bg-white text-gray-800">
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 0.8 }}
+      className="min-h-screen bg-gradient-to-b from-blue-50 to-white text-gray-800"
+    >
       {/* Header */}
-      <header className="bg-blue-600 text-white py-6">
+      <motion.header 
+        initial={{ y: -20, opacity: 0 }} 
+        animate={{ y: 0, opacity: 1 }} 
+        transition={{ duration: 0.6 }}
+        className="bg-blue-600 text-white py-6"
+      >
         <div className="container mx-auto px-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold">Futbol Conect</h1>
-          <nav>
-            <Link to="/" className="mr-4 hover:underline">Home</Link>
-            <Link to="/features" className="mr-4 hover:underline">Features</Link>
-            <Link to="/pricing" className="mr-4 hover:underline">Pricing</Link>
-            <Link to="/integration" className="hover:underline">Integration</Link>
+          <nav className="flex space-x-4">
+            {["Home", "Features", "Pricing", "Integration"].map((item) => (
+              <motion.div whileHover={{ scale: 1.1 }} key={item}>
+                <Link to={`/${item.toLowerCase()}`} className="hover:underline">{item}</Link>
+              </motion.div>
+            ))}
           </nav>
         </div>
-      </header>
+      </motion.header>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
-        <motion.section
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <motion.h2 
+          initial={{ opacity: 0, scale: 0.9 }} 
+          animate={{ opacity: 1, scale: 1 }} 
+          transition={{ duration: 0.6 }} 
+          className="text-4xl font-bold text-blue-600 text-center mb-8"
         >
-          <h2 className="text-4xl font-bold text-blue-600 mb-4">Integrations</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Enhance your Futbol Conect experience with seamless integrations to your favorite tools.
-          </p>
-        </motion.section>
+          Integrations
+        </motion.h2>
 
-        <motion.div
+        <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          variants={containerVariants}
           initial="hidden"
           animate="visible"
+          transition={{ staggerChildren: 0.2 }}
         >
           {integrations.map((integration, index) => (
-            <motion.div
-              key={index}
-              className="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-              variants={itemVariants}
+            <motion.div 
+              key={index} 
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: index * 0.2 }}
+              whileHover={{ scale: 1.03 }}
+              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
             >
-              <div className="text-4xl mb-4">{integration.icon}</div>
-              <h3 className="text-xl font-semibold text-blue-600 mb-2">{integration.title}</h3>
+              <motion.div 
+                className="text-4xl mb-4" 
+                animate={{ y: [0, -5, 0] }} 
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                {integration.icon}
+              </motion.div>
+              <h3 className="text-xl font-semibold text-blue-600">{integration.title}</h3>
               <p className="text-gray-600">{integration.description}</p>
             </motion.div>
           ))}
         </motion.div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-blue-600 text-white py-6">
-        <div className="container mx-auto px-4 text-center">
-          <p>© 2025 Futbol Conect. All rights reserved.</p>
-          <div className="mt-4 flex justify-center space-x-4">
-            <Link to="/about" className="hover:underline">About Us</Link>
-            <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
-            <Link to="/terms" className="hover:underline">Terms of Service</Link>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </motion.div>
   );
 };
 

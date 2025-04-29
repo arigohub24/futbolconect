@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Users, 
   Search, 
@@ -8,12 +8,14 @@ import {
   ChevronDown, 
   Star, 
   MessageCircle,
-  ExternalLink 
+  ExternalLink,
+  X,
+  Plus
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AvailablePlayers = () => {
-  // Sample data - in a real app, would come from API or context
+  // Sample data with more details for richer cards
   const [players, setPlayers] = useState([
     {
       id: 1,
@@ -22,10 +24,16 @@ const AvailablePlayers = () => {
       age: 24,
       club: "City Strikers",
       nationality: "England",
+      flag: "🇬🇧",
       status: "Available",
       contractEnd: "2025-06-30",
       enquiries: 5,
       starred: false,
+      stats: {
+        goals: 12,
+        assists: 8,
+        rating: 7.8
+      },
       image: null
     },
     {
@@ -35,10 +43,16 @@ const AvailablePlayers = () => {
       age: 22,
       club: "Global United",
       nationality: "USA",
+      flag: "🇺🇸",
       status: "Available",
       contractEnd: "2024-12-31",
       enquiries: 3,
       starred: false,
+      stats: {
+        goals: 5,
+        assists: 15,
+        rating: 8.2
+      },
       image: null
     },
     {
@@ -48,10 +62,16 @@ const AvailablePlayers = () => {
       age: 27,
       club: "FC Elite",
       nationality: "France",
+      flag: "🇫🇷",
       status: "Available",
       contractEnd: "2025-05-15",
       enquiries: 7,
       starred: true,
+      stats: {
+        goals: 2,
+        assists: 4,
+        rating: 7.5
+      },
       image: null
     },
     {
@@ -61,10 +81,16 @@ const AvailablePlayers = () => {
       age: 25,
       club: "Eastern Dragons",
       nationality: "China",
+      flag: "🇨🇳",
       status: "Available",
       contractEnd: "2025-08-01",
       enquiries: 2,
       starred: false,
+      stats: {
+        cleanSheets: 14,
+        saves: 87,
+        rating: 8.0
+      },
       image: null
     },
     {
@@ -74,10 +100,16 @@ const AvailablePlayers = () => {
       age: 23,
       club: "Madrid Stars",
       nationality: "Spain",
+      flag: "🇪🇸",
       status: "Available",
       contractEnd: "2025-01-15",
       enquiries: 8,
       starred: true,
+      stats: {
+        goals: 9,
+        assists: 11,
+        rating: 8.4
+      },
       image: null
     }
   ]);
@@ -91,6 +123,15 @@ const AvailablePlayers = () => {
   });
   const [showFilters, setShowFilters] = useState(false);
   const [sortOption, setSortOption] = useState('enquiries');
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading data
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Filtered and sorted players
   const filteredPlayers = players.filter(player => {
@@ -109,6 +150,7 @@ const AvailablePlayers = () => {
     if (sortOption === 'enquiries') return b.enquiries - a.enquiries;
     if (sortOption === 'age') return a.age - b.age;
     if (sortOption === 'name') return a.name.localeCompare(b.name);
+    if (sortOption === 'rating') return (b.stats.rating || 0) - (a.stats.rating || 0);
     return 0;
   });
 
@@ -129,253 +171,473 @@ const AvailablePlayers = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.1,
+        when: "beforeChildren"
       }
     }
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10
+      }
+    },
+    hover: {
+      y: -8,
+      boxShadow: "0 20px 25px -5px rgba(0, 91, 234, 0.1), 0 10px 10px -5px rgba(0, 91, 234, 0.04)",
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 15
+      }
+    },
+    tap: {
+      scale: 0.98
+    }
+  };
+
+  const starVariants = {
+    initial: { scale: 1 },
+    animate: { scale: [1, 1.2, 1], transition: { duration: 0.4 } }
   };
 
   const positions = ["Forward", "Midfielder", "Defender", "Goalkeeper"];
   const nationalities = ["England", "USA", "France", "Spain", "China", "Germany", "Brazil", "Argentina"];
+
+  // Loading skeleton
+  if (isLoading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-screen bg-gray-50 p-4 md:p-8"
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Loading skeleton for header */}
+          <div className="flex justify-between items-center mb-8">
+            <div className="h-10 w-24 bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="h-10 w-48 bg-gray-200 rounded-lg animate-pulse"></div>
+          </div>
+          
+          {/* Loading skeleton for title */}
+          <div className="h-10 w-64 bg-gray-200 rounded-lg mb-8 animate-pulse"></div>
+          
+          {/* Loading skeleton for search/filter */}
+          <div className="bg-white rounded-xl shadow-sm p-4 mb-6 border border-gray-100">
+            <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
+          </div>
+          
+          {/* Loading skeleton for player cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+                <div className="h-40 bg-gray-200 animate-pulse"></div>
+                <div className="p-4">
+                  <div className="h-6 w-3/4 bg-gray-200 rounded mb-4 animate-pulse"></div>
+                  <div className="h-4 w-1/2 bg-gray-200 rounded mb-6 animate-pulse"></div>
+                  <div className="h-10 bg-gray-200 rounded-lg animate-pulse"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-gray-50 p-4 md:p-8"
+      transition={{ duration: 0.3 }}
+      className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4 md:p-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header with back button */}
-        <div className="flex justify-between items-center mb-6">
-          <Link to="/" className="flex items-center text-blue-600 hover:text-blue-800 transition-colors">
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            <span className="font-medium">Back to Dashboard</span>
+        <motion.div 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.1 }}
+          className="flex justify-between items-center mb-6"
+        >
+          <Link 
+            to="/" 
+            className="flex items-center text-blue-600 hover:text-blue-800 transition-colors group"
+          >
+            <motion.div 
+              whileHover={{ x: -2 }}
+              className="flex items-center"
+            >
+              <ArrowLeft className="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-1" />
+              <span className="font-medium">Back to Dashboard</span>
+            </motion.div>
           </Link>
           <Link 
             to="/make-player-available" 
-            className="bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors"
+            className="relative overflow-hidden group"
           >
-            Make Player Available
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg font-medium flex items-center"
+            >
+              <Plus className="w-5 h-5 mr-2" />
+              Make Player Available
+              <motion.span 
+                className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 0.1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>
           </Link>
-        </div>
+        </motion.div>
 
         {/* Page Title */}
-        <h1 className="text-3xl font-bold text-blue-900 mb-6">Available Players</h1>
+        <motion.h1 
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="text-3xl font-bold text-gray-900 mb-6"
+        >
+          Available <span className="text-blue-600">Players</span>
+        </motion.h1>
 
         {/* Search and Filter Bar */}
-        <div className="bg-white rounded-xl shadow-sm p-4 mb-6 border border-gray-100">
+        <motion.div
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="bg-white rounded-xl shadow-sm p-4 mb-6 border border-gray-100 backdrop-blur-sm bg-opacity-80"
+        >
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-              <input
+              <motion.input
                 type="text"
                 placeholder="Search players, clubs, nationalities..."
                 className="pl-10 w-full border border-gray-200 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                whileFocus={{ 
+                  boxShadow: "0 0 0 2px rgba(59, 130, 246, 0.5)",
+                  borderColor: "transparent"
+                }}
               />
+              {searchTerm && (
+                <motion.button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <X className="h-5 w-5" />
+                </motion.button>
+              )}
             </div>
             <div className="flex gap-2">
-              <button
+              <motion.button
                 onClick={() => setShowFilters(!showFilters)}
                 className="flex items-center bg-blue-50 text-blue-700 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <Filter className="w-5 h-5 mr-2" />
                 Filters
                 <ChevronDown className={`w-5 h-5 ml-1 transition-transform ${showFilters ? 'transform rotate-180' : ''}`} />
-              </button>
-              <select
+              </motion.button>
+              <motion.select
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
                 className="bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                whileFocus={{ 
+                  boxShadow: "0 0 0 2px rgba(59, 130, 246, 0.5)",
+                  borderColor: "transparent"
+                }}
               >
                 <option value="enquiries">Sort by: Enquiries</option>
+                <option value="rating">Sort by: Rating</option>
                 <option value="age">Sort by: Age</option>
                 <option value="name">Sort by: Name</option>
-              </select>
+              </motion.select>
             </div>
           </div>
 
           {/* Filter Panel */}
-          {showFilters && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="mt-4 pt-4 border-t border-gray-100"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Position</label>
-                  <select
-                    name="position"
-                    value={filters.position}
-                    onChange={handleFilterChange}
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="">All Positions</option>
-                    {positions.map(pos => (
-                      <option key={pos} value={pos}>{pos}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Min Age</label>
-                  <input
-                    type="number"
-                    name="ageMin"
-                    value={filters.ageMin}
-                    onChange={handleFilterChange}
-                    placeholder="Min"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Max Age</label>
-                  <input
-                    type="number"
-                    name="ageMax"
-                    value={filters.ageMax}
-                    onChange={handleFilterChange}
-                    placeholder="Max"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Nationality</label>
-                  <select
-                    name="nationality"
-                    value={filters.nationality}
-                    onChange={handleFilterChange}
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="">All Nationalities</option>
-                    {nationalities.map(nat => (
-                      <option key={nat} value={nat}>{nat}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              <div className="flex justify-end mt-4">
-                <button
-                  onClick={() => setFilters({position: '', ageMin: '', ageMax: '', nationality: ''})}
-                  className="text-gray-600 hover:text-gray-800 mr-4"
-                >
-                  Clear Filters
-                </button>
-                <button
-                  onClick={() => setShowFilters(false)}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Apply Filters
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </div>
-
-        {/* Results Count */}
-        <p className="text-gray-600 mb-4">Showing {filteredPlayers.length} available players</p>
-
-        {/* Player Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filteredPlayers.map(player => (
-            <motion.div
-              key={player.id}
-              variants={itemVariants}
-              whileHover={{ 
-                y: -5, 
-                boxShadow: "0 12px 24px rgba(0, 91, 234, 0.1)",
-              }}
-              className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:border-blue-200 transition-all"
-            >
-              <div className="relative">
-                <div className="h-32 bg-gradient-to-r from-blue-500 to-blue-600"></div>
-                <div className="absolute top-3 right-3 flex space-x-2">
-                  <button 
-                    onClick={() => toggleStarPlayer(player.id)}
-                    className={`p-1.5 rounded-full ${player.starred ? 'bg-yellow-400 text-white' : 'bg-gray-100 text-gray-400 hover:bg-gray-200'}`}
-                  >
-                    <Star className="h-4 w-4" />
-                  </button>
-                </div>
-                <div className="absolute -bottom-10 left-4">
-                  <div className="w-20 h-20 bg-gray-200 rounded-full border-4 border-white flex items-center justify-center text-blue-600 font-bold text-xl">
-                    {player.image ? (
-                      <img 
-                        src={player.image} 
-                        alt={player.name} 
-                        className="w-full h-full rounded-full object-cover"
-                      />
-                    ) : (
-                      player.name.charAt(0)
-                    )}
+          <AnimatePresence>
+            {showFilters && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="mt-4 pt-4 border-t border-gray-100"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Position</label>
+                    <select
+                      name="position"
+                      value={filters.position}
+                      onChange={handleFilterChange}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="">All Positions</option>
+                      {positions.map(pos => (
+                        <option key={pos} value={pos}>{pos}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Min Age</label>
+                    <input
+                      type="number"
+                      name="ageMin"
+                      value={filters.ageMin}
+                      onChange={handleFilterChange}
+                      placeholder="Min"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Max Age</label>
+                    <input
+                      type="number"
+                      name="ageMax"
+                      value={filters.ageMax}
+                      onChange={handleFilterChange}
+                      placeholder="Max"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Nationality</label>
+                    <select
+                      name="nationality"
+                      value={filters.nationality}
+                      onChange={handleFilterChange}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="">All Nationalities</option>
+                      {nationalities.map(nat => (
+                        <option key={nat} value={nat}>{nat}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
-              </div>
-              
-              <div className="pt-12 p-4">
-                <h3 className="font-semibold text-lg text-blue-900">{player.name}</h3>
-                <div className="flex items-center text-gray-500 text-sm mb-3">
-                  <span className="mr-3">{player.position}</span>
-                  <span className="mr-3">|</span>
-                  <span>{player.age} years</span>
+                <div className="flex justify-end mt-4">
+                  <motion.button
+                    onClick={() => setFilters({position: '', ageMin: '', ageMax: '', nationality: ''})}
+                    className="text-gray-600 hover:text-gray-800 mr-4"
+                    whileHover={{ x: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Clear Filters
+                  </motion.button>
+                  <motion.button
+                    onClick={() => setShowFilters(false)}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Apply Filters
+                  </motion.button>
                 </div>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-2 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">
-                    {player.club}
-                  </span>
-                  <span className="px-2 py-1 bg-gray-50 text-gray-700 rounded-full text-xs font-medium">
-                    {player.nationality}
-                  </span>
-                  <span className="px-2 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium">
-                    {player.status}
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
-                  <div>Contract ends: {new Date(player.contractEnd).toLocaleDateString()}</div>
-                  <div className="font-medium text-blue-600">{player.enquiries} Enquiries</div>
-                </div>
-                
-                <div className="flex space-x-2">
-                  <button className="flex-1 flex items-center justify-center bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    <MessageCircle className="h-4 w-4 mr-2" />
-                    Contact
-                  </button>
-                  <button className="flex items-center justify-center bg-gray-100 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-                    <ExternalLink className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
+
+        {/* Results Count */}
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-gray-600 mb-4"
+        >
+          Showing <span className="font-semibold text-blue-600">{filteredPlayers.length}</span> available players
+        </motion.p>
+
+        {/* Player Cards */}
+        <AnimatePresence>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filteredPlayers.map(player => (
+              <motion.div
+                key={player.id}
+                variants={itemVariants}
+                whileHover="hover"
+                whileTap="tap"
+                layout
+                className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:border-blue-200 transition-all group"
+              >
+                <div className="relative">
+                  <div className="h-40 bg-gradient-to-r from-blue-500 to-blue-600 relative overflow-hidden">
+                    <motion.div 
+                      className="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-20"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 0.2 }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                      <svg className="w-32 h-32 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="absolute top-3 right-3 flex space-x-2">
+                    <motion.button 
+                      onClick={() => toggleStarPlayer(player.id)}
+                      className={`p-1.5 rounded-full ${player.starred ? 'bg-yellow-400 text-white' : 'bg-white text-gray-400 hover:bg-gray-100'}`}
+                      variants={starVariants}
+                      initial="initial"
+                      animate={player.starred ? "animate" : "initial"}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Star className="h-4 w-4" fill={player.starred ? "currentColor" : "none"} />
+                    </motion.button>
+                  </div>
+                  <div className="absolute -bottom-10 left-4">
+                    <motion.div 
+                      className="w-20 h-20 bg-gray-200 rounded-full border-4 border-white flex items-center justify-center text-blue-600 font-bold text-xl relative overflow-hidden"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {player.image ? (
+                        <img 
+                          src={player.image} 
+                          alt={player.name} 
+                          className="w-full h-full rounded-full object-cover"
+                        />
+                      ) : (
+                        <span>{player.name.charAt(0)}</span>
+                      )}
+                      <motion.div 
+                        className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 0.1 }}
+                      />
+                    </motion.div>
+                  </div>
+                </div>
+                
+                <div className="pt-12 p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="font-semibold text-lg text-gray-900">{player.name}</h3>
+                    <span className="text-2xl">{player.flag}</span>
+                  </div>
+                  <div className="flex items-center text-gray-500 text-sm mb-3">
+                    <span className="mr-3">{player.position}</span>
+                    <span className="mr-3">•</span>
+                    <span>{player.age} years</span>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="px-2 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">
+                      {player.club}
+                    </span>
+                    <span className="px-2 py-1 bg-gray-50 text-gray-700 rounded-full text-xs font-medium">
+                      {player.nationality}
+                    </span>
+                    <span className="px-2 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium">
+                      {player.status}
+                    </span>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {player.position === 'Goalkeeper' ? (
+                      <>
+                        <div className="text-center">
+                          <div className="text-xs text-gray-500">Clean Sheets</div>
+                          <div className="font-bold text-blue-600">{player.stats.cleanSheets || 0}</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-xs text-gray-500">Saves</div>
+                          <div className="font-bold text-blue-600">{player.stats.saves || 0}</div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="text-center">
+                          <div className="text-xs text-gray-500">Goals</div>
+                          <div className="font-bold text-blue-600">{player.stats.goals || 0}</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-xs text-gray-500">Assists</div>
+                          <div className="font-bold text-blue-600">{player.stats.assists || 0}</div>
+                        </div>
+                      </>
+                    )}
+                    <div className="text-center">
+                      <div className="text-xs text-gray-500">Rating</div>
+                      <div className="font-bold text-blue-600">{player.stats.rating?.toFixed(1) || 'N/A'}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
+                    <div>Contract ends: {new Date(player.contractEnd).toLocaleDateString()}</div>
+                    <div className="font-medium text-blue-600 flex items-center">
+                      <MessageCircle className="w-4 h-4 mr-1" />
+                      {player.enquiries}
+                    </div>
+                  </div>
+                  
+                  <div className="flex space-x-2">
+                    <motion.button 
+                      className="flex-1 flex items-center justify-center bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <MessageCircle className="h-4 w-4 mr-2" />
+                      Contact
+                    </motion.button>
+                    <motion.button 
+                      className="flex items-center justify-center bg-gray-100 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Empty State */}
         {filteredPlayers.length === 0 && (
-          <div className="bg-white rounded-xl shadow-sm p-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="bg-white rounded-xl shadow-sm p-8 text-center"
+          >
             <Users className="h-12 w-12 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-700 mb-2">No players found</h3>
             <p className="text-gray-500 mb-4">Try adjusting your search or filters</p>
-            <button 
+            <motion.button 
               onClick={() => {setSearchTerm(''); setFilters({position: '', ageMin: '', ageMax: '', nationality: ''});}}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 flex items-center justify-center mx-auto"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
+              <X className="w-4 h-4 mr-1" />
               Clear all filters
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         )}
       </div>
     </motion.div>

@@ -59,7 +59,7 @@ const Pricing = () => {
 
   const testimonials = [
     {
-      quote: "TransferRoom has revolutionized how we connect with clubs globally.",
+      quote: "futbol connect has revolutionized how we connect with clubs globally.",
       author: "John Smith, Sporting Director, FC Elite",
       rating: 5
     },

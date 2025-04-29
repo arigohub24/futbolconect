@@ -23,105 +23,74 @@ const Press = () => {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
   return (
-    <div className="min-h-screen bg-white text-gray-800">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8 }}
+      className="min-h-screen bg-gray-50 text-gray-800"
+    >
       {/* Header */}
       <header className="bg-blue-600 text-white py-6">
-        <div className="container mx-auto px-4 flex justify-between items-center">
+        <motion.div 
+          initial={{ y: -20, opacity: 0 }} 
+          animate={{ y: 0, opacity: 1 }} 
+          transition={{ duration: 0.6 }}
+          className="container mx-auto px-4 flex justify-between items-center"
+        >
           <h1 className="text-2xl font-bold">Futbol Conect</h1>
-          <nav>
-            <Link to="/" className="mr-4 hover:underline">Home</Link>
-            <Link to="/features" className="mr-4 hover:underline">Features</Link>
-            <Link to="/press" className="hover:underline">Press</Link>
+          <nav className="flex space-x-4">
+            {["Home", "Features", "Press"].map((item, index) => (
+              <motion.div 
+                key={index} 
+                whileHover={{ scale: 1.1 }} 
+                className="hover:underline"
+              >
+                <Link to={`/${item.toLowerCase()}`}>{item}</Link>
+              </motion.div>
+            ))}
           </nav>
-        </div>
+        </motion.div>
       </header>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
-        <motion.section
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <motion.h2 
+          initial={{ scale: 0.9, opacity: 0 }} 
+          animate={{ scale: 1, opacity: 1 }} 
+          transition={{ duration: 0.6 }} 
+          className="text-4xl font-bold text-blue-600 text-center mb-8"
         >
-          <h2 className="text-4xl font-bold text-blue-600 mb-4">Press & Media</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Stay updated with the latest news and announcements from Futbol Conect.
-          </p>
-        </motion.section>
+          Press & Media
+        </motion.h2>
 
-        <motion.section
+        <motion.div 
           className="grid grid-cols-1 gap-8"
-          variants={containerVariants}
           initial="hidden"
           animate="visible"
+          transition={{ staggerChildren: 0.2 }}
         >
           {pressReleases.map((release, index) => (
-            <motion.div
-              key={index}
-              className="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-              variants={itemVariants}
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.03 }}
+              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
             >
-              <h3 className="text-xl font-semibold text-blue-600 mb-2">{release.title}</h3>
-              <p className="text-gray-600 mb-2"><strong>{release.date}</strong></p>
-              <p className="text-gray-600 mb-4">{release.excerpt}</p>
-              <a
-                href={release.link}
-                className="text-blue-600 hover:underline font-medium"
-              >
+              <h3 className="text-xl font-semibold text-blue-600">{release.title}</h3>
+              <p className="text-gray-600">{release.date}</p>
+              <p className="text-gray-600 mt-2">{release.excerpt}</p>
+              <a href={release.link} className="text-blue-600 hover:underline font-medium mt-3 block">
                 Read More
               </a>
             </motion.div>
           ))}
-        </motion.section>
-
-        <motion.section
-          className="text-center mt-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h3 className="text-2xl font-semibold text-blue-600 mb-4">Media Inquiries</h3>
-          <p className="text-gray-600 max-w-2xl mx-auto mb-4">
-            For press kits, interviews, or other media requests, please contact our team.
-          </p>
-          <a
-            href="mailto:press@futbolconect.com"
-            className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
-          >
-            Contact Us
-          </a>
-        </motion.section>
+        </motion.div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-blue-600 text-white py-6">
-        <div className="container mx-auto px-4 text-center">
-          <p>© 2025 Futbol Conect. All rights reserved.</p>
-          <div className="mt-4 flex justify-center space-x-4">
-            <Link to="/about" className="hover:underline">About Us</Link>
-            <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
-            <Link to="/terms" className="hover:underline">Terms of Service</Link>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </motion.div>
   );
 };
 

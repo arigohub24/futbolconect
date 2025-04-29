@@ -13,62 +13,54 @@ const MakePlayerAvailable = () => {
     asking: '',
     notes: ''
   });
-  
+
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
-    
+
     // Clear error for this field when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
         [name]: null
       }));
     }
   };
-  
+
   const navigateBack = () => {
-    // In a real app with routing, this would use navigate
-    // Here we're simulating navigation with an alert
     alert('Navigating back to Outplacement page');
-    // This would trigger a state change in a parent component 
-    // to show the Outplacement page instead
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Basic validation
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.age) newErrors.age = 'Age is required';
     if (!formData.club.trim()) newErrors.club = 'Current club is required';
-    
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     setIsSubmitting(true);
-    
-    // Mock API call to add player
-    // In a real app, you would send this data to your backend
-    console.log('Submitting player data:', formData);
-    
-    // Simulate successful submission
+
+    // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       alert('Player successfully added to available list!');
       navigateBack();
     }, 1000);
   };
-  
+
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -76,7 +68,7 @@ const MakePlayerAvailable = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        when: "beforeChildren",
+        when: 'beforeChildren',
         staggerChildren: 0.1
       }
     }
@@ -92,14 +84,14 @@ const MakePlayerAvailable = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen bg-gray-50 p-6 md:p-8"
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-6 md:p-8"
     >
       <div className="max-w-4xl mx-auto">
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="flex justify-between items-center mb-6"
         >
-          <button 
+          <button
             onClick={navigateBack}
             className="flex items-center text-blue-600 hover:text-blue-800 font-medium"
           >
@@ -107,19 +99,19 @@ const MakePlayerAvailable = () => {
             Back to Outplacement
           </button>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           variants={containerVariants}
-          className="bg-white rounded-xl shadow-sm p-6 md:p-8 border border-gray-100"
+          className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
         >
-          <motion.h1 
+          <motion.h1
             variants={itemVariants}
-            className="text-2xl md:text-3xl font-bold text-blue-900 mb-6"
+            className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6"
           >
             Make Player Available
           </motion.h1>
-          
-          <motion.form 
+
+          <motion.form
             variants={containerVariants}
             onSubmit={handleSubmit}
             className="space-y-6"
@@ -127,7 +119,10 @@ const MakePlayerAvailable = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Player Name */}
               <motion.div variants={itemVariants}>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Player Name*
                 </label>
                 <input
@@ -136,15 +131,22 @@ const MakePlayerAvailable = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.name ? 'border-red-500' : 'border-gray-300'
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                   placeholder="Full name"
                 />
-                {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+                {errors.name && (
+                  <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                )}
               </motion.div>
-              
+
               {/* Position */}
               <motion.div variants={itemVariants}>
-                <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="position"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Position*
                 </label>
                 <select
@@ -160,10 +162,13 @@ const MakePlayerAvailable = () => {
                   <option value="Goalkeeper">Goalkeeper</option>
                 </select>
               </motion.div>
-              
+
               {/* Age */}
               <motion.div variants={itemVariants}>
-                <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="age"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Age*
                 </label>
                 <input
@@ -174,15 +179,22 @@ const MakePlayerAvailable = () => {
                   max="45"
                   value={formData.age}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.age ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.age ? 'border-red-500' : 'border-gray-300'
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                   placeholder="Player's age"
                 />
-                {errors.age && <p className="mt-1 text-sm text-red-500">{errors.age}</p>}
+                {errors.age && (
+                  <p className="mt-1 text-sm text-red-500">{errors.age}</p>
+                )}
               </motion.div>
-              
+
               {/* Current Club */}
               <motion.div variants={itemVariants}>
-                <label htmlFor="club" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="club"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Current Club*
                 </label>
                 <input
@@ -191,15 +203,22 @@ const MakePlayerAvailable = () => {
                   name="club"
                   value={formData.club}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.club ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.club ? 'border-red-500' : 'border-gray-300'
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                   placeholder="Player's current club"
                 />
-                {errors.club && <p className="mt-1 text-sm text-red-500">{errors.club}</p>}
+                {errors.club && (
+                  <p className="mt-1 text-sm text-red-500">{errors.club}</p>
+                )}
               </motion.div>
-              
+
               {/* Nationality */}
               <motion.div variants={itemVariants}>
-                <label htmlFor="nationality" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="nationality"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Nationality
                 </label>
                 <input
@@ -212,10 +231,13 @@ const MakePlayerAvailable = () => {
                   placeholder="Player's nationality"
                 />
               </motion.div>
-              
+
               {/* Contract End */}
               <motion.div variants={itemVariants}>
-                <label htmlFor="contractEnd" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="contractEnd"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Contract End Date
                 </label>
                 <input
@@ -227,10 +249,13 @@ const MakePlayerAvailable = () => {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </motion.div>
-              
+
               {/* Asking Price */}
               <motion.div variants={itemVariants}>
-                <label htmlFor="asking" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="asking"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Asking Price (€)
                 </label>
                 <input
@@ -244,10 +269,13 @@ const MakePlayerAvailable = () => {
                 />
               </motion.div>
             </div>
-            
+
             {/* Additional Notes */}
             <motion.div variants={itemVariants}>
-              <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="notes"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Additional Notes
               </label>
               <textarea
@@ -260,8 +288,8 @@ const MakePlayerAvailable = () => {
                 placeholder="Any additional information about the player..."
               ></textarea>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               variants={itemVariants}
               className="flex justify-end gap-4 pt-4"
             >
@@ -275,12 +303,20 @@ const MakePlayerAvailable = () => {
                 <X className="h-5 w-5 mr-2" />
                 Cancel
               </motion.button>
-              
+
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className={`flex items-center px-6 py-2.5 ${isSubmitting ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white rounded-lg font-medium`}
-                whileHover={isSubmitting ? {} : { scale: 1.02, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}
+                className={`flex items-center px-6 py-2.5 ${
+                  isSubmitting
+                    ? 'bg-blue-400 cursor-not-allowed'
+                    : 'bg-blue-600 hover:bg-blue-700'
+                } text-white rounded-lg font-medium`}
+                whileHover={
+                  isSubmitting
+                    ? {}
+                    : { scale: 1.02, boxShadow: '0 4px 10px rgba(0, 91, 234, 0.2)' }
+                }
                 whileTap={isSubmitting ? {} : { scale: 0.98 }}
               >
                 <Save className="h-5 w-5 mr-2" />

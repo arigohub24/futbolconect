@@ -95,6 +95,10 @@ const EventDetails = () => {
     },
   };
 
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  };
 
   return (
     <motion.div
@@ -110,46 +114,58 @@ const EventDetails = () => {
         <p><strong>Location:</strong> {event.location}</p>
       </div>
 
-      <div className="mb-6">
+      <motion.div variants={itemVariants} className="mb-6">
         <h2 className="text-2xl font-semibold mb-2">Key Stats</h2>
         <ul className="list-disc list-inside">
           {event.stats?.map((stat, index) => (
-            <li key={index}>{stat.label}: {stat.value}</li>
+            <li key={index}>
+              <motion.span
+                whileHover={{ scale: 1.1 }}
+                className="inline-block text-blue-600"
+              >
+                {stat.label}:
+              </motion.span>{' '}
+              {stat.value}
+            </li>
           ))}
         </ul>
-      </div>
+      </motion.div>
 
-      <div className="mb-6">
+      <motion.div variants={itemVariants} className="mb-6">
         <h2 className="text-2xl font-semibold mb-2">Features</h2>
         <ul className="list-disc list-inside">
           {event.features?.map((feature, index) => (
-            <li key={index}>{feature}</li>
+            <li key={index} className="hover:text-blue-600">
+              {feature}
+            </li>
           ))}
         </ul>
-      </div>
+      </motion.div>
 
       {event.agenda && (
-        <div>
+        <motion.div variants={itemVariants}>
           <h2 className="text-2xl font-semibold mb-2">Agenda</h2>
           <ul className="list-disc list-inside">
             {event.agenda.map((item, idx) => (
-              <li key={idx}>{item.time} - {item.activity}</li>
+              <li key={idx}>
+                <strong>{item.time}</strong> - {item.activity}
+              </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
       )}
 
       {event.schedule && (
-        <div>
+        <motion.div variants={itemVariants}>
           <h2 className="text-2xl font-semibold mb-2">Schedule</h2>
           <ul className="list-disc list-inside">
             {event.schedule.map((item, idx) => (
               <li key={idx}>
-                {item.time} - {item.club} ({item.role})
+                {item.time} - <span className="font-medium">{item.club}</span> ({item.role})
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
       )}
     </motion.div>
   );

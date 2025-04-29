@@ -4,131 +4,91 @@ import { BarChart, ArrowLeft, TrendingUp, Clock, CheckCircle } from 'lucide-reac
 
 const DealsStats = () => {
   const navigate = useNavigate();
-
+  
   const deals = [
-    { id: 1, player: "Marcus Johnson", from: "Ajax", to: "Leicester City", status: "completed", value: "€15M" },
-    { id: 2, player: "David Silva", from: "Real Sociedad", to: "Inter Miami", status: "completed", value: "Free" },
-    { id: 3, player: "Luka Modric", from: "Real Madrid", to: "AC Milan", status: "pending", value: "€8M" },
-    { id: 4, player: "Erling Haaland", from: "Dortmund", to: "Man City", status: "completed", value: "€60M" },
-    { id: 5, player: "Kylian Mbappé", from: "PSG", to: "Real Madrid", status: "pending", value: "€120M" },
+    { player: "Marcus Johnson", from: "Ajax", to: "Leicester City", status: "completed", value: "€15M" },
+    { player: "David Silva", from: "Real Sociedad", to: "Inter Miami", status: "completed", value: "Free" },
+    { player: "Luka Modric", from: "Real Madrid", to: "AC Milan", status: "pending", value: "€8M" },
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen p-6">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="max-w-7xl mx-auto"
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-800 p-6"
+    >
+      {/* Header */}
+      <motion.header 
+        initial={{ y: -20, opacity: 0 }} 
+        animate={{ y: 0, opacity: 1 }} 
+        transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <button 
-              onClick={() => navigate(-1)}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-4 transition-colors"
+        <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition">
+          <ArrowLeft size={18} /> Back to Dashboard
+        </button>
+      </motion.header>
+
+      {/* Main Stats */}
+      <main className="max-w-7xl mx-auto">
+        {/* Animated Title */}
+        <motion.h1 
+          className="text-3xl font-bold text-gray-800 flex items-center gap-3 mb-4"
+          initial={{ scale: 0.9 }} 
+          animate={{ scale: 1 }} 
+          transition={{ duration: 0.6 }}
+        >
+          <BarChart className="text-emerald-500" size={28} /> Deals Facilitated
+        </motion.h1>
+
+        {/* Animated Statistics Cards */}
+        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { title: "Monthly Growth", value: "+12%", icon: <TrendingUp />, barWidth: '72%' },
+            { title: "Completed Deals", value: "6,240", icon: <CheckCircle />, barWidth: '83%' },
+            { title: "Avg Duration", value: "14 days", icon: <Clock />, barWidth: '60%' },
+          ].map((stat, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
             >
-              <ArrowLeft size={18} />
-              Back to Dashboard
-            </button>
-            <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
-              <BarChart className="text-emerald-500" size={28} />
-              Deals Facilitated
-            </h1>
-            <p className="text-gray-600">Detailed breakdown of transfers and negotiations</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-            <div className="text-2xl font-bold text-emerald-600">7,500+</div>
-            <div className="text-gray-500 text-sm">Total Deals</div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-50 rounded-lg">
-                <TrendingUp className="text-emerald-500" size={20} />
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-emerald-50 rounded-lg">{stat.icon}</div>
+                <h3 className="text-lg font-semibold">{stat.title}</h3>
               </div>
-              <h3 className="text-lg font-semibold">Monthly Growth</h3>
-            </div>
-            <div className="space-y-2">
-              <div className="text-2xl font-bold text-emerald-600">+12%</div>
-              <p className="text-gray-500">Compared to last month</p>
+              <div className="text-2xl font-bold text-emerald-600">{stat.value}</div>
               <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                <div className="bg-emerald-500 h-2 rounded-full" style={{ width: '72%' }}></div>
+                <motion.div className="bg-emerald-500 h-2 rounded-full" style={{ width: stat.barWidth }} animate={{ width: [0, stat.barWidth] }} transition={{ duration: 1 }}></motion.div>
               </div>
-            </div>
+            </motion.div>
+          ))}
+        </motion.div>
+        {/* Deals List */}
+        <section className="mt-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Recent Deals</h2>
+          <div className="space-y-4">
+            {deals.map((deal, index) => (
+              <div key={index} className="p-4 bg-white rounded-lg shadow-md flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-semibold">{deal.player}</h3>
+                  <p className="text-sm text-gray-600">{deal.from} → {deal.to}</p>
+                </div>
+                <div className="text-right">
+                  <p className={`text-sm font-medium ${deal.status === 'completed' ? 'text-emerald-600' : 'text-yellow-600'}`}>
+                    {deal.status.charAt(0).toUpperCase() + deal.status.slice(1)}
+                  </p>
+                  <p className="text-lg font-bold">{deal.value}</p>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-50 rounded-lg">
-                <CheckCircle className="text-emerald-500" size={20} />
-              </div>
-              <h3 className="text-lg font-semibold">Completed Deals</h3>
-            </div>
-            <div className="space-y-2">
-              <div className="text-2xl font-bold text-emerald-600">6,240</div>
-              <p className="text-gray-500">83% success rate</p>
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                <div className="bg-emerald-500 h-2 rounded-full" style={{ width: '83%' }}></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-50 rounded-lg">
-                <Clock className="text-emerald-500" size={20} />
-              </div>
-              <h3 className="text-lg font-semibold">Average Duration</h3>
-            </div>
-            <div className="space-y-2">
-              <div className="text-2xl font-bold text-emerald-600">14 days</div>
-              <p className="text-gray-500">From initial contact to completion</p>
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                <div className="bg-emerald-400 h-2 rounded-full" style={{ width: '60%' }}></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold mb-4">Recent Deals</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Player</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">From</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">To</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Value</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {deals.map((deal) => (
-                  <tr key={deal.id} className="hover:bg-gray-50 cursor-pointer">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium">{deal.player}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{deal.from}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{deal.to}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{deal.value}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        deal.status === 'completed' 
-                          ? 'bg-emerald-100 text-emerald-800' 
-                          : 'bg-amber-100 text-amber-800'
-                      }`}>
-                        {deal.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </motion.div>
-    </div>
+        </section>
+      </main>
+    </motion.div>
   );
 };
 

@@ -31,21 +31,29 @@ const Recruitment = () => {
   ];
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.5,
         when: "beforeChildren",
-        staggerChildren: 0.2
+        staggerChildren: 0.15,
+        delay: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+    hidden: { y: 50, opacity: 0, scale: 0.95 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 15
+      }
+    }
   };
 
   return (
@@ -53,15 +61,15 @@ const Recruitment = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      exit={{ opacity: 0, transition: { duration: 0.3 } }}
-      className="min-h-screen bg-gray-50 p-6 md:p-8"
+      exit={{ opacity: 0 }}
+      className="min-h-screen bg-gray-50 w-full"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           variants={itemVariants}
-          className="flex flex-col md:flex-row justify-between items-center mb-8"
+          className="flex flex-col sm:flex-row justify-between items-center py-8"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-0">
+          <h1 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4 sm:mb-0">
             Player Recruitment
           </h1>
           <motion.button
@@ -77,11 +85,11 @@ const Recruitment = () => {
         {/* Benefits Section */}
         <motion.div 
           variants={containerVariants}
-          className="bg-white rounded-xl shadow-sm p-6 md:p-8 mb-8 border border-gray-100 hover:shadow-md transition-shadow duration-300"
+          className="bg-white rounded-xl shadow-sm p-6 sm:p-8 mb-8 border border-gray-100 hover:shadow-md transition-shadow duration-300"
         >
           <motion.h2 
             variants={itemVariants}
-            className="text-xl md:text-2xl font-semibold text-blue-900 mb-4"
+            className="text-xl sm:text-2xl font-semibold text-blue-900 mb-6"
           >
             Benefits of Futbol Connect Recruitment
           </motion.h2>
@@ -95,10 +103,11 @@ const Recruitment = () => {
                 variants={itemVariants}
                 whileHover={{ 
                   y: -8, 
+                  scale: 1.03,
                   boxShadow: "0 6px 12px rgba(0, 91, 234, 0.1)",
                   backgroundColor: "#EBF5FF"
                 }}
-                className="p-4 bg-blue-50 rounded-lg flex items-start transition-colors"
+                className="p-4 bg-blue-50 rounded-lg flex items-start transition-colors duration-300"
               >
                 <benefit.icon className="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" />
                 <div>
@@ -112,21 +121,41 @@ const Recruitment = () => {
 
         {/* Available Players Section */}
         <motion.div variants={containerVariants}>
-          <motion.h2 
-            variants={itemVariants}
-            className="text-xl md:text-2xl font-semibold text-blue-900 mb-4"
-          >
-            Available Players
-          </motion.h2>
+          <div className="flex justify-between items-center mb-6">
+            <motion.h2 
+              variants={itemVariants}
+              className="text-xl sm:text-2xl font-semibold text-blue-900"
+            >
+              Available Players
+            </motion.h2>
+            <motion.button
+              variants={itemVariants}
+              onClick={() => navigate('/available-players')}
+              className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center"
+              whileHover={{ x: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View All
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </motion.button>
+          </div>
+
           <motion.div 
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {players.map((player, index) => (
               <motion.div 
                 key={player.id}
                 variants={itemVariants}
-                whileHover={{ y: -8, boxShadow: "0 10px 20px rgba(0, 91, 234, 0.15)" }}
+                whileHover={{ 
+                  y: -8, 
+                  scale: 1.03,
+                  boxShadow: "0 10px 20px rgba(0, 91, 234, 0.15)"
+                }}
+                whileTap={{ scale: 0.98 }}
               >
                 <PlayerCard 
                   player={player}

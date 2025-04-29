@@ -1122,15 +1122,15 @@ const LandingPage = () => {
               </button>
             </div>
             <div className="aspect-video bg-slate-100 rounded-lg mb-4">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/watch?v=lij3byeS8Ak"
-                title="Platform Demo"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              <video 
+                width="100%" 
+                height="100%" 
+                controls 
+                className="rounded-lg"
+              >
+                <source src="/assets/demo-video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
             <motion.button
               onClick={() => setShowDemoModal(false)}

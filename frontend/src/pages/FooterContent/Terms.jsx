@@ -1,5 +1,18 @@
 import { motion } from "framer-motion";
 
+const sectionVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  })
+};
+
 const Terms = () => {
   const sections = [
     {
@@ -33,48 +46,58 @@ const Terms = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen bg-gradient-to-br from-blue-100 to-white py-16 px-6 sm:px-10 lg:px-24 overflow-y-auto"
     >
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <motion.h1 
-            initial={{ y: -20 }}
-            animate={{ y: 0 }}
-            className="text-4xl font-bold text-blue-900 mb-4"
-          >
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mb-14"
+        >
+          <h1 className="text-5xl font-extrabold text-blue-900 tracking-tight drop-shadow-sm">
             Terms of Service
-          </motion.h1>
-          <p className="text-lg text-blue-800">
-            Last Updated: May 15, 2023
-          </p>
-        </div>
+          </h1>
+          <p className="text-base mt-4 text-blue-700">Last Updated: May 15, 2023</p>
+        </motion.div>
 
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <div className="prose prose-blue max-w-none">
-            <p className="text-blue-900 mb-8">
-              Welcome to Futbol Conect. These Terms of Service govern your use of our platform and services. Please read them carefully before using our services.
+        <div className="bg-white rounded-3xl shadow-2xl p-10 border border-blue-100 backdrop-blur-sm">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-blue-900 mb-10 leading-relaxed"
+          >
+            Welcome to Futbol Conect. These Terms of Service govern your use of our platform and services. Please read them carefully before using our services.
+          </motion.p>
+
+          {sections.map((section, i) => (
+            <motion.div
+              key={i}
+              custom={i}
+              variants={sectionVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="mb-10"
+            >
+              <h2 className="text-2xl font-semibold text-blue-900 mb-2">{section.title}</h2>
+              <p className="text-blue-800 text-base leading-7">{section.content}</p>
+            </motion.div>
+          ))}
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-16 p-6 bg-blue-50 rounded-xl border border-blue-100"
+          >
+            <h3 className="text-xl font-bold text-blue-900 mb-2">Contact Us</h3>
+            <p className="text-blue-800">
+              If you have any questions about these Terms, please contact us at <a className="underline text-blue-600" href="mailto:legal@futbolconect.com">legal@futbolconect.com</a>.
             </p>
-
-            {sections.map((section, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="mb-8"
-              >
-                <h2 className="text-xl font-bold text-blue-900 mb-3">{section.title}</h2>
-                <p className="text-blue-800">{section.content}</p>
-              </motion.div>
-            ))}
-
-            <div className="mt-12 p-6 bg-blue-50 rounded-lg">
-              <h3 className="text-lg font-semibold text-blue-900 mb-3">Contact Us</h3>
-              <p className="text-blue-800">
-                If you have any questions about these Terms, please contact us at legal@futbolconect.com.
-              </p>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>

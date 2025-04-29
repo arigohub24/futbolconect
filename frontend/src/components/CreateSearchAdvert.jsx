@@ -12,6 +12,8 @@ const CreateSearchAdvert = () => {
     requirements: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -19,17 +21,21 @@ const CreateSearchAdvert = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the formData to an API
-    console.log('Form submitted:', formData);
-    // Reset form after submission
-    setFormData({
-      position: '',
-      ageMin: '',
-      ageMax: '',
-      preferredFoot: '',
-      availability: '',
-      requirements: ''
-    });
+    setIsSubmitting(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      console.log('Form submitted:', formData);
+      setFormData({
+        position: '',
+        ageMin: '',
+        ageMax: '',
+        preferredFoot: '',
+        availability: '',
+        requirements: ''
+      });
+      setIsSubmitting(false);
+    }, 2000);
   };
 
   const containerVariants = {
@@ -56,27 +62,27 @@ const CreateSearchAdvert = () => {
       initial="hidden"
       animate="visible"
       exit={{ opacity: 0, transition: { duration: 0.3 } }}
-      className="min-h-screen bg-gray-50 p-6 md:p-8"
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-6 md:p-8"
     >
       <div className="max-w-3xl mx-auto">
         <motion.div 
           variants={itemVariants}
-          className="mb-8"
+          className="mb-8 text-center"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-2">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4">
             Create Player Search Advert
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-700 text-lg">
             Find the perfect player for your team by specifying your requirements.
           </p>
         </motion.div>
 
         <motion.div 
           variants={containerVariants}
-          className="bg-white rounded-xl shadow-sm p-6 md:p-8 border border-gray-100 hover:shadow-md transition-shadow duration-300"
+          className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
         >
           <form onSubmit={handleSubmit}>
-            <motion.div variants={containerVariants} className="space-y-6">
+            <motion.div variants={containerVariants} className="space-y-8">
               {/* Position */}
               <motion.div variants={itemVariants}>
                 <label className="flex items-center text-sm font-medium text-blue-900 mb-2">
@@ -87,7 +93,7 @@ const CreateSearchAdvert = () => {
                   name="position"
                   value={formData.position}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
                   required
                 >
                   <option value="">Select position</option>
@@ -99,7 +105,7 @@ const CreateSearchAdvert = () => {
               </motion.div>
 
               {/* Age Range */}
-              <motion.div variants={itemVariants} className="grid grid-cols-2 gap-4">
+              <motion.div variants={itemVariants} className="grid grid-cols-2 gap-6">
                 <div>
                   <label className="flex items-center text-sm font-medium text-blue-900 mb-2">
                     <Calendar className="w-5 h-5 mr-2 text-blue-600" />
@@ -113,7 +119,7 @@ const CreateSearchAdvert = () => {
                     min="16"
                     max="40"
                     placeholder="e.g., 18"
-                    className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
                     required
                   />
                 </div>
@@ -130,7 +136,7 @@ const CreateSearchAdvert = () => {
                     min="16"
                     max="40"
                     placeholder="e.g., 30"
-                    className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
                     required
                   />
                 </div>
@@ -146,7 +152,7 @@ const CreateSearchAdvert = () => {
                   name="preferredFoot"
                   value={formData.preferredFoot}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
                 >
                   <option value="">Any</option>
                   <option value="Left">Left</option>
@@ -165,7 +171,7 @@ const CreateSearchAdvert = () => {
                   name="availability"
                   value={formData.availability}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
                   required
                 >
                   <option value="">Select availability</option>
@@ -187,7 +193,7 @@ const CreateSearchAdvert = () => {
                   value={formData.requirements}
                   onChange={handleChange}
                   placeholder="Specify any additional requirements (e.g., playing style, experience level, etc.)"
-                  className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y"
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y shadow-sm"
                   rows="4"
                 />
               </motion.div>
@@ -196,12 +202,21 @@ const CreateSearchAdvert = () => {
               <motion.div variants={itemVariants} className="flex justify-end">
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}
+                  whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.3)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium flex items-center hover:bg-blue-700 transition-colors"
+                  disabled={isSubmitting}
+                  className={`px-6 py-3 rounded-lg font-medium flex items-center transition-colors ${
+                    isSubmitting
+                      ? "bg-blue-400 cursor-not-allowed"
+                      : "bg-blue-600 hover:bg-blue-700 text-white"
+                  }`}
                 >
-                  <Send className="w-5 h-5 mr-2" />
-                  Post Advert
+                  {isSubmitting ? (
+                    <span className="animate-spin mr-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full"></span>
+                  ) : (
+                    <Send className="w-5 h-5 mr-2" />
+                  )}
+                  {isSubmitting ? "Submitting..." : "Post Advert"}
                 </motion.button>
               </motion.div>
             </motion.div>

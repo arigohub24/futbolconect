@@ -41,16 +41,16 @@ const Sidebar = () => {
     <>
       {isMobile ? (
         <>
-          {/* Mobile Toggle Button - Changed position to top and icon to menu-alt */}
+          {/* Mobile Toggle Button - Hamburger Icon */}
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
-            className="fixed top-4 left-4 z-50 w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg"
+            className="fixed top-4 left-4 z-50 w-12 h-12 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg"
             whileTap={{ scale: 0.9 }}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
           >
             <motion.i
-              className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-white text-lg`}
+              className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-white text-2xl`}
               animate={{ rotate: isOpen ? 90 : 0 }}
               transition={{ duration: 0.3 }}
             />
@@ -128,9 +128,12 @@ const Sidebar = () => {
                       className="flex items-center px-4 py-3 text-sm text-blue-600 font-medium hover:bg-blue-50 rounded-lg cursor-pointer"
                       whileHover={{ x: 4 }}
                       whileTap={{ scale: 0.98 }}
+                      onClick={() => setIsOpen(false)} // Close menu when clicked
                     >
-                      <i className="fas fa-headset mr-3" />
-                      Need help? Contact support
+                      <NavLink to="/help-center" className="flex items-center">
+                        <i className="fas fa-headset mr-3" />
+                        Need help? Contact support
+                      </NavLink>
                     </motion.div>
                   </div>
                 </div>
