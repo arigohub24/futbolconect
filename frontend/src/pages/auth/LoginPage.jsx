@@ -60,11 +60,15 @@ const LoginPage = () => {
       {/* Left Panel - Form Side */}
       <div className="w-full md:w-1/2 flex flex-col justify-center p-6 md:p-12">
         <div className="w-full max-w-md mx-auto">
-          <div className="text-center md:text-left mb-6">
-            <h3 className="text-lg font-medium text-blue-600">Welcome to</h3>
-            <h1 className="text-3xl font-bold text-gray-900">Futbol<span className="text-blue-600">Connect</span></h1>
-            <p className="mt-2 text-gray-600">The ultimate football community platform</p>
-          </div>
+        <div className="text-center md:text-left mb-6">
+          <h3 className="text-lg font-medium text-blue-600">Welcome to</h3>
+          <Link to="/" className="no-underline">
+            <h1 className="text-3xl font-bold text-gray-900">
+              Futbol<span className="text-blue-600">Connect</span>
+            </h1>
+          </Link>
+          <p className="mt-2 text-gray-600">The ultimate football community platform</p>
+        </div>
 
           <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Sign In</h2>

@@ -137,7 +137,7 @@ function App() {
               element={authUser ? <AvailablePlayers /> : <Navigate to="/login" />}
             />
             <Route
-              path="/marketplatzce"
+              path="/marketplace"
               element={authUser ? <Marketplace /> : <Navigate to="/login" />}
             />
             <Route

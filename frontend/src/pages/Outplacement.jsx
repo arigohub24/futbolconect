@@ -106,12 +106,12 @@ const Outplacement = () => {
           variants={containerVariants}
           className="bg-white rounded-xl shadow-sm p-6 md:p-8 mb-8 border border-gray-100 hover:shadow-md transition-shadow duration-300"
         >
-          <motion.h2 
-            variants={itemVariants}
-            className="text-xl md:text-2xl font-semibold text-blue-900 mb-4"
-          >
-            TransferRoom Player Outplacement
-          </motion.h2>
+         <motion.h2 
+          variants={itemVariants}
+          className="text-xl md:text-2xl font-semibold text-blue-900 mb-4"
+        >
+          Futbol Conect Player Outplacement
+        </motion.h2>
           <motion.ul 
             variants={containerVariants}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"

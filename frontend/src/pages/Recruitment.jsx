@@ -83,7 +83,7 @@ const Recruitment = () => {
             variants={itemVariants}
             className="text-xl md:text-2xl font-semibold text-blue-900 mb-4"
           >
-            Benefits of TransferRoom Recruitment
+            Benefits of Futbol Connect Recruitment
           </motion.h2>
           <motion.ul 
             variants={containerVariants}
