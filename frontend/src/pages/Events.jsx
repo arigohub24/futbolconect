@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import MeetingSchedule from '../components/MeetingSchedule';
 import { Calendar, Video, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Events = () => {
   const events = [
@@ -105,14 +106,16 @@ const Events = () => {
                   </motion.p>
                 </div>
               </div>
-              <motion.button
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}
-                whileTap={{ scale: 0.95 }}
-                className="mt-4 md:mt-0 bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-              >
-                Register Now
-              </motion.button>
+              <Link href={`/events/${event.id}`} passHref>
+                <motion.a
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="mt-4 md:mt-0 bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                >
+                  Register Now
+                </motion.a>
+              </Link>
             </div>
 
             <motion.div 

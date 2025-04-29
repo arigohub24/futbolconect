@@ -19,6 +19,10 @@ import Marketplace from './pages/Marketplace';
 import Events from './pages/Events';
 import Pricing from './pages/Pricing';
 import Profile from './pages/Profile';
+import EditProfile from './components/EditProfile'; // Import EditProfile
+
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 // footer content
 import Features from './pages/FooterContent/Features';
@@ -36,8 +40,24 @@ import Terms from './pages/FooterContent/Terms';
 import PrivacyPolicy from './pages/FooterContent/Privacy';
 import Cookies from './pages/FooterContent/Cookies';
 import CookieConsent from './components/CookieConsent';
+import Join from './components/Join';
+
+import Activity from './pages/Activity';
+import ClubsStats from './pages/Stats/Clubs';
+import DealsStats from './pages/Stats/Deals';
+import PlayersStats from './pages/Stats/Players';
+import CreateSearchAdvert from './components/CreateSearchAdvert';
+import ViewStats from './components/ViewStats';
+import BrowseLeagues from './components/BrowseLeagues';
+import ConnectClubs from './components/ConnectClubs';
+import MakePlayerAvailable from './components/MakePlayerAvailable';
+import AvailablePlayers from './components/AvailablePlayer';
+import EventDetails from './pages/events/[eventId]';
+import ChoosePremium from './components/ChoosePremium';
+import ChooseStandalone from './components/ChooseStandalone';
 
 function App() {
+  const stripePromise = loadStripe('your_publishable_key_here');
   const { data: authUser, isLoading } = useQuery({
     queryKey: ['authUser'],
     queryFn: async () => {
@@ -109,7 +129,15 @@ function App() {
               element={authUser ? <Outplacement /> : <Navigate to="/login" />}
             />
             <Route
-              path="/marketplace"
+              path="/make-player-available"
+              element={authUser ? <MakePlayerAvailable /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/available-players"
+              element={authUser ? <AvailablePlayers /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/marketplatzce"
               element={authUser ? <Marketplace /> : <Navigate to="/login" />}
             />
             <Route
@@ -123,6 +151,10 @@ function App() {
             <Route
               path="/profile"
               element={authUser ? <Profile /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/profile/edit"
+              element={authUser ? <EditProfile /> : <Navigate to="/login" />}
             />
           </Route>
 
@@ -142,6 +174,36 @@ function App() {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/cookies" element={<Cookies />} />
 
+          <Route path="/activity" element={<Activity />} />
+          <Route path="/stats/clubs" element={<ClubsStats />} />
+          <Route path="/stats/deals" element={<DealsStats />} />
+          <Route path="/stats/players" element={<PlayersStats />} />
+
+          <Route path="/create-search-advert" element={<CreateSearchAdvert />} />
+          <Route path="/browse-leagues" element={<BrowseLeagues />} />
+          <Route path="/connect-clubs" element={<ConnectClubs />} />
+          <Route path="/view-stats" element={<ViewStats />} />
+          <Route path="/join" element={<Join />} />
+
+          <Route path="/events/:eventId" element={<EventDetails />} />
+
+          <Route
+            path="/choose-premium"
+            element={
+              <Elements stripe={stripePromise}>
+                <ChoosePremium />
+              </Elements>
+            }
+          />
+          <Route
+            path="/choose-standalone"
+            element={
+              <Elements stripe={stripePromise}>
+                <ChooseStandalone />
+              </Elements>
+            }
+          />
+
           {/* Catch-all Route */}
           <Route
             path="*"
@@ -150,8 +212,7 @@ function App() {
         </Routes>
       </AnimatePresence>
 
-       {/* Add CookieConsent component here */}
-       <CookieConsent />
+      <CookieConsent />
       <Toaster />
     </div>
   );

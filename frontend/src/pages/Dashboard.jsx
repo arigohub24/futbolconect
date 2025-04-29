@@ -106,15 +106,19 @@ const Dashboard = () => {
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
         >
           {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ 
-                y: -5, 
-                boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" 
-              }}
-              className={`${stat.color} border rounded-xl p-6 shadow-sm`}
-            >
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ 
+                  y: -5, 
+                  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" 
+                }}
+                className={`${stat.color} border rounded-xl p-6 shadow-sm cursor-pointer`}
+                onClick={() => navigate(
+                  index === 0 ? '/stats/clubs' : 
+                  index === 1 ? '/stats/deals' : '/stats/players'
+                )}
+              >
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-gray-600 text-sm font-medium mb-1">{stat.title}</p>
@@ -215,7 +219,10 @@ const Dashboard = () => {
         >
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-semibold text-gray-800">Recent Activity</h2>
-            <button className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors">
+            <button 
+              onClick={() => navigate('/activity')}
+              className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors"
+            >
               View All
             </button>
           </div>

@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import PlayerCard from '../components/PlayerCard';
 import { Users, Clock, Globe } from 'lucide-react';
 
 const Recruitment = () => {
+  const navigate = useNavigate();
+
   const benefits = [
     {
       title: "Access to 800+ clubs",
@@ -64,6 +67,7 @@ const Recruitment = () => {
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/create-search-advert')}
             className="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors"
           >
             Create Search Advert

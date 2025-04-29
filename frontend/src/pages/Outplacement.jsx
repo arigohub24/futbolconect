@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Users, ArrowRight, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Outplacement = () => {
   const benefits = [
@@ -89,13 +90,15 @@ const Outplacement = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-0">
             Player Outplacement
           </h1>
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-green-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-green-700 transition-colors"
-          >
-            Make Player Available
-          </motion.button>
+          <Link to="/make-player-available">
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-green-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-green-700 transition-colors"
+            >
+              Make Player Available
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Benefits Section */}
@@ -139,12 +142,23 @@ const Outplacement = () => {
           variants={containerVariants}
           className="bg-white rounded-xl shadow-sm p-6 md:p-8 border border-gray-100 hover:shadow-md transition-shadow duration-300"
         >
-          <motion.h2 
-            variants={itemVariants}
-            className="text-xl md:text-2xl font-semibold text-blue-900 mb-4"
-          >
-            Available Players
-          </motion.h2>
+          <div className="flex justify-between items-center mb-4">
+            <motion.h2 
+              variants={itemVariants}
+              className="text-xl md:text-2xl font-semibold text-blue-900"
+            >
+              Available Players
+            </motion.h2>
+            <Link to="/available-players">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                View All
+              </motion.button>
+            </Link>
+          </div>
           <motion.div 
             variants={containerVariants}
             className="space-y-4"

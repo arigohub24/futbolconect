@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const PricingCard = ({ plan, delay = 0 }) => {
   const cardVariants = {
@@ -19,14 +20,6 @@ const PricingCard = ({ plan, delay = 0 }) => {
     }
   };
 
-  const buttonVariants = {
-    hover: { 
-      scale: 1.03, 
-      backgroundColor: '#1d4ed8',
-      transition: { duration: 0.2 }
-    },
-    tap: { scale: 0.98 }
-  };
 
   return (
     <motion.div
@@ -124,14 +117,12 @@ const PricingCard = ({ plan, delay = 0 }) => {
 
         <p className="text-gray-500 text-sm mb-6">{plan.note}</p>
 
-        <motion.button
-          variants={buttonVariants}
-          whileHover="hover"
-          whileTap="tap"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-shadow duration-200"
+        <Link 
+          to={plan.name === "Premium" ? "/choose-premium" : "/choose-standalone"}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg text-center block"
         >
           Choose {plan.name}
-        </motion.button>
+        </Link>
       </div>
     </motion.div>
   );
