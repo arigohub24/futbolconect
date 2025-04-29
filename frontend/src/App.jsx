@@ -1,12 +1,13 @@
-// App.jsx
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import { AnimatePresence } from 'framer-motion';
 
 import LandingPage from './components/LandingPage';
-import LoginPage from './pages/auth/login/LoginPage';
-import SignUpPage from './pages/auth/signup/SignUpPage';
+import LoginPage from './pages/auth/LoginPage';
+import SignUpPage from './pages/auth/SignUpPage';
+import OnboardingPage from './pages/auth/OnboardingPage';
+import WelcomePage from './pages/auth/WelcomePage';
 import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedLayout from './components/ProtectedLayout';
 
@@ -18,6 +19,23 @@ import Marketplace from './pages/Marketplace';
 import Events from './pages/Events';
 import Pricing from './pages/Pricing';
 import Profile from './pages/Profile';
+
+// footer content
+import Features from './pages/FooterContent/Features';
+import UseCases from './pages/FooterContent/UseCases';
+import Integration from './pages/FooterContent/Integration';
+import AboutUs from './pages/FooterContent/AboutUs';
+import Careers from './pages/FooterContent/Careers';
+import Press from './pages/FooterContent/Press';
+import Blog from './pages/FooterContent/Blog';
+import HelpCenter from './pages/FooterContent/HelpCenter';
+import Documentation from './pages/FooterContent/Documentation';
+import Webinars from './pages/FooterContent/Webinars';
+import Status from './pages/FooterContent/Status';
+import Terms from './pages/FooterContent/Terms';
+import PrivacyPolicy from './pages/FooterContent/Privacy';
+import Cookies from './pages/FooterContent/Cookies';
+import CookieConsent from './components/CookieConsent';
 
 function App() {
   const { data: authUser, isLoading } = useQuery({
@@ -75,6 +93,14 @@ function App() {
               element={authUser ? <Dashboard /> : <Navigate to="/login" />}
             />
             <Route
+              path="/onboarding"
+              element={authUser ? <OnboardingPage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/welcome"
+              element={authUser ? <WelcomePage /> : <Navigate to="/login" />}
+            />
+            <Route
               path="/recruitment"
               element={authUser ? <Recruitment /> : <Navigate to="/login" />}
             />
@@ -100,6 +126,22 @@ function App() {
             />
           </Route>
 
+          {/* footer content */}
+          <Route path="/features" element={<Features />} />
+          <Route path="/use-cases" element={<UseCases />} />
+          <Route path="/integrations" element={<Integration />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/press" element={<Press />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/help-center" element={<HelpCenter />} />
+          <Route path="/docs" element={<Documentation />} />
+          <Route path="/webinars" element={<Webinars />} />
+          <Route path="/status" element={<Status />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/cookies" element={<Cookies />} />
+
           {/* Catch-all Route */}
           <Route
             path="*"
@@ -108,6 +150,8 @@ function App() {
         </Routes>
       </AnimatePresence>
 
+       {/* Add CookieConsent component here */}
+       <CookieConsent />
       <Toaster />
     </div>
   );

@@ -5,8 +5,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const signupSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -50,7 +50,7 @@ const SignUpPage = () => {
     onSuccess: (data) => {
       toast.success("Account created successfully");
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
-      navigate("/verify", { state: { email: data.email } });
+      navigate("/onboarding", { state: { email: data.email } });
     },
   });
 
@@ -59,21 +59,21 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
       {/* Left Panel - Form Side */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center p-6 md:p-12">
+      <div className="w-full md:w-1/2 flex flex-col justify-center p-6 md:p-12 bg-white">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="w-full max-w-md mx-auto"
         >
-          <div className="text-center md:text-left mb-6">
+          <div className="text-center md:text-left mb-8">
             <motion.h3
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-lg font-medium text-blue-600"
+              className="text-lg font-semibold text-blue-800"
             >
               Welcome to
             </motion.h3>
@@ -81,9 +81,10 @@ const SignUpPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-3xl font-bold text-gray-900"
+              className="text-4xl font-bold text-gray-900 cursor-pointer hover:text-blue-800 transition-colors"
+              onClick={() => navigate("/")}
             >
-              Futbol<span className="text-blue-600">Connect</span>
+              Futbol<span className="text-blue-800">Connect</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0 }}
@@ -91,18 +92,18 @@ const SignUpPage = () => {
               transition={{ delay: 0.4 }}
               className="mt-2 text-gray-600"
             >
-              The ultimate football community platform
+              Join the ultimate football community platform
             </motion.p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+          <div className="bg-white rounded-2xl shadow-xl p-8">
             <motion.h2
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
               className="text-2xl font-bold text-gray-800 mb-6"
             >
-              Create Account
+              Step 1: Create Account
             </motion.h2>
             
             {isError && (
@@ -115,7 +116,7 @@ const SignUpPage = () => {
               </motion.div>
             )}
             
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -129,8 +130,8 @@ const SignUpPage = () => {
                   <input
                     type="email"
                     className={`pl-10 w-full py-3 px-4 rounded-lg border ${
-                      errors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
-                    } focus:ring-2 focus:border-blue-500 outline-none transition text-base`}
+                      errors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-800'
+                    } focus:ring-2 focus:border-blue-800 outline-none transition text-base`}
                     placeholder="your@email.com"
                     {...register("email")}
                   />
@@ -153,8 +154,8 @@ const SignUpPage = () => {
                   <input
                     type="text"
                     className={`pl-10 w-full py-3 px-4 rounded-lg border ${
-                      errors.username ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
-                    } focus:ring-2 focus:border-blue-500 outline-none transition text-base`}
+                      errors.username ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-800'
+                    } focus:ring-2 focus:border-blue-800 outline-none transition text-base`}
                     placeholder="Choose a username"
                     {...register("username")}
                   />
@@ -177,8 +178,8 @@ const SignUpPage = () => {
                   <input
                     type="text"
                     className={`pl-10 w-full py-3 px-4 rounded-lg border ${
-                      errors.fullName ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
-                    } focus:ring-2 focus:border-blue-500 outline-none transition text-base`}
+                      errors.fullName ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-800'
+                    } focus:ring-2 focus:border-blue-800 outline-none transition text-base`}
                     placeholder="Your full name"
                     {...register("fullName")}
                   />
@@ -201,8 +202,8 @@ const SignUpPage = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     className={`pl-10 w-full py-3 px-4 rounded-lg border ${
-                      errors.password ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
-                    } focus:ring-2 focus:border-blue-500 outline-none transition text-base`}
+                      errors.password ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-800'
+                    } focus:ring-2 focus:border-blue-800 outline-none transition text-base`}
                     placeholder="Create a password"
                     {...register("password")}
                   />
@@ -232,7 +233,7 @@ const SignUpPage = () => {
                 <button
                   type="submit"
                   disabled={isPending}
-                  className={`w-full flex items-center justify-center py-3 px-4 rounded-lg bg-blue-600 text-white font-medium shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 text-base ${
+                  className={`w-full flex items-center justify-center py-3 px-4 rounded-lg bg-blue-800 text-white font-medium shadow-md hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-2 transition-all duration-200 text-base ${
                     isPending ? 'opacity-70 cursor-not-allowed' : ''
                   }`}
                 >
@@ -246,7 +247,7 @@ const SignUpPage = () => {
                     </>
                   ) : (
                     <>
-                      Sign Up <FiArrowRight className="ml-2" />
+                      Next <FiArrowRight className="ml-2" />
                     </>
                   )}
                 </button>
@@ -261,7 +262,7 @@ const SignUpPage = () => {
             >
               <p className="text-sm text-gray-600">
                 Already have an account?{' '}
-                <Link to="/login" className="text-blue-600 font-medium hover:text-blue-800 transition-colors">
+                <Link to="/login" className="text-blue-800 font-medium hover:text-blue-900 transition-colors">
                   Sign in
                 </Link>
               </p>
@@ -271,56 +272,52 @@ const SignUpPage = () => {
       </div>
 
       {/* Right Panel - Visual Side */}
-        <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-blue-400 to-blue-600 items-center justify-center relative overflow-hidden">
-          <div className="absolute w-full h-full">
-            <div className="absolute inset-0 bg-black opacity-20"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white z-10 w-full max-w-lg px-6">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="text-4xl font-bold mb-4"
-              >
-                Revolutionize Your Transfer Strategy
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="text-xl mb-8"
-              >
-                Direct access to the global football marketplace - buy, sell and discover talent efficiently
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.0 }}
-                className="flex flex-wrap justify-center gap-6 max-w-md mx-auto"
-              >
-                <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 w-32 text-center">
-                  <div className="text-3xl mb-1">85%</div>
-                  <div className="text-sm opacity-80">Faster Deals</div>
-                </div>
-                <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 w-32 text-center">
-                  <div className="text-3xl mb-1">150+</div>
-                  <div className="text-sm opacity-80">Countries</div>
-                </div>
-                <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 w-32 text-center">
-                  <div className="text-3xl mb-1">24/7</div>
-                  <div className="text-sm opacity-80">Support</div>
-                </div>
-                <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 w-32 text-center">
-                  <div className="text-3xl mb-1">4.9⭐</div>
-                  <div className="text-sm opacity-80">Agent Rating</div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-          <div className="absolute bottom-6 right-6 flex items-center text-white text-sm">
-            <div className="mr-1 font-bold">Transfer</div>
-            <div className="text-blue-300">Pro</div>
+      <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-blue-800 to-blue-600 items-center justify-center relative overflow-hidden">
+        <div className="absolute w-full h-full">
+          <div className="absolute inset-0 bg-black opacity-20"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white z-10 w-full max-w-lg px-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="text-4xl font-bold mb-4"
+            >
+              Join the Football Revolution
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="text-xl mb-8"
+            >
+              Connect with players, clubs, and agents worldwide
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.0 }}
+              className="flex flex-wrap justify-center gap-6 max-w-md mx-auto"
+            >
+              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 w-32 text-center">
+                <div className="text-3xl mb-1">90%</div>
+                <div className="text-sm opacity-80">User Satisfaction</div>
+              </div>
+              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 w-32 text-center">
+                <div className="text-3xl mb-1">200+</div>
+                <div className="text-sm opacity-80">Clubs</div>
+              </div>
+              <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 w-32 text-center">
+                <div className="text-3xl mb-1">24/7</div>
+                <div className="text-sm opacity-80">Support</div>
+              </div>
+            </motion.div>
           </div>
         </div>
+        <div className="absolute bottom-6 right-6 flex items-center text-white text-sm">
+          <div className="mr-1 font-bold">Futbol</div>
+          <div className="text-blue-300">Connect</div>
+        </div>
+      </div>
     </div>
   );
 };

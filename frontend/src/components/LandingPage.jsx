@@ -1006,38 +1006,39 @@ const LandingPage = () => {
               {
                 title: "Product",
                 links: [
-                  { name: "Features", href: "#" },
-                  { name: "Pricing", href: "#" },
-                  { name: "Use Cases", href: "#" },
-                  { name: "Integrations", href: "#" },
-                ],
+                  { name: "Features", href: "/features" },
+                  { name: "Pricing", href: "/pricing" },
+                  { name: "Use Cases", href: "/use-cases" },
+                  { name: "Integrations", href: "/integrations" },
+                ]                
               },
               {
                 title: "Company",
                 links: [
-                  { name: "About Us", href: "#" },
-                  { name: "Careers", href: "#" },
-                  { name: "Press", href: "#" },
-                  { name: "Blog", href: "#" },
-                ],
+                  { name: "About Us", href: "/about" },
+                  { name: "Careers", href: "/careers" },
+                  { name: "Press", href: "/press" },
+                  { name: "Blog", href: "/blog" },
+                ]
               },
               {
                 title: "Resources",
                 links: [
-                  { name: "Help Center", href: "#" },
-                  { name: "Documentation", href: "#" },
-                  { name: "Webinars", href: "#" },
-                  { name: "Status", href: "#" },
-                ],
+                  { name: "Help Center", href: "/help-center" },
+                  { name: "Documentation", href: "/docs" },
+                  { name: "Webinars", href: "/webinars" },
+                  { name: "Status", href: "/status" },
+                ]
+                
               },
               {
                 title: "Legal",
                 links: [
-                  { name: "Terms of Service", href: "#" },
-                  { name: "Privacy Policy", href: "#" },
-                  { name: "Cookies", href: "#" },
-                  { name: "GDPR", href: "#" },
-                ],
+                  { name: "Terms of Service", href: "/terms" },
+                  { name: "Privacy Policy", href: "/privacy" },
+                  { name: "Cookies", href: "/cookies" },
+                  { name: "GDPR", href: "/gdpr" },
+                ]                
               },
             ].map((section, index) => (
               <motion.div
