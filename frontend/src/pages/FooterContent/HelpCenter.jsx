@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const HelpCenter = () => {
+  const navigate = useNavigate();
   const faqs = [
     {
       question: "How do I create an account?",
@@ -39,8 +41,19 @@ const HelpCenter = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-gradient-to-b from-blue-100 via-white to-blue-50 py-16 px-6"
+      className="min-h-screen bg-gradient-to-b from-blue-100 via-white to-blue-50 py-16 px-6 relative"
     >
+      {/* Back Button */}
+      <motion.button
+        onClick={() => navigate(-1)}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="absolute top-6 left-6 flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-xl shadow-md hover:bg-blue-700 transition"
+      >
+        <i className="fas fa-arrow-left mr-2" />
+        Back
+      </motion.button>
+
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <motion.h1 

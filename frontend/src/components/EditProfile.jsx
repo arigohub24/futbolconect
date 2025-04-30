@@ -13,11 +13,9 @@ const EditProfile = () => {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [activeSection, setActiveSection] = useState('personal');
-
-  // Add a shake animation when there are errors
   const [shake, setShake] = useState(false);
 
-  const { data: user, isLoading } = useQuery({
+  const { data: user, isLoading, error } = useQuery({
     queryKey: ['authUser'],
     queryFn: async () => {
       const res = await fetch('/api/auth/me', {
@@ -25,7 +23,11 @@ const EditProfile = () => {
         credentials: 'include',
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to fetch user data');
+      if (!res.ok) {
+        console.log('Auth Error:', data);
+        throw new Error(data.error || 'Failed to fetch user data');
+      }
+      console.log('User Data:', data);
       setFormData({
         firstName: data.firstName || '',
         lastName: data.lastName || '',
@@ -54,8 +56,13 @@ const EditProfile = () => {
         credentials: 'include',
         body: JSON.stringify(updatedData),
       });
+      if (!res.ok) {
+        const text = await res.text();
+        console.log('Update Response Status:', res.status);
+        console.log('Update Response Body:', text);
+        throw new Error(`Failed to update profile: ${text}`);
+      }
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to update profile');
       return data;
     },
     onSuccess: () => {
@@ -66,7 +73,8 @@ const EditProfile = () => {
       }, 1500);
     },
     onError: (error) => {
-      setErrors({ form: error.message });
+      console.error('Update Profile Error:', error);
+      setErrors({ form: error.message || 'Failed to update profile' });
     },
   });
 
@@ -83,7 +91,6 @@ const EditProfile = () => {
     if (!formData.email) newErrors.email = 'Email is required';
     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email format';
     
-    // Trigger shake animation if there are errors
     if (Object.keys(newErrors).length > 0) {
       setShake(true);
       setTimeout(() => setShake(false), 500);
@@ -102,7 +109,6 @@ const EditProfile = () => {
     updateProfileMutation.mutate(formData);
   };
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -146,6 +152,23 @@ const EditProfile = () => {
     exit: { opacity: 0, x: -20 }
   };
 
+  const professionalFields = [
+    { label: 'Current Club', name: 'currentClub', type: 'text' },
+    { label: 'Club/Organization', name: 'club', type: 'text' },
+    { label: 'Organization', name: 'organizationName', type: 'text' },
+    { label: 'Job Title', name: 'jobTitle', type: 'text' },
+    { label: 'Coaching License', name: 'coachingLicense', type: 'text' },
+    { 
+      label: 'Years of Experience', 
+      name: 'yearsExperience', 
+      type: 'number',
+      min: 0,
+      max: 50
+    },
+    { label: 'Agency Name', name: 'agencyName', type: 'text' },
+    { label: 'License Number', name: 'licenseNumber', type: 'text' },
+  ];
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -160,6 +183,14 @@ const EditProfile = () => {
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-red-500">Error: {error.message}. Please log in again.</p>
+      </div>
+    );
+  }
+
   return (
     <motion.div
       variants={containerVariants}
@@ -169,7 +200,6 @@ const EditProfile = () => {
       className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-50 p-4 md:p-8"
     >
       <div className="max-w-6xl mx-auto">
-        {/* Header Section */}
         <motion.div 
           variants={itemVariants}
           className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4"
@@ -189,7 +219,6 @@ const EditProfile = () => {
             </div>
           </div>
           
-          {/* Role Badge */}
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -197,11 +226,10 @@ const EditProfile = () => {
             className="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 flex items-center"
           >
             <span className="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
-            <span className="font-medium text-gray-700 capitalize">{user?.role?.replace('_', ' ')}</span>
+            <span className="font-medium text-gray-700 capitalize">{user?.role?.replace('_', ' ') || 'Unknown Role'}</span>
           </motion.div>
         </motion.div>
 
-        {/* Navigation Tabs */}
         <motion.div variants={itemVariants} className="mb-8">
           <div className="flex space-x-1 bg-white p-1 rounded-xl shadow-inner border border-gray-200 max-w-md">
             {['personal', 'professional'].map((tab) => (
@@ -220,7 +248,6 @@ const EditProfile = () => {
           </div>
         </motion.div>
 
-        {/* Success/Error Messages */}
         <AnimatePresence>
           {successMessage && (
             <motion.div
@@ -275,8 +302,8 @@ const EditProfile = () => {
                     { label: 'Email', name: 'email', type: 'email', required: true },
                     { label: 'Country', name: 'country', type: 'text' },
                     { label: 'Phone Number', name: 'phoneNumber', type: 'tel' },
-                    user?.role === 'player' && { label: 'Date of Birth', name: 'dateOfBirth', type: 'date' },
-                  ].filter(Boolean).map((field, index) => (
+                    { label: 'Date of Birth', name: 'dateOfBirth', type: 'date' },
+                  ].map((field, index) => (
                     <motion.div 
                       key={index} 
                       variants={itemVariants}
@@ -320,6 +347,7 @@ const EditProfile = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
+                className="min-h-[200px]"
               >
                 <h3 className="text-xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-100 flex items-center">
                   <span className="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
@@ -327,22 +355,7 @@ const EditProfile = () => {
                 </h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[
-                    user?.role === 'player' && { label: 'Current Club', name: 'currentClub', type: 'text' },
-                    user?.role === 'scout' && { label: 'Club/Organization', name: 'club', type: 'text' },
-                    user?.role === 'club_staff' && { label: 'Organization', name: 'organizationName', type: 'text' },
-                    user?.role === 'club_staff' && { label: 'Job Title', name: 'jobTitle', type: 'text' },
-                    user?.role === 'coach' && { label: 'Coaching License', name: 'coachingLicense', type: 'text' },
-                    user?.role === 'coach' && { 
-                      label: 'Years of Experience', 
-                      name: 'yearsExperience', 
-                      type: 'number',
-                      min: 0,
-                      max: 50
-                    },
-                    user?.role === 'agent' && { label: 'Agency Name', name: 'agencyName', type: 'text' },
-                    user?.role === 'agent' && { label: 'License Number', name: 'licenseNumber', type: 'text' },
-                  ].filter(Boolean).map((field, index) => (
+                  {professionalFields.map((field, index) => (
                     <motion.div 
                       key={index} 
                       variants={itemVariants}

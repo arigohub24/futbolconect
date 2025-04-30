@@ -128,7 +128,7 @@ const Sidebar = () => {
                       className="flex items-center px-4 py-3 text-sm text-blue-600 font-medium hover:bg-blue-50 rounded-lg cursor-pointer"
                       whileHover={{ x: 4 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => setIsOpen(false)} // Close menu when clicked
+                      onClick={() => setIsOpen(false)}
                     >
                       <NavLink to="/help-center" className="flex items-center">
                         <i className="fas fa-headset mr-3" />
@@ -210,8 +210,10 @@ const Sidebar = () => {
                 whileHover={{ x: 4 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <i className="fas fa-headset mr-3" />
-                Need help? Contact support
+                <NavLink to="/help-center" className="flex items-center">
+                  <i className="fas fa-headset mr-3" />
+                  Need help? Contact support
+                </NavLink>
               </motion.div>
             </motion.div>
           </div>

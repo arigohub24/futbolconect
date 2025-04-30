@@ -164,38 +164,43 @@ const Outplacement = () => {
             className="space-y-4"
           >
             {players.map((player) => (
-              <motion.div
+              <Link
                 key={player.id}
-                variants={itemVariants}
-                whileHover={{ 
-                  y: -4, 
-                  boxShadow: "0 6px 12px rgba(0, 91, 234, 0.1)",
-                  backgroundColor: "#F9FAFB"
-                }}
-                className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors"
+                to={`/player/${player.id}`}
+                state={{ player }}
               >
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                    <span className="text-blue-600 font-semibold">
-                      {player.name.charAt(0)}
-                    </span>
+                <motion.div
+                  variants={itemVariants}
+                  whileHover={{ 
+                    y: -4, 
+                    boxShadow: "0 6px 12px rgba(0, 91, 234, 0.1)",
+                    backgroundColor: "#F9FAFB"
+                  }}
+                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                      <span className="text-blue-600 font-semibold">
+                        {player.name.charAt(0)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-blue-900">{player.name}</p>
+                      <p className="text-sm text-gray-600">
+                        {player.position} | {player.age} | {player.club}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium text-blue-900">{player.name}</p>
+                  <div className="text-right">
                     <p className="text-sm text-gray-600">
-                      {player.position} | {player.age} | {player.club}
+                      <span className="inline-block px-2 py-1 bg-green-100 text-green-600 rounded-full text-xs font-medium">
+                        {player.status}
+                      </span>
                     </p>
+                    <p className="text-sm text-gray-500">{player.enquiries} Enquiries</p>
                   </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-gray-600">
-                    <span className="inline-block px-2 py-1 bg-green-100 text-green-600 rounded-full text-xs font-medium">
-                      {player.status}
-                    </span>
-                  </p>
-                  <p className="text-sm text-gray-500">{player.enquiries} Enquiries</p>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
         </motion.div>
