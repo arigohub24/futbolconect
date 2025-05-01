@@ -907,6 +907,7 @@ const LandingPage = () => {
                     <option value="club_director">Club Director</option>
                     <option value="scout">Scout</option>
                     <option value="agent">Agent</option>
+                    <option value="agent">Club Representative</option>
                     <option value="coach">Coach</option>
                     <option value="other">Other</option>
                   </select>
