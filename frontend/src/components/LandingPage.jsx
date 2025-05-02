@@ -1095,6 +1095,16 @@ const LandingPage = () => {
           >
             <p>© {new Date().getFullYear()} Futbol Connect. All rights reserved.</p>
           </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-gray-400"
+          >
+            <p>© {new Date().getFullYear()} Futbol Connect. All rights reserved.</p>
+            <p className="mt-1 text-blue-400">Developed by Arigo Technologies</p>
+          </motion.div>
         </div>
       </footer>
 

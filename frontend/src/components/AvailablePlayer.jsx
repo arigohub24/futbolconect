@@ -10,12 +10,15 @@ import {
   MessageCircle,
   ExternalLink,
   X,
-  Plus
+  Plus,
+  Mail,
+  Phone,
+  MapPin
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AvailablePlayers = () => {
-  // Sample data with more details for richer cards
+  // Sample data with added contact information
   const [players, setPlayers] = useState([
     {
       id: 1,
@@ -34,7 +37,12 @@ const AvailablePlayers = () => {
         assists: 8,
         rating: 7.8
       },
-      image: null
+      image: null,
+      contact: {
+        email: "john.doe@soccerpro.com",
+        phone: "+44 123 456 7890",
+        location: "London, England"
+      }
     },
     {
       id: 2,
@@ -53,7 +61,12 @@ const AvailablePlayers = () => {
         assists: 15,
         rating: 8.2
       },
-      image: null
+      image: null,
+      contact: {
+        email: "jane.smith@soccerpro.com",
+        phone: "+1 234 567 8901",
+        location: "New York, USA"
+      }
     },
     {
       id: 3,
@@ -72,7 +85,12 @@ const AvailablePlayers = () => {
         assists: 4,
         rating: 7.5
       },
-      image: null
+      image: null,
+      contact: {
+        email: "mike.johnson@soccerpro.com",
+        phone: "+33 345 678 9012",
+        location: "Paris, France"
+      }
     },
     {
       id: 4,
@@ -91,7 +109,12 @@ const AvailablePlayers = () => {
         saves: 87,
         rating: 8.0
       },
-      image: null
+      image: null,
+      contact: {
+        email: "sophie.chen@soccerpro.com",
+        phone: "+86 456 789 0123",
+        location: "Shanghai, China"
+      }
     },
     {
       id: 5,
@@ -110,7 +133,12 @@ const AvailablePlayers = () => {
         assists: 11,
         rating: 8.4
       },
-      image: null
+      image: null,
+      contact: {
+        email: "carlos.mendez@soccerpro.com",
+        phone: "+34 567 890 1234",
+        location: "Madrid, Spain"
+      }
     }
   ]);
 
@@ -124,6 +152,7 @@ const AvailablePlayers = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [sortOption, setSortOption] = useState('enquiries');
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   // Simulate loading data
   useEffect(() => {
@@ -163,6 +192,14 @@ const AvailablePlayers = () => {
     setPlayers(players.map(player => 
       player.id === id ? {...player, starred: !player.starred} : player
     ));
+  };
+
+  const openContactModal = (player) => {
+    setSelectedPlayer(player);
+  };
+
+  const closeContactModal = () => {
+    setSelectedPlayer(null);
   };
 
   // Animation variants
@@ -207,6 +244,24 @@ const AvailablePlayers = () => {
     animate: { scale: [1, 1.2, 1], transition: { duration: 0.4 } }
   };
 
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { 
+        type: "spring",
+        stiffness: 300,
+        damping: 20
+      }
+    },
+    exit: { 
+      opacity: 0, 
+      scale: 0.8,
+      transition: { duration: 0.2 }
+    }
+  };
+
   const positions = ["Forward", "Midfielder", "Defender", "Goalkeeper"];
   const nationalities = ["England", "USA", "France", "Spain", "China", "Germany", "Brazil", "Argentina"];
 
@@ -219,21 +274,17 @@ const AvailablePlayers = () => {
         className="min-h-screen bg-gray-50 p-4 md:p-8"
       >
         <div className="max-w-7xl mx-auto">
-          {/* Loading skeleton for header */}
           <div className="flex justify-between items-center mb-8">
             <div className="h-10 w-24 bg-gray-200 rounded-lg animate-pulse"></div>
             <div className="h-10 w-48 bg-gray-200 rounded-lg animate-pulse"></div>
           </div>
           
-          {/* Loading skeleton for title */}
           <div className="h-10 w-64 bg-gray-200 rounded-lg mb-8 animate-pulse"></div>
           
-          {/* Loading skeleton for search/filter */}
           <div className="bg-white rounded-xl shadow-sm p-4 mb-6 border border-gray-100">
             <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
           </div>
           
-          {/* Loading skeleton for player cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
@@ -260,7 +311,6 @@ const AvailablePlayers = () => {
       className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4 md:p-8"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Header with back button */}
         <motion.div 
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -300,7 +350,6 @@ const AvailablePlayers = () => {
           </Link>
         </motion.div>
 
-        {/* Page Title */}
         <motion.h1 
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -310,7 +359,6 @@ const AvailablePlayers = () => {
           Available <span className="text-blue-600">Players</span>
         </motion.h1>
 
-        {/* Search and Filter Bar */}
         <motion.div
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -370,7 +418,6 @@ const AvailablePlayers = () => {
             </div>
           </div>
 
-          {/* Filter Panel */}
           <AnimatePresence>
             {showFilters && (
               <motion.div
@@ -455,7 +502,6 @@ const AvailablePlayers = () => {
           </AnimatePresence>
         </motion.div>
 
-        {/* Results Count */}
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -465,7 +511,6 @@ const AvailablePlayers = () => {
           Showing <span className="font-semibold text-blue-600">{filteredPlayers.length}</span> available players
         </motion.p>
 
-        {/* Player Cards */}
         <AnimatePresence>
           <motion.div
             variants={containerVariants}
@@ -555,7 +600,6 @@ const AvailablePlayers = () => {
                     </span>
                   </div>
 
-                  {/* Stats */}
                   <div className="grid grid-cols-3 gap-2 mb-4">
                     {player.position === 'Goalkeeper' ? (
                       <>
@@ -596,6 +640,7 @@ const AvailablePlayers = () => {
                   
                   <div className="flex space-x-2">
                     <motion.button 
+                      onClick={() => openContactModal(player)}
                       className="flex-1 flex items-center justify-center bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -617,7 +662,86 @@ const AvailablePlayers = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Empty State */}
+        {/* Contact Modal */}
+        <AnimatePresence>
+          {selectedPlayer && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+              onClick={closeContactModal}
+            >
+              <motion.div
+                variants={modalVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="bg-white rounded-xl p-6 max-w-md w-full mx-4 relative"
+                onClick={e => e.stopPropagation()}
+              >
+                <motion.button
+                  onClick={closeContactModal}
+                  className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <X className="h-6 w-6" />
+                </motion.button>
+                
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                  Contact {selectedPlayer.name}
+                </h2>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <Mail className="h-5 w-5 text-blue-600 mr-3" />
+                    <div>
+                      <p className="text-sm text-gray-500">Email</p>
+                      <p className="text-gray-900 font-medium">{selectedPlayer.contact.email}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <Phone className="h-5 w-5 text-blue-600 mr-3" />
+                    <div>
+                      <p className="text-sm text-gray-500">Phone</p>
+                      <p className="text-gray-900 font-medium">{selectedPlayer.contact.phone}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <MapPin className="h-5 w-5 text-blue-600 mr-3" />
+                    <div>
+                      <p className="text-sm text-gray-500">Location</p>
+                      <p className="text-gray-900 font-medium">{selectedPlayer.contact.location}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6 flex justify-end space-x-2">
+                  <motion.button
+                    onClick={closeContactModal}
+                    className="px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Close
+                  </motion.button>
+                  <motion.button
+                    onClick={() => window.location.href = `mailto:${selectedPlayer.contact.email}`}
+                    className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Send Email
+                  </motion.button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {filteredPlayers.length === 0 && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
