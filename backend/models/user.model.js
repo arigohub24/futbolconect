@@ -1,68 +1,26 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
-	{
-		username: {
-			type: String,
-			required: true,
-			unique: true,
-		},
-		fullName: {
-			type: String,
-			required: true,
-		},
-		password: {
-			type: String,
-			required: true,
-			minLength: 6,
-		},
-		email: {
-			type: String,
-			required: true,
-			unique: true,
-		},
-		followers: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "User",
-				default: [],
-			},
-		],
-		following: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "User",
-				default: [],
-			},
-		],
-		profileImg: {
-			type: String,
-			default: "",
-		},
-		coverImg: {
-			type: String,
-			default: "",
-		},
-		bio: {
-			type: String,
-			default: "",
-		},
+const userSchema = new mongoose.Schema({
+  firstName: { type: String, trim: true },
+  lastName: { type: String, trim: true },
+  email: { type: String, required: true, unique: true, trim: true },
+  password: { type: String, required: true },
+  role: {
+    type: String,
+    enum: ["player", "scout", "club_staff", "coach", "agent"],
+    default: "player",
+  },
+  country: { type: String, trim: true },
+  phoneNumber: { type: String, trim: true },
+  dateOfBirth: { type: Date },
+  currentClub: { type: String, trim: true },
+  club: { type: String, trim: true },
+  organizationName: { type: String, trim: true },
+  jobTitle: { type: String, trim: true },
+  coachingLicense: { type: String, trim: true },
+  yearsExperience: { type: Number, min: 0 },
+  agencyName: { type: String, trim: true },
+  licenseNumber: { type: String, trim: true },
+}, { timestamps: true });
 
-		link: {
-			type: String,
-			default: "",
-		},
-		likedPosts: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "Post",
-				default: [],
-			},
-		],
-	},
-	{ timestamps: true }
-);
-
-const User = mongoose.model("User", userSchema);
-
-export default User;
+export default mongoose.model("User", userSchema);

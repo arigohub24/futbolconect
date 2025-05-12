@@ -1,20 +1,16 @@
 // components/ProtectedLayout.jsx
 import { Outlet } from 'react-router-dom';
-import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
 const ProtectedLayout = () => {
   return (
     <div className="flex flex-col h-screen bg-gray-50">
-      {/* Navbar at the top */}
-      <Navbar />
-
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar on the left */}
         <Sidebar />
 
         {/* Main content area */}
-        <main className="flex-1 md:ml-72 pt-16 overflow-y-auto transition-all duration-300">
+        <main className="flex-1 md:ml-72 overflow-y-auto transition-all duration-300">
           <div className="p-6 max-w-7xl mx-auto">
             <Outlet />
           </div>

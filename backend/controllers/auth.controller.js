@@ -2,6 +2,20 @@ import { generateTokenAndSetCookie } from "../lib/utils/generateToken.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 
+
+// Existing controllers (assumed)
+export const getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export const signup = async (req, res) => {
 	try {
 		const { fullName, username, email, password } = req.body;
@@ -95,13 +109,60 @@ export const logout = async (req, res) => {
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 };
+// New update controller
+export const update = async (req, res) => {
+  try {
+    const {
+      firstName,
+      lastName,
+      email,
+      country,
+      phoneNumber,
+      dateOfBirth,
+      currentClub,
+      club,
+      organizationName,
+      jobTitle,
+      coachingLicense,
+      yearsExperience,
+      agencyName,
+      licenseNumber,
+    } = req.body;
 
-export const getMe = async (req, res) => {
-	try {
-		const user = await User.findById(req.user._id).select("-password");
-		res.status(200).json(user);
-	} catch (error) {
-		console.log("Error in getMe controller", error.message);
-		res.status(500).json({ error: "Internal Server Error" });
-	}
+    const updateData = {
+      firstName,
+      lastName,
+      email,
+      country,
+      phoneNumber,
+      dateOfBirth,
+      currentClub,
+      club,
+      organizationName,
+      jobTitle,
+      coachingLicense,
+      yearsExperience,
+      agencyName,
+      licenseNumber,
+    };
+
+    // Remove undefined fields to prevent overwriting with undefined
+    Object.keys(updateData).forEach(
+      (key) => updateData[key] === undefined && delete updateData[key]
+    );
+
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ message: "Profile updated successfully", user });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };

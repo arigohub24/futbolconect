@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Users, ArrowRight, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Outplacement = () => {
   const benefits = [
@@ -89,13 +90,15 @@ const Outplacement = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-0">
             Player Outplacement
           </h1>
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-green-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-green-700 transition-colors"
-          >
-            Make Player Available
-          </motion.button>
+          <Link to="/make-player-available">
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-green-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-green-700 transition-colors"
+            >
+              Make Player Available
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Benefits Section */}
@@ -103,12 +106,12 @@ const Outplacement = () => {
           variants={containerVariants}
           className="bg-white rounded-xl shadow-sm p-6 md:p-8 mb-8 border border-gray-100 hover:shadow-md transition-shadow duration-300"
         >
-          <motion.h2 
-            variants={itemVariants}
-            className="text-xl md:text-2xl font-semibold text-blue-900 mb-4"
-          >
-            TransferRoom Player Outplacement
-          </motion.h2>
+         <motion.h2 
+          variants={itemVariants}
+          className="text-xl md:text-2xl font-semibold text-blue-900 mb-4"
+        >
+          Futbol Conect Player Outplacement
+        </motion.h2>
           <motion.ul 
             variants={containerVariants}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
@@ -139,49 +142,65 @@ const Outplacement = () => {
           variants={containerVariants}
           className="bg-white rounded-xl shadow-sm p-6 md:p-8 border border-gray-100 hover:shadow-md transition-shadow duration-300"
         >
-          <motion.h2 
-            variants={itemVariants}
-            className="text-xl md:text-2xl font-semibold text-blue-900 mb-4"
-          >
-            Available Players
-          </motion.h2>
+          <div className="flex justify-between items-center mb-4">
+            <motion.h2 
+              variants={itemVariants}
+              className="text-xl md:text-2xl font-semibold text-blue-900"
+            >
+              Available Players
+            </motion.h2>
+            <Link to="/available-players">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                View All
+              </motion.button>
+            </Link>
+          </div>
           <motion.div 
             variants={containerVariants}
             className="space-y-4"
           >
             {players.map((player) => (
-              <motion.div
+              <Link
                 key={player.id}
-                variants={itemVariants}
-                whileHover={{ 
-                  y: -4, 
-                  boxShadow: "0 6px 12px rgba(0, 91, 234, 0.1)",
-                  backgroundColor: "#F9FAFB"
-                }}
-                className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors"
+                to={`/player/${player.id}`}
+                state={{ player }}
               >
-                <div className="flex items-center">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                    <span className="text-blue-600 font-semibold">
-                      {player.name.charAt(0)}
-                    </span>
+                <motion.div
+                  variants={itemVariants}
+                  whileHover={{ 
+                    y: -4, 
+                    boxShadow: "0 6px 12px rgba(0, 91, 234, 0.1)",
+                    backgroundColor: "#F9FAFB"
+                  }}
+                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                      <span className="text-blue-600 font-semibold">
+                        {player.name.charAt(0)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-blue-900">{player.name}</p>
+                      <p className="text-sm text-gray-600">
+                        {player.position} | {player.age} | {player.club}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium text-blue-900">{player.name}</p>
+                  <div className="text-right">
                     <p className="text-sm text-gray-600">
-                      {player.position} | {player.age} | {player.club}
+                      <span className="inline-block px-2 py-1 bg-green-100 text-green-600 rounded-full text-xs font-medium">
+                        {player.status}
+                      </span>
                     </p>
+                    <p className="text-sm text-gray-500">{player.enquiries} Enquiries</p>
                   </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-gray-600">
-                    <span className="inline-block px-2 py-1 bg-green-100 text-green-600 rounded-full text-xs font-medium">
-                      {player.status}
-                    </span>
-                  </p>
-                  <p className="text-sm text-gray-500">{player.enquiries} Enquiries</p>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
         </motion.div>

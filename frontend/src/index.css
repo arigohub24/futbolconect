@@ -14,3 +14,71 @@
    scrollbar-width: none;  /* Firefox */
    overflow-y: auto;
  }
+
+ .payment-form-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f9fafb, #e5e7eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.payment-form {
+  width: 100%;
+  max-width: 32rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.payment-form input,
+.payment-form .card-element {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.payment-form input:focus,
+.payment-form .card-element:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.payment-form button {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.payment-form button:hover {
+  background: #1d4ed8;
+}
+
+.payment-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.animate-fall {
+  animation: fall linear forwards;
+}
