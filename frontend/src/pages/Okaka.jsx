@@ -605,6 +605,7 @@ const Okaka = () => {
                     <div className="text-xs text-gray-500">Joined</div>
                     <div className="font-medium">{player.joined}</div>
                   </div>
+
                 </div>
 
                 <div className="mb-4">
