@@ -65,18 +65,24 @@ const Pricing = () => {
   const testimonials = [
     {
       quote: 'futbol conect has revolutionized how we connect with clubs globally.',
-      author: 'John Smith, Sporting Director, FC Elite',
+      author: 'John Smith',
+      role: 'Sporting Director, FC Elite',
       rating: 5,
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&auto=format'
     },
     {
       quote: 'The platform saves us weeks of work in the transfer market.',
-      author: 'Emma Johnson, Technical Director, Global United',
+      author: 'Emma Johnson',
+      role: 'Technical Director, Global United',
       rating: 4,
+      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&auto=format'
     },
     {
       quote: 'An essential tool for modern football management.',
-      author: 'Carlos Mendez, Head Scout, City Strikers',
+      author: 'Carlos Mendez',
+      role: 'Head Scout, City Strikers',
       rating: 5,
+      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&auto=format'
     },
   ];
 
@@ -151,11 +157,11 @@ const Pricing = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ scale: 1.03 }}
-                className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center"
+                className="bg-blue-600 p-8 rounded-xl shadow-sm border border-blue-500 text-center text-white"
               >
-                <div className="flex justify-center mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <div className="flex justify-center mb-4 text-white">{feature.icon}</div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-blue-100">{feature.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -188,12 +194,24 @@ const Pricing = () => {
               >
                 <Quote className="absolute top-4 left-4 h-5 w-5 text-gray-300" />
                 <p className="text-gray-700 italic mb-6 pl-8">{testimonial.quote}</p>
-                <div className="border-t border-gray-200 pt-4">
-                  <p className="font-medium text-gray-900">{testimonial.author}</p>
-                  <div className="flex mt-2">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                    ))}
+                <div className="border-t border-gray-200 pt-4 flex items-center">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.author}
+                    className="w-12 h-12 rounded-full object-cover mr-4"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = `https://ui-avatars.com/api/?name=${testimonial.author}&background=random`;
+                    }}
+                  />
+                  <div>
+                    <p className="font-medium text-gray-900">{testimonial.author}</p>
+                    <p className="text-sm text-gray-600">{testimonial.role}</p>
+                    <div className="flex mt-1">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>

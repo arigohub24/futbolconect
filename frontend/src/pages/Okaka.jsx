@@ -16,9 +16,11 @@ const Okaka = () => {
     stadium: "Okaka Stadium",
     capacity: "25,000",
     location: "Lagos, Nigeria",
-    manager: "John Smith",
+    manager: "Dr. Arinze",
     achievements: [
+      "League Champions 2023",
       "League Champions 2022",
+      "League Champions 2021",
       "Cup Winners 2021",
       "Super Cup 2023"
     ]
@@ -391,6 +393,15 @@ const Okaka = () => {
     { id: 'goalkeeper', label: 'Goalkeepers' }
   ];
 
+  const getPositionCategory = (position) => {
+    const positionLower = position.toLowerCase();
+    if (positionLower.includes('goalkeeper')) return 'goalkeeper';
+    if (positionLower.includes('forward') || positionLower.includes('striker') || positionLower.includes('winger')) return 'forward';
+    if (positionLower.includes('midfielder')) return 'midfielder';
+    if (positionLower.includes('back') || positionLower.includes('defender')) return 'defender';
+    return 'all';
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -416,7 +427,7 @@ const Okaka = () => {
 
   const filteredPlayers = players.filter(player => {
     const matchesSearch = player.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesPosition = selectedPosition === 'all' || player.position.toLowerCase() === selectedPosition;
+    const matchesPosition = selectedPosition === 'all' || getPositionCategory(player.position) === selectedPosition;
     return matchesSearch && matchesPosition;
   });
 
