@@ -25,77 +25,73 @@ const Recruitment = () => {
 
   const players = [
     {
-      id: 6,
-      name: "Rotimi Nicol",
-      position: "Attacking Midfielder",
-      age: 19,
-      club: "Okaka FC",
-      nationality: "Nigeria",
-      flag: "🇳🇬",
-      status: "Available",
-      contractEnd: "2025-06-30",
-      enquiries: 15,
-      starred: true,
-      stats: {
-        goals: 45,
-        assists: 30,
-        rating: 9.2
-      },
-      image: "/rotimi.png",
-      contact: {
-        email: "rotimi.nicol@okakafc.com",
-        phone: "+234 678 901 2345",
-        location: "Lagos, Nigeria"
-      }
-    },
-    {
-      id: 4,
-      name: "Chisom Agbodike",
-      position: "Attacking Midfielder",
-      age: 17,
-      club: "Okaka FC",
-      nationality: "Nigeria",
-      flag: "🇳🇬",
-      status: "Available",
-      contractEnd: "2025-06-30",
-      enquiries: 8,
-      starred: true,
-      stats: {
-        goals: 7,
-        assists: 12,
-        rating: 8.2
-      },
-      image: "/player1.png",
-      contact: {
-        email: "chisom.agbodike@okakafc.com",
-        phone: "+234 456 789 0123",
-        location: "Lagos, Nigeria"
-      }
-    },
-    {
-      id: 5,
-      name: "Emmanuell Bright",
-      position: "Striker",
+      id: 3,
+      name: "Bamidele Sunday",
+      position: "Right Back",
+      number: 2,
       age: 14,
-      club: "Okaka FC",
       nationality: "Nigeria",
       flag: "🇳🇬",
-      status: "Available",
-      contractEnd: "2025-06-30",
-      enquiries: 12,
-      starred: true,
+      height: "1.78m",
+      weight: "68kg",
+      joined: "2023",
+      contract: "2025",
+      dateOfBirth: "2006-12-16",
       stats: {
-        goals: 15,
-        assists: 4,
+        appearances: 20,
+        goals: 2,
+        assists: 8,
+        cleanSheets: 10,
         rating: 8.5
       },
       image: "/player2.png",
-      contact: {
-        email: "emmanuell.bright@okakafc.com",
-        phone: "+234 567 890 1234",
-        location: "Lagos, Nigeria"
-      }
-    }
+      bio: "Dynamic right-back with excellent pace and crossing ability. Known for his defensive solidity and attacking contributions."
+    },
+    {
+      id: 4,
+      name: "Adebayo Sodiq",
+      position: "Defensive Midfielder",
+      number: 6,
+      age: 18,
+      nationality: "Nigeria",
+      flag: "🇳🇬",
+      height: "1.85m",
+      weight: "78kg",
+      joined: "2023",
+      contract: "2025",
+      dateOfBirth: "2005-12-17",
+      stats: {
+        appearances: 22,
+        goals: 3,
+        assists: 12,
+        cleanSheets: 11,
+        rating: 7.8
+      },
+      image: "/player3.png",
+      bio: "Strong defensive midfielder with excellent tackling and positioning. Provides solid protection for the backline."
+    },
+    {
+      id: 5,
+      name: "Emmanuel Bright",
+      position: "Striker",
+      number: 9,
+      age: 17,
+      nationality: "Nigeria",
+      flag: "🇳🇬",
+      height: "1.78m",
+      weight: "72kg",
+      joined: "2023",
+      contract: "2025",
+      dateOfBirth: "2009-12-13",
+      stats: {
+        appearances: 24,
+        goals: 18,
+        assists: 7,
+        rating: 8.7
+      },
+      image: "/player4.png",
+      bio: "Young and prolific striker with exceptional finishing ability. Despite his age, he has shown remarkable composure and goal-scoring instincts."
+    },
   ];
 
   const containerVariants = {

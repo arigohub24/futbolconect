@@ -29,30 +29,31 @@ const Okaka = () => {
   const players = [
     {
       id: 1,
-      name: "Rotimi Nicol",
+      name: "Chisom Agbodike",
       position: "Attacking Midfielder",
-      number: 10,
-      age: 19,
+      number: 8,
+      age: 17,
       nationality: "Nigeria",
       flag: "🇳🇬",
-      height: "1.82m",
-      weight: "75kg",
+      height: "1.88m",
+      weight: "80kg",
       joined: "2023",
       contract: "2025",
-      dateOfBirth: "2004-09-27",
+      dateOfBirth: "2006-07-01",
       stats: {
-        appearances: 28,
-        goals: 45,
-        assists: 30,
-        rating: 9.2
+        appearances: 26,
+        goals: 2,
+        assists: 1,
+        cleanSheets: 13,
+        rating: 7.9
       },
-      image: "/rotimi2.png",
-      bio: "Creative attacking midfielder with exceptional vision and technical ability. Controls the tempo of the game and provides key assists."
+      image: "/player5.png",
+      bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness."
     },
     {
       id: 2,
       name: "Chucks Peter",
-      position: "Center Back",
+      position: "Defender",
       number: 5,
       age: 17,
       nationality: "Nigeria",
@@ -61,7 +62,7 @@ const Okaka = () => {
       weight: "73kg",
       joined: "2023",
       contract: "2025",
-      dateOfBirth: "2006-07-01",
+      dateOfBirth: "2006-10-04",
       stats: {
         appearances: 25,
         goals: 1,
@@ -84,7 +85,7 @@ const Okaka = () => {
       weight: "68kg",
       joined: "2023",
       contract: "2025",
-      dateOfBirth: "2009-12-13",
+      dateOfBirth: "2006-12-16",
       stats: {
         appearances: 20,
         goals: 2,
@@ -130,7 +131,7 @@ const Okaka = () => {
       weight: "72kg",
       joined: "2023",
       contract: "2025",
-      dateOfBirth: "2006-12-16",
+      dateOfBirth: "2009-12-13",
       stats: {
         appearances: 24,
         goals: 18,
@@ -142,26 +143,25 @@ const Okaka = () => {
     },
     {
       id: 6,
-      name: "Chisom Agbodike",
-      position: "Center Back",
-      number: 4,
-      age: 17,
+      name: "ahmed johnson",
+      position: "Attacking Midfielder",
+      number: 10,
+      age: 19,
       nationality: "Nigeria",
       flag: "🇳🇬",
-      height: "1.88m",
-      weight: "80kg",
+      height: "1.82m",
+      weight: "75kg",
       joined: "2023",
       contract: "2025",
-      dateOfBirth: "2006-10-04",
+      dateOfBirth: "2004-09-27",
       stats: {
-        appearances: 26,
-        goals: 2,
-        assists: 1,
-        cleanSheets: 13,
-        rating: 7.9
+        appearances: 28,
+        goals: 45,
+        assists: 30,
+        rating: 9.2
       },
-      image: "/player5.png",
-      bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness."
+      image: "/assets/players/victor-osimhen.jpg",
+      bio: "Creative attacking midfielder with exceptional vision and technical ability. Controls the tempo of the game and provides key assists."
     },
     {
       id: 7,

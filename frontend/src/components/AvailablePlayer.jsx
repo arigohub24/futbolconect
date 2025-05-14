@@ -28,153 +28,503 @@ const AvailablePlayers = () => {
     return [
       {
         id: 1,
+        name: "Chisom Agbodike",
+        position: "Attacking Midfielder",
+        number: 8,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.88m",
+        weight: "80kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 26,
+        starred: true,
+        stats: {
+          appearances: 26,
+          goals: 2,
+          assists: 1,
+          cleanSheets: 13,
+          rating: 7.9
+        },
+        image: "/player5.png",
+        contact: {
+          email: "chisom.agbodike@okakafc.com",
+          phone: "+234 123 456 7890",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-07-01",
+        bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness."
+      },
+      {
+        id: 2,
+        name: "Chucks Peter",
+        position: "Defender",
+        number: 5,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.80m",
+        weight: "73kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 25,
+        starred: true,
+        stats: {
+          appearances: 25,
+          goals: 1,
+          assists: 1,
+          cleanSheets: 12,
+          rating: 8.2
+        },
+        image: "/player1.png",
+        contact: {
+          email: "chucks.peter@okakafc.com",
+          phone: "+234 234 567 8901",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-10-04",
+        bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness."
+      },
+      {
+        id: 3,
+        name: "Bamidele Sunday",
+        position: "Right Back",
+        number: 2,
+        age: 14,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.78m",
+        weight: "68kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 20,
+        starred: true,
+        stats: {
+          appearances: 20,
+          goals: 2,
+          assists: 8,
+          cleanSheets: 10,
+          rating: 8.5
+        },
+        image: "/player2.png",
+        contact: {
+          email: "bamidele.sunday@okakafc.com",
+          phone: "+234 345 678 9012",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-12-16",
+        bio: "Dynamic right-back with excellent pace and crossing ability. Known for his defensive solidity and attacking contributions."
+      },
+      {
+        id: 4,
         name: "Adebayo Sodiq",
         position: "Defensive Midfielder",
+        number: 6,
         age: 18,
         club: "Okaka FC",
         nationality: "Nigeria",
         flag: "🇳🇬",
+        height: "1.85m",
+        weight: "78kg",
+        joined: "2023",
+        contract: "2025",
         status: "Available",
-        contractEnd: "2025-06-30",
-        enquiries: 5,
-        starred: false,
+        enquiries: 22,
+        starred: true,
         stats: {
+          appearances: 22,
           goals: 3,
-          assists: 8,
+          assists: 12,
+          cleanSheets: 11,
           rating: 7.8
         },
         image: "/player3.png",
         contact: {
           email: "adebayo.sodiq@okakafc.com",
-          phone: "+234 123 456 7890",
-          location: "Lagos, Nigeria"
-        },
-        dateOfBirth: "2005-12-17"
-      },
-      {
-        id: 2,
-        name: "Bamidele Sunday",
-        position: "Right Back",
-        age: 17,
-        club: "Okaka FC",
-        nationality: "Nigeria",
-        flag: "🇳🇬",
-        status: "Available",
-        contractEnd: "2025-06-30",
-        enquiries: 3,
-        starred: false,
-        stats: {
-          goals: 1,
-          assists: 5,
-          rating: 7.5
-        },
-        image: "/player4.png",
-        contact: {
-          email: "bamidele.sunday@okakafc.com",
-          phone: "+234 234 567 8901",
-          location: "Lagos, Nigeria"
-        },
-        dateOfBirth: "2006-12-16"
-      },
-      {
-        id: 3,
-        name: "Chucks Peter",
-        position: "Center Back",
-        age: 17,
-        club: "Okaka FC",
-        nationality: "Nigeria",
-        flag: "🇳🇬",
-        status: "Available",
-        contractEnd: "2025-06-30",
-        enquiries: 7,
-        starred: true,
-        stats: {
-          goals: 2,
-          assists: 1,
-          rating: 7.9
-        },
-        image: "/player5.png",
-        contact: {
-          email: "chucks.peter@okakafc.com",
-          phone: "+234 345 678 9012",
-          location: "Lagos, Nigeria"
-        },
-        dateOfBirth: "2006-10-04"
-      },
-      {
-        id: 4,
-        name: "Chisom Agbodike",
-        position: "Attacking Midfielder",
-        age: 17,
-        club: "Okaka FC",
-        nationality: "Nigeria",
-        flag: "🇳🇬",
-        status: "Available",
-        contractEnd: "2025-06-30",
-        enquiries: 8,
-        starred: true,
-        stats: {
-          goals: 7,
-          assists: 12,
-          rating: 8.2
-        },
-        image: "/player1.png",
-        contact: {
-          email: "chisom.agbodike@okakafc.com",
           phone: "+234 456 789 0123",
           location: "Lagos, Nigeria"
         },
-        dateOfBirth: "2006-07-01"
+        dateOfBirth: "2005-12-17",
+        bio: "Strong defensive midfielder with excellent tackling and positioning. Provides solid protection for the backline."
       },
       {
         id: 5,
-        name: "Emmanuell Bright",
+        name: "Emmanuel Bright",
         position: "Striker",
-        age: 14,
+        number: 9,
+        age: 17,
         club: "Okaka FC",
         nationality: "Nigeria",
         flag: "🇳🇬",
+        height: "1.78m",
+        weight: "72kg",
+        joined: "2023",
+        contract: "2025",
         status: "Available",
-        contractEnd: "2025-06-30",
-        enquiries: 12,
+        enquiries: 24,
         starred: true,
         stats: {
-          goals: 15,
-          assists: 4,
-          rating: 8.5
+          appearances: 24,
+          goals: 18,
+          assists: 7,
+          rating: 8.7
         },
-        image: "/player2.png",
+        image: "/player4.png",
         contact: {
-          email: "emmanuell.bright@okakafc.com",
+          email: "emmanuel.bright@okakafc.com",
           phone: "+234 567 890 1234",
           location: "Lagos, Nigeria"
         },
-        dateOfBirth: "2009-12-13"
+        dateOfBirth: "2009-12-13",
+        bio: "Young and prolific striker with exceptional finishing ability. Despite his age, he has shown remarkable composure and goal-scoring instincts."
       },
       {
         id: 6,
-        name: "Rotimi Nicol",
+        name: "Ahmed Johnson",
         position: "Attacking Midfielder",
+        number: 10,
         age: 19,
         club: "Okaka FC",
         nationality: "Nigeria",
         flag: "🇳🇬",
+        height: "1.82m",
+        weight: "75kg",
+        joined: "2023",
+        contract: "2025",
         status: "Available",
-        contractEnd: "2025-06-30",
-        enquiries: 15,
+        enquiries: 28,
         starred: true,
         stats: {
-          goals: 45,
-          assists: 30,
-          rating: 9.2
+          appearances: 28,
+          goals: 15,
+          assists: 10,
+          rating: 8.9
         },
-        image: "/rotimi.png",
+        image: "/assets/players/victor-osimhen.jpg",
         contact: {
-          email: "rotimi.nicol@okakafc.com",
+          email: "ahmed.johnson@okakafc.com",
           phone: "+234 678 901 2345",
           location: "Lagos, Nigeria"
         },
-        dateOfBirth: "2004-09-27"
+        dateOfBirth: "2004-09-27",
+        bio: "Creative attacking midfielder with exceptional vision and technical ability. Controls the tempo of the game and provides key assists."
+      },
+      {
+        id: 7,
+        name: "Victor Osimhen",
+        position: "Goalkeeper",
+        number: 1,
+        age: 16,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.90m",
+        weight: "82kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 18,
+        starred: false,
+        stats: {
+          appearances: 18,
+          cleanSheets: 8,
+          saves: 45,
+          rating: 8.1
+        },
+        image: "/assets/players/victor-osimhen.jpg",
+        contact: {
+          email: "victor.osimhen@okakafc.com",
+          phone: "+234 789 012 3456",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2007-05-15",
+        bio: "Promising young goalkeeper with excellent reflexes and shot-stopping ability. Shows great potential for his age."
+      },
+      {
+        id: 8,
+        name: "Ibrahim Musa",
+        position: "Left Back",
+        number: 3,
+        age: 18,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.80m",
+        weight: "74kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 15,
+        starred: false,
+        stats: {
+          appearances: 23,
+          goals: 2,
+          assists: 6,
+          rating: 7.7
+        },
+        image: "/assets/players/ibrahim-musa.jpg",
+        contact: {
+          email: "ibrahim.musa@okakafc.com",
+          phone: "+234 890 123 4567",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2005-08-22",
+        bio: "Attacking left-back with good pace and crossing ability. Provides width and defensive cover on the left flank."
+      },
+      {
+        id: 9,
+        name: "Daniel Johnson",
+        position: "Center Back",
+        number: 5,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.86m",
+        weight: "79kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 12,
+        starred: false,
+        stats: {
+          appearances: 21,
+          goals: 1,
+          assists: 2,
+          rating: 7.6
+        },
+        image: "/assets/players/daniel-johnson.jpg",
+        contact: {
+          email: "daniel.johnson@okakafc.com",
+          phone: "+234 901 234 5678",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-03-10",
+        bio: "Solid center-back with good positioning and tackling ability. Forms a strong partnership with the defensive line."
+      },
+      {
+        id: 10,
+        name: "Samuel Okon",
+        position: "Central Midfielder",
+        number: 7,
+        age: 18,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.83m",
+        weight: "76kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 14,
+        starred: false,
+        stats: {
+          appearances: 25,
+          goals: 4,
+          assists: 9,
+          rating: 7.8
+        },
+        image: "/assets/players/samuel-okon.jpg",
+        contact: {
+          email: "samuel.okon@okakafc.com",
+          phone: "+234 012 345 6789",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2005-11-30",
+        bio: "Versatile central midfielder with good passing range and work rate. Controls the tempo of the game effectively."
+      },
+      {
+        id: 11,
+        name: "Michael Adebayo",
+        position: "Winger",
+        number: 11,
+        age: 16,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.79m",
+        weight: "71kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 10,
+        starred: false,
+        stats: {
+          appearances: 19,
+          goals: 6,
+          assists: 7,
+          rating: 7.9
+        },
+        image: "/assets/players/michael-adebayo.jpg",
+        contact: {
+          email: "michael.adebayo@okakafc.com",
+          phone: "+234 123 456 7890",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2007-07-14",
+        bio: "Explosive winger with excellent pace and dribbling skills. Creates chances and scores important goals."
+      },
+      {
+        id: 12,
+        name: "David Okonkwo",
+        position: "Striker",
+        number: 14,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.84m",
+        weight: "77kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 16,
+        starred: false,
+        stats: {
+          appearances: 22,
+          goals: 12,
+          assists: 3,
+          rating: 8.0
+        },
+        image: "/assets/players/david-okonkwo.jpg",
+        contact: {
+          email: "david.okonkwo@okakafc.com",
+          phone: "+234 234 567 8901",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-09-25",
+        bio: "Clinical striker with good movement and finishing ability. Provides strong competition for the starting spot."
+      },
+      {
+        id: 13,
+        name: "James Okafor",
+        position: "Goalkeeper",
+        number: 13,
+        age: 16,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.88m",
+        weight: "80kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 8,
+        starred: false,
+        stats: {
+          appearances: 12,
+          cleanSheets: 5,
+          saves: 32,
+          rating: 7.5
+        },
+        image: "/assets/players/james-okafor.jpg",
+        contact: {
+          email: "james.okafor@okakafc.com",
+          phone: "+234 345 678 9012",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2007-02-18",
+        bio: "Promising young goalkeeper with good shot-stopping ability. Provides strong competition for the number one spot."
+      },
+      {
+        id: 14,
+        name: "Peter Obi",
+        position: "Defensive Midfielder",
+        number: 15,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.81m",
+        weight: "75kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 9,
+        starred: false,
+        stats: {
+          appearances: 18,
+          goals: 2,
+          assists: 4,
+          rating: 7.4
+        },
+        image: "/assets/players/peter-obi.jpg",
+        contact: {
+          email: "peter.obi@okakafc.com",
+          phone: "+234 456 789 0123",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-06-08",
+        bio: "Hard-working defensive midfielder with good tackling and positioning. Provides solid cover for the backline."
+      },
+      {
+        id: 15,
+        name: "John Okonkwo",
+        position: "Winger",
+        number: 17,
+        age: 16,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.77m",
+        weight: "70kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 11,
+        starred: false,
+        stats: {
+          appearances: 15,
+          goals: 5,
+          assists: 6,
+          rating: 7.6
+        },
+        image: "/assets/players/john-okonkwo.jpg",
+        contact: {
+          email: "john.okonkwo@okakafc.com",
+          phone: "+234 567 890 1234",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2007-04-12",
+        bio: "Skilled winger with good pace and technical ability. Creates chances and provides attacking options."
+      },
+      {
+        id: 16,
+        name: "Emmanuel Okafor",
+        position: "Center Back",
+        number: 16,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.87m",
+        weight: "81kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 7,
+        starred: false,
+        stats: {
+          appearances: 14,
+          goals: 1,
+          assists: 1,
+          rating: 7.3
+        },
+        image: "/assets/players/emmanuel-okafor.jpg",
+        contact: {
+          email: "emmanuel.okafor@okakafc.com",
+          phone: "+234 678 901 2345",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-08-19",
+        bio: "Strong center-back with good aerial ability and tackling. Provides depth in the defensive line."
       }
     ];
   });
