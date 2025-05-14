@@ -80,7 +80,7 @@ const ViewStats = () => {
         className="mb-12 text-center"
       >
         <h1 className="text-5xl font-extrabold text-gray-900 tracking-tight">
-          Futbol Connect Insights
+          futbol conect Insights
         </h1>
         <p className="text-gray-600 mt-3 text-lg max-w-2xl mx-auto">
           Real-time analytics showcasing our platform growth and performance

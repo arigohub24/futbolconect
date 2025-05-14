@@ -285,7 +285,7 @@ const ConnectClubs = () => {
         className="mb-8 relative"
       >
         <h1 className="text-4xl font-bold text-gray-800">Connect With Clubs</h1>
-        <p className="text-gray-600 mt-2 max-w-2xl">Build meaningful relationships with football clubs worldwide through Futbol Connect exclusive network</p>
+        <p className="text-gray-600 mt-2 max-w-2xl">Build meaningful relationships with football clubs worldwide through futbol conect exclusive network</p>
         
         <motion.div
           variants={floatingBadgeVariants}

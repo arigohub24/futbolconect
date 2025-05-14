@@ -54,7 +54,7 @@ const PaymentSuccess = () => {
           Payment Successful!
         </h2>
         <p className="text-gray-600 mb-6">
-          Welcome to futbol connect {plan.name}. Your account is ready to go!
+          Welcome to futbol conect {plan.name}. Your account is ready to go!
         </p>
         <motion.button
           whileHover={{ scale: 1.05 }}

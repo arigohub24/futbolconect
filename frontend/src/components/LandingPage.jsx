@@ -51,7 +51,7 @@ const stats = [
 const testimonials = [
   {
     id: 1,
-    quote: "Futbol Connect streamlined our transfer process, saving us time and money.",
+    quote: "futbol conect streamlined our transfer process, saving us time and money.",
     name: "John Smith",
     role: "Club Director, London",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
@@ -407,7 +407,7 @@ const LandingPage = () => {
 
                   {/* Subheading */}
                   <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mb-8 leading-relaxed">
-                    Futbol Connect streamlines the transfer process by connecting clubs,
+                    futbol conect streamlines the transfer process by connecting clubs,
                     scouts, and agents directly, eliminating intermediaries and
                     accelerating deals.
                   </p>
@@ -540,7 +540,7 @@ const LandingPage = () => {
             >
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
                 How{" "}
-                <span className="text-blue-600">Futbol Connect</span> Works
+                <span className="text-blue-600">futbol conect</span> Works
               </h2>
               <p className="text-lg text-slate-600 mb-8">
                 Our platform streamlines the entire transfer process from initial
@@ -654,7 +654,7 @@ const LandingPage = () => {
           >
             <h2 className="text-3xl font-bold mb-4">Global Network and Impact</h2>
             <p className="max-w-2xl mx-auto text-blue-100">
-              Futbol Connect has become the leading platform for clubs worldwide,
+              futbol conect has become the leading platform for clubs worldwide,
               facilitating transfers across all levels of professional football.
             </p>
           </motion.div>
@@ -826,7 +826,7 @@ const LandingPage = () => {
               <span className="text-blue-400">Transfer Strategy?</span>
             </h2>
             <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
-              Join over 800 clubs worldwide that are already using Futbol Connect
+              Join over 800 clubs worldwide that are already using futbol conect
               to revolutionize their transfer approach.
             </p>
             <motion.div
@@ -1096,16 +1096,7 @@ const LandingPage = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-gray-400"
           >
-            <p>© {new Date().getFullYear()} Futbol Connect. All rights reserved.</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-gray-400"
-          >
-            <p>© {new Date().getFullYear()} Futbol Connect. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} futbol conect. All rights reserved.</p>
             <p className="mt-1 text-blue-400">
               Developed by{" "}
               <a

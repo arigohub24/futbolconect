@@ -59,7 +59,7 @@ const BrowseLeagues = () => {
         className="mb-8"
       >
         <h1 className="text-4xl font-bold text-gray-800">Browse All Leagues</h1>
-        <p className="text-gray-600 mt-2">Explore football leagues from around the world on Futbol Connect</p>
+        <p className="text-gray-600 mt-2">Explore football leagues from around the world on futbol conect</p>
       </motion.div>
 
       <motion.div 

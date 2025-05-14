@@ -21,6 +21,8 @@ import Profile from './pages/Profile';
 import EditProfile from './components/EditProfile';
 import PaymentForm from './components/PaymentForm';
 import PaymentSuccess from './components/PaymentSuccess';
+import Okaka from './pages/Okaka';
+import Settings from './pages/Settings';
 
 // Footer Content
 import Features from './pages/FooterContent/Features';
@@ -122,6 +124,14 @@ function App() {
             <Route
               path="/outplacement"
               element={authUser ? <Outplacement /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/okaka"
+              element={authUser ? <Okaka /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/settings"
+              element={authUser ? <Settings /> : <Navigate to="/login" />}
             />
             <Route
               path="/player/:id"

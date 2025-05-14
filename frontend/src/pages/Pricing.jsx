@@ -64,7 +64,7 @@ const Pricing = () => {
 
   const testimonials = [
     {
-      quote: 'futbol connect has revolutionized how we connect with clubs globally.',
+      quote: 'futbol conect has revolutionized how we connect with clubs globally.',
       author: 'John Smith, Sporting Director, FC Elite',
       rating: 5,
     },
@@ -140,7 +140,7 @@ const Pricing = () => {
             variants={itemVariants}
             className="text-3xl font-bold text-center text-gray-900 mb-12"
           >
-            Why Choose futbol connect
+            Why Choose futbol conect
           </motion.h2>
           <motion.div
             variants={containerVariants}

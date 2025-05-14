@@ -147,7 +147,7 @@ const Join = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-4xl md:text-5xl font-bold text-gray-800 mb-4"
           >
-            Join <span className="text-blue-600">Futbol Connect</span>
+            Join <span className="text-blue-600">futbol conect</span>
           </motion.h1>
           
           <motion.p 

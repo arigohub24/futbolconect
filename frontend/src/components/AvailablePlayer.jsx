@@ -18,129 +18,166 @@ import {
 import { Link } from 'react-router-dom';
 
 const AvailablePlayers = () => {
-  // Sample data with added contact information
-  const [players, setPlayers] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      position: "Forward",
-      age: 24,
-      club: "City Strikers",
-      nationality: "England",
-      flag: "🇬🇧",
-      status: "Available",
-      contractEnd: "2025-06-30",
-      enquiries: 5,
-      starred: false,
-      stats: {
-        goals: 12,
-        assists: 8,
-        rating: 7.8
-      },
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
-      contact: {
-        email: "john.doe@soccerpro.com",
-        phone: "+44 123 456 7890",
-        location: "London, England"
-      }
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      position: "Midfielder",
-      age: 22,
-      club: "Global United",
-      nationality: "USA",
-      flag: "🇺🇸",
-      status: "Available",
-      contractEnd: "2024-12-31",
-      enquiries: 3,
-      starred: false,
-      stats: {
-        goals: 5,
-        assists: 15,
-        rating: 8.2
-      },
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
-      contact: {
-        email: "jane.smith@soccerpro.com",
-        phone: "+1 234 567 8901",
-        location: "New York, USA"
-      }
-    },
-    {
-      id: 3,
-      name: "Mike Johnson",
-      position: "Defender",
-      age: 27,
-      club: "FC Elite",
-      nationality: "France",
-      flag: "🇫🇷",
-      status: "Available",
-      contractEnd: "2025-05-15",
-      enquiries: 7,
-      starred: true,
-      stats: {
-        goals: 2,
-        assists: 4,
-        rating: 7.5
-      },
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
-      contact: {
-        email: "mike.johnson@soccerpro.com",
-        phone: "+33 345 678 9012",
-        location: "Paris, France"
-      }
-    },
-    {
-      id: 4,
-      name: "Sophie Chen",
-      position: "Goalkeeper",
-      age: 25,
-      club: "Eastern Dragons",
-      nationality: "China",
-      flag: "🇨🇳",
-      status: "Available",
-      contractEnd: "2025-08-01",
-      enquiries: 2,
-      starred: false,
-      stats: {
-        cleanSheets: 14,
-        saves: 87,
-        rating: 8.0
-      },
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
-      contact: {
-        email: "sophie.chen@soccerpro.com",
-        phone: "+86 456 789 0123",
-        location: "Shanghai, China"
-      }
-    },
-    {
-      id: 5,
-      name: "Carlos Mendez",
-      position: "Midfielder",
-      age: 23,
-      club: "Madrid Stars",
-      nationality: "Spain",
-      flag: "🇪🇸",
-      status: "Available",
-      contractEnd: "2025-01-15",
-      enquiries: 8,
-      starred: true,
-      stats: {
-        goals: 9,
-        assists: 11,
-        rating: 8.4
-      },
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
-      contact: {
-        email: "carlos.mendez@soccerpro.com",
-        phone: "+34 567 890 1234",
-        location: "Madrid, Spain"
-      }
+  // Load players from localStorage or use sample data
+  const [players, setPlayers] = useState(() => {
+    const savedPlayers = localStorage.getItem('availablePlayers');
+    if (savedPlayers) {
+      return JSON.parse(savedPlayers);
     }
-  ]);
+    // Return sample data if no saved players
+    return [
+      {
+        id: 1,
+        name: "Adebayo Sodiq",
+        position: "Defensive Midfielder",
+        age: 18,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        status: "Available",
+        contractEnd: "2025-06-30",
+        enquiries: 5,
+        starred: false,
+        stats: {
+          goals: 3,
+          assists: 8,
+          rating: 7.8
+        },
+        image: "/player3.png",
+        contact: {
+          email: "adebayo.sodiq@okakafc.com",
+          phone: "+234 123 456 7890",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2005-12-17"
+      },
+      {
+        id: 2,
+        name: "Bamidele Sunday",
+        position: "Right Back",
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        status: "Available",
+        contractEnd: "2025-06-30",
+        enquiries: 3,
+        starred: false,
+        stats: {
+          goals: 1,
+          assists: 5,
+          rating: 7.5
+        },
+        image: "/player4.png",
+        contact: {
+          email: "bamidele.sunday@okakafc.com",
+          phone: "+234 234 567 8901",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-12-16"
+      },
+      {
+        id: 3,
+        name: "Chucks Peter",
+        position: "Center Back",
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        status: "Available",
+        contractEnd: "2025-06-30",
+        enquiries: 7,
+        starred: true,
+        stats: {
+          goals: 2,
+          assists: 1,
+          rating: 7.9
+        },
+        image: "/player5.png",
+        contact: {
+          email: "chucks.peter@okakafc.com",
+          phone: "+234 345 678 9012",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-10-04"
+      },
+      {
+        id: 4,
+        name: "Chisom Agbodike",
+        position: "Attacking Midfielder",
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        status: "Available",
+        contractEnd: "2025-06-30",
+        enquiries: 8,
+        starred: true,
+        stats: {
+          goals: 7,
+          assists: 12,
+          rating: 8.2
+        },
+        image: "/player1.png",
+        contact: {
+          email: "chisom.agbodike@okakafc.com",
+          phone: "+234 456 789 0123",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-07-01"
+      },
+      {
+        id: 5,
+        name: "Emmanuell Bright",
+        position: "Striker",
+        age: 14,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        status: "Available",
+        contractEnd: "2025-06-30",
+        enquiries: 12,
+        starred: true,
+        stats: {
+          goals: 15,
+          assists: 4,
+          rating: 8.5
+        },
+        image: "/player2.png",
+        contact: {
+          email: "emmanuell.bright@okakafc.com",
+          phone: "+234 567 890 1234",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2009-12-13"
+      },
+      {
+        id: 6,
+        name: "Rotimi Nicol",
+        position: "Attacking Midfielder",
+        age: 19,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        status: "Available",
+        contractEnd: "2025-06-30",
+        enquiries: 15,
+        starred: true,
+        stats: {
+          goals: 45,
+          assists: 30,
+          rating: 9.2
+        },
+        image: "/rotimi.png",
+        contact: {
+          email: "rotimi.nicol@okakafc.com",
+          phone: "+234 678 901 2345",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2004-09-27"
+      }
+    ];
+  });
 
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
@@ -164,23 +201,36 @@ const AvailablePlayers = () => {
 
   // Filtered and sorted players
   const filteredPlayers = players.filter(player => {
-    const matchesSearch = player.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         player.club.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         player.nationality.toLowerCase().includes(searchTerm.toLowerCase());
+    // Search functionality
+    const searchLower = searchTerm.toLowerCase();
+    const matchesSearch = 
+      player.name.toLowerCase().includes(searchLower) ||
+      player.club.toLowerCase().includes(searchLower) ||
+      player.nationality.toLowerCase().includes(searchLower) ||
+      player.position.toLowerCase().includes(searchLower);
     
+    // Filter functionality
     const matchesPosition = !filters.position || player.position === filters.position;
     const matchesAgeMin = !filters.ageMin || player.age >= parseInt(filters.ageMin);
     const matchesAgeMax = !filters.ageMax || player.age <= parseInt(filters.ageMax);
     const matchesNationality = !filters.nationality || 
-                              player.nationality.toLowerCase().includes(filters.nationality.toLowerCase());
+      player.nationality.toLowerCase() === filters.nationality.toLowerCase();
     
     return matchesSearch && matchesPosition && matchesAgeMin && matchesAgeMax && matchesNationality;
   }).sort((a, b) => {
-    if (sortOption === 'enquiries') return b.enquiries - a.enquiries;
-    if (sortOption === 'age') return a.age - b.age;
-    if (sortOption === 'name') return a.name.localeCompare(b.name);
-    if (sortOption === 'rating') return (b.stats.rating || 0) - (a.stats.rating || 0);
-    return 0;
+    // Sort functionality
+    switch (sortOption) {
+      case 'enquiries':
+        return b.enquiries - a.enquiries;
+      case 'age':
+        return a.age - b.age;
+      case 'name':
+        return a.name.localeCompare(b.name);
+      case 'rating':
+        return (b.stats.rating || 0) - (a.stats.rating || 0);
+      default:
+        return 0;
+    }
   });
 
   const handleFilterChange = (e) => {
@@ -188,10 +238,22 @@ const AvailablePlayers = () => {
     setFilters(prev => ({ ...prev, [name]: value }));
   };
 
+  const clearFilters = () => {
+    setFilters({
+      position: '',
+      ageMin: '',
+      ageMax: '',
+      nationality: ''
+    });
+    setSearchTerm('');
+  };
+
   const toggleStarPlayer = (id) => {
-    setPlayers(players.map(player => 
+    const updatedPlayers = players.map(player => 
       player.id === id ? {...player, starred: !player.starred} : player
-    ));
+    );
+    setPlayers(updatedPlayers);
+    localStorage.setItem('availablePlayers', JSON.stringify(updatedPlayers));
   };
 
   const openContactModal = (player) => {
@@ -449,6 +511,8 @@ const AvailablePlayers = () => {
                       name="ageMin"
                       value={filters.ageMin}
                       onChange={handleFilterChange}
+                      min="15"
+                      max="45"
                       placeholder="Min"
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -460,6 +524,8 @@ const AvailablePlayers = () => {
                       name="ageMax"
                       value={filters.ageMax}
                       onChange={handleFilterChange}
+                      min="15"
+                      max="45"
                       placeholder="Max"
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -481,7 +547,7 @@ const AvailablePlayers = () => {
                 </div>
                 <div className="flex justify-end mt-4">
                   <motion.button
-                    onClick={() => setFilters({position: '', ageMin: '', ageMax: '', nationality: ''})}
+                    onClick={clearFilters}
                     className="text-gray-600 hover:text-gray-800 mr-4"
                     whileHover={{ x: -2 }}
                     whileTap={{ scale: 0.95 }}
@@ -528,21 +594,18 @@ const AvailablePlayers = () => {
                 className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:border-blue-200 transition-all group"
               >
                 <div className="relative">
-                  <div className="h-40 bg-gradient-to-r from-blue-500 to-blue-600 relative overflow-hidden">
-                    <img 
-                      src={player.image} 
-                      alt={player.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
-                      }}
-                    />
-                    <motion.div 
-                      className="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-20"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 0.2 }}
-                    />
+                  <div className="h-48 bg-white relative overflow-hidden flex items-center justify-center">
+                    <div className="h-full w-full flex items-center justify-center">
+                      <img 
+                        src={player.image} 
+                        alt={player.name}
+                        className="h-full w-full object-contain"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
+                        }}
+                      />
+                    </div>
                   </div>
                   <div className="absolute top-3 right-3 flex space-x-2">
                     <motion.button 
@@ -558,25 +621,19 @@ const AvailablePlayers = () => {
                     </motion.button>
                   </div>
                   <div className="absolute -bottom-10 left-4">
-                    <motion.div 
-                      className="w-20 h-20 bg-gray-200 rounded-full border-4 border-white flex items-center justify-center text-blue-600 font-bold text-xl relative overflow-hidden"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <img 
-                        src={player.image} 
-                        alt={player.name} 
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
-                        }}
-                      />
-                      <motion.div 
-                        className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 0.1 }}
-                      />
-                    </motion.div>
+                    <div className="w-20 h-20 bg-white rounded-full border-4 border-white flex items-center justify-center text-blue-600 font-bold text-xl relative overflow-hidden">
+                      <div className="h-full w-full flex items-center justify-center">
+                        <img 
+                          src={player.image} 
+                          alt={player.name} 
+                          className="h-full w-full object-contain"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
+                          }}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
                 

@@ -14,6 +14,7 @@ const Sidebar = () => {
     { path: '/recruitment', name: 'Recruitment', icon: 'fas fa-user-plus' },
     { path: '/outplacement', name: 'Transfer Market', icon: 'fas fa-exchange-alt' },
     { path: '/marketplace', name: 'Marketplace', icon: 'fas fa-store' },
+    { path: '/okaka', name: 'Okaka FC', icon: 'fas fa-futbol' },
     { path: '/activity', name: 'Activity', icon: 'fas fa-chart-line' },
     { path: '/settings', name: 'Settings', icon: 'fas fa-cog' },
     { path: '/events', name: 'Events', icon: 'fas fa-calendar' },
