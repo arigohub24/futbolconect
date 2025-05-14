@@ -17,6 +17,7 @@ import {
   Globe,
   Trophy,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Sample data (replace with actual data from your project)
 const features = [
@@ -508,13 +509,13 @@ const LandingPage = () => {
                     {feature.title}
                   </h3>
                   <p className="mt-2 text-gray-600">{feature.description}</p>
-                  <motion.div
-                    whileHover={{ x: 5 }}
+                  <Link
+                    to="/features"
                     className="mt-4 inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
                   >
                     Learn more
                     <ArrowRight className="ml-1 h-4 w-4" />
-                  </motion.div>
+                  </Link>
                 </div>
               </motion.div>
             ))}
@@ -986,16 +987,18 @@ const LandingPage = () => {
               </div>
               <div className="flex space-x-4 pt-2">
                 {[
-                  { icon: <Facebook className="w-5 h-5" />, href: "#" },
-                  { icon: <Twitter className="w-5 h-5" />, href: "#" },
-                  { icon: <Instagram className="w-5 h-5" />, href: "#" },
-                  { icon: <Linkedin className="w-5 h-5" />, href: "#" },
+                  { icon: <Facebook className="w-5 h-5" />, href: "https://facebook.com/futbolconnect" },
+                  { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com/futbolconnect" },
+                  { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com/futbolconnect" },
+                  { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com/company/futbolconnect" },
                 ].map((social, index) => (
                   <motion.a
                     key={index}
                     whileHover={{ y: -3, scale: 1.1, color: "#ffffff" }}
                     whileTap={{ scale: 0.95 }}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-slate-800 p-2 rounded-full hover:bg-blue-600 transition-colors"
                   >
                     {social.icon}
@@ -1103,7 +1106,17 @@ const LandingPage = () => {
             className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-gray-400"
           >
             <p>© {new Date().getFullYear()} Futbol Connect. All rights reserved.</p>
-            <p className="mt-1 text-blue-400">Developed by Arigo Technologies</p>
+            <p className="mt-1 text-blue-400">
+              Developed by{" "}
+              <a
+                href="https://arigotechnologies.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-300 transition-colors duration-200"
+              >
+                Arigo Technologies
+              </a>
+            </p>
           </motion.div>
         </div>
       </footer>

@@ -87,9 +87,14 @@ const Outplacement = () => {
           variants={itemVariants}
           className="flex flex-col md:flex-row justify-between items-center mb-8"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-0">
-            Player Outplacement
-          </h1>
+          <motion.h1 
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-3xl font-bold text-gray-900 mb-6"
+          >
+            Transfer <span className="text-blue-600">Market</span>
+          </motion.h1>
           <Link to="/make-player-available">
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 4px 10px rgba(0, 91, 234, 0.2)" }}

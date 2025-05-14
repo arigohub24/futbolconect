@@ -13,11 +13,20 @@ const signupSchema = yup.object().shape({
   username: yup.string().required("Username is required").min(3, "Username must be at least 3 characters"),
   fullName: yup.string().required("Full name is required"),
   password: yup.string().required("Password is required").min(6, "Password must be at least 6 characters"),
+  role: yup.string().required("Role is required").oneOf(['player', 'scout', 'coach', 'agent', 'club_staff', 'manager']),
 });
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const roles = [
+    { value: 'player', label: 'Player' },
+    { value: 'scout', label: 'Scout' },
+    { value: 'coach', label: 'Coach' },
+    { value: 'agent', label: 'Agent' },
+    { value: 'club_staff', label: 'Club Staff' },
+    { value: 'manager', label: 'Manager' },
+  ];
   const { 
     register, 
     handleSubmit, 
@@ -29,14 +38,14 @@ const SignUpPage = () => {
   const queryClient = useQueryClient();
 
   const { mutate, isError, isPending, error } = useMutation({
-    mutationFn: async ({ email, username, fullName, password }) => {
+    mutationFn: async ({ email, username, fullName, password, role }) => {
       try {
         const res = await fetch("/api/auth/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, username, fullName, password }),
+          body: JSON.stringify({ email, username, fullName, password, role }),
         });
 
         const data = await res.json();
@@ -194,6 +203,35 @@ const SignUpPage = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.9 }}
               >
+                <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FiUser className="text-gray-400" />
+                  </div>
+                  <select
+                    className={`pl-10 w-full py-3 px-4 rounded-lg border ${
+                      errors.role ? 'border-red-300 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-800'
+                    } focus:ring-2 focus:border-blue-800 outline-none transition text-base`}
+                    {...register("role")}
+                  >
+                    <option value="">Select your role</option>
+                    {roles.map((role) => (
+                      <option key={role.value} value={role.value}>
+                        {role.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                {errors.role && (
+                  <p className="mt-1 text-sm text-red-500">{errors.role.message}</p>
+                )}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.0 }}
+              >
                 <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -227,7 +265,7 @@ const SignUpPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.0 }}
+                transition={{ delay: 1.1 }}
                 className="pt-2"
               >
                 <button
@@ -247,7 +285,7 @@ const SignUpPage = () => {
                     </>
                   ) : (
                     <>
-                      Next <FiArrowRight className="ml-2" />
+                      Sign Up <FiArrowRight className="ml-2" />
                     </>
                   )}
                 </button>

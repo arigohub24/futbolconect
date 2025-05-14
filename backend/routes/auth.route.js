@@ -5,7 +5,7 @@ import { protectRoute } from "../middleware/protectRoute.js";
 const router = express.Router();
 
 router.get("/me", protectRoute, getMe);
-router.put("/update", protectRoute, update); // Added update route
+router.put("/update", protectRoute, update);
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/logout", logout);

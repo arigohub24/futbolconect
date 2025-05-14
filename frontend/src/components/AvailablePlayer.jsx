@@ -37,7 +37,7 @@ const AvailablePlayers = () => {
         assists: 8,
         rating: 7.8
       },
-      image: null,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
       contact: {
         email: "john.doe@soccerpro.com",
         phone: "+44 123 456 7890",
@@ -61,7 +61,7 @@ const AvailablePlayers = () => {
         assists: 15,
         rating: 8.2
       },
-      image: null,
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
       contact: {
         email: "jane.smith@soccerpro.com",
         phone: "+1 234 567 8901",
@@ -85,7 +85,7 @@ const AvailablePlayers = () => {
         assists: 4,
         rating: 7.5
       },
-      image: null,
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
       contact: {
         email: "mike.johnson@soccerpro.com",
         phone: "+33 345 678 9012",
@@ -109,7 +109,7 @@ const AvailablePlayers = () => {
         saves: 87,
         rating: 8.0
       },
-      image: null,
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
       contact: {
         email: "sophie.chen@soccerpro.com",
         phone: "+86 456 789 0123",
@@ -133,7 +133,7 @@ const AvailablePlayers = () => {
         assists: 11,
         rating: 8.4
       },
-      image: null,
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
       contact: {
         email: "carlos.mendez@soccerpro.com",
         phone: "+34 567 890 1234",
@@ -529,17 +529,20 @@ const AvailablePlayers = () => {
               >
                 <div className="relative">
                   <div className="h-40 bg-gradient-to-r from-blue-500 to-blue-600 relative overflow-hidden">
+                    <img 
+                      src={player.image} 
+                      alt={player.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
+                      }}
+                    />
                     <motion.div 
                       className="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-20"
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 0.2 }}
                     />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                      <svg className="w-32 h-32 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                        <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
                   </div>
                   <div className="absolute top-3 right-3 flex space-x-2">
                     <motion.button 
@@ -559,15 +562,15 @@ const AvailablePlayers = () => {
                       className="w-20 h-20 bg-gray-200 rounded-full border-4 border-white flex items-center justify-center text-blue-600 font-bold text-xl relative overflow-hidden"
                       whileHover={{ scale: 1.05 }}
                     >
-                      {player.image ? (
-                        <img 
-                          src={player.image} 
-                          alt={player.name} 
-                          className="w-full h-full rounded-full object-cover"
-                        />
-                      ) : (
-                        <span>{player.name.charAt(0)}</span>
-                      )}
+                      <img 
+                        src={player.image} 
+                        alt={player.name} 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
+                        }}
+                      />
                       <motion.div 
                         className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10"
                         initial={{ opacity: 0 }}

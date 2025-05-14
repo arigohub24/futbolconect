@@ -6,8 +6,6 @@ import { AnimatePresence } from 'framer-motion';
 import LandingPage from './components/LandingPage';
 import LoginPage from './pages/auth/LoginPage';
 import SignUpPage from './pages/auth/SignUpPage';
-import OnboardingPage from './pages/auth/OnboardingPage';
-import WelcomePage from './pages/auth/WelcomePage';
 import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedLayout from './components/ProtectedLayout';
 
@@ -93,6 +91,7 @@ function App() {
   }
 
   return (
+    
     <div className="w-full h-screen overflow-y-auto">
       <AnimatePresence mode="wait">
         <Routes>
@@ -115,14 +114,6 @@ function App() {
             <Route
               path="/dashboard"
               element={authUser ? <Dashboard /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/onboarding"
-              element={authUser ? <OnboardingPage /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/welcome"
-              element={authUser ? <WelcomePage /> : <Navigate to="/login" />}
             />
             <Route
               path="/recruitment"
@@ -269,10 +260,10 @@ function App() {
           />
         </Routes>
       </AnimatePresence>
-
       <CookieConsent />
       <Toaster />
     </div>
+     
   );
 }
 

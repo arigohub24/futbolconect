@@ -17,59 +17,74 @@ export const getMe = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-	try {
-		const { fullName, username, email, password } = req.body;
+  try {
+    const { email, username, fullName, password, role } = req.body;
 
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		if (!emailRegex.test(email)) {
-			return res.status(400).json({ error: "Invalid email format" });
-		}
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: "User already exists" });
+    }
 
-		const existingUser = await User.findOne({ username });
-		if (existingUser) {
-			return res.status(400).json({ error: "Username is already taken" });
-		}
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ error: "Invalid email format" });
+    }
 
-		const existingEmail = await User.findOne({ email });
-		if (existingEmail) {
-			return res.status(400).json({ error: "Email is already taken" });
-		}
+    // Validate role
+    const validRoles = ['player', 'scout', 'coach', 'agent', 'club_staff', 'manager'];
+    if (!validRoles.includes(role)) {
+      return res.status(400).json({ error: "Invalid role" });
+    }
 
-		if (password.length < 6) {
-			return res.status(400).json({ error: "Password must be at least 6 characters long" });
-		}
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-		const salt = await bcrypt.genSalt(10);
-		const hashedPassword = await bcrypt.hash(password, salt);
+    // Create new user
+    const newUser = new User({
+      email,
+      username,
+      fullName,
+      password: hashedPassword,
+      role,
+      firstName: fullName.split(' ')[0],
+      lastName: fullName.split(' ')[1] || ''
+    });
 
-		const newUser = new User({
-			fullName,
-			username,
-			email,
-			password: hashedPassword,
-		});
+    if (newUser) {
+      await newUser.save();
+      
+      // Create welcome message
+      const welcomeMessage = {
+        title: "Welcome to FutbolConnect!",
+        message: `Welcome to FutbolConnect! You're now part of the ultimate football community platform as a ${role}.`,
+        type: "success"
+      };
 
-		if (newUser) {
-			generateTokenAndSetCookie(newUser._id, res);
-			await newUser.save();
+      // Store welcome message in user's notifications
+      newUser.notifications = [welcomeMessage];
+      await newUser.save();
 
-			res.status(201).json({
-				_id: newUser._id,
-				fullName: newUser.fullName,
-				username: newUser.username,
-				email: newUser.email,
-				followers: newUser.followers,
-				following: newUser.following,
-				profileImg: newUser.profileImg,
-				coverImg: newUser.coverImg,
-			});
-		} else {
-			res.status(400).json({ error: "Invalid user data" });
-		}
-	} catch (error) {
-		console.log("Error in signup controller", error.message);
-		res.status(500).json({ error: "Internal Server Error" });
-	}
+      generateTokenAndSetCookie(newUser._id, res);
+
+      res.status(201).json({
+        message: "User created successfully",
+        user: {
+          id: newUser._id,
+          email: newUser.email,
+          username: newUser.username,
+          fullName: newUser.fullName,
+          role: newUser.role,
+        },
+      });
+    } else {
+      res.status(400).json({ error: "Failed to create user" });
+    }
+  } catch (error) {
+    console.error("Error signing up:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 };
 
 export const login = async (req, res) => {

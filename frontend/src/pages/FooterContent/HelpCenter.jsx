@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Mail, Phone } from "lucide-react";
 
 const HelpCenter = () => {
   const navigate = useNavigate();
@@ -103,6 +104,31 @@ const HelpCenter = () => {
                   </motion.div>
                 </div>
               ))}
+            </div>
+          </motion.div>
+
+          {/* Contact Information Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="backdrop-blur-xl bg-white/70 rounded-2xl shadow-xl p-8 border border-blue-100 mt-8"
+          >
+            <h2 className="text-2xl font-bold text-blue-900 mb-6">Contact Us</h2>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <Mail className="w-5 h-5 text-blue-600" />
+                <a href="mailto:support@futbolconect.com" className="text-blue-800 hover:text-blue-600">
+                  support@futbolconect.com
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-5 h-5 text-blue-600" />
+                <span className="text-blue-800">+44 (0) 20 1234 5678</span>
+              </div>
+              <p className="text-gray-600 mt-4">
+                Our support team is available Monday to Friday, 9:00 AM - 6:00 PM GMT.
+              </p>
             </div>
           </motion.div>
 
