@@ -17,6 +17,7 @@ import {
   Globe,
   Trophy,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Sample data (replace with actual data from your project)
 const features = [
@@ -50,7 +51,7 @@ const stats = [
 const testimonials = [
   {
     id: 1,
-    quote: "Futbol Connect streamlined our transfer process, saving us time and money.",
+    quote: "futbol conect streamlined our transfer process, saving us time and money.",
     name: "John Smith",
     role: "Club Director, London",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
@@ -406,7 +407,7 @@ const LandingPage = () => {
 
                   {/* Subheading */}
                   <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mb-8 leading-relaxed">
-                    Futbol Connect streamlines the transfer process by connecting clubs,
+                    futbol conect streamlines the transfer process by connecting clubs,
                     scouts, and agents directly, eliminating intermediaries and
                     accelerating deals.
                   </p>
@@ -508,13 +509,13 @@ const LandingPage = () => {
                     {feature.title}
                   </h3>
                   <p className="mt-2 text-gray-600">{feature.description}</p>
-                  <motion.div
-                    whileHover={{ x: 5 }}
+                  <Link
+                    to="/features"
                     className="mt-4 inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
                   >
                     Learn more
                     <ArrowRight className="ml-1 h-4 w-4" />
-                  </motion.div>
+                  </Link>
                 </div>
               </motion.div>
             ))}
@@ -539,7 +540,7 @@ const LandingPage = () => {
             >
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
                 How{" "}
-                <span className="text-blue-600">Futbol Connect</span> Works
+                <span className="text-blue-600">futbol conect</span> Works
               </h2>
               <p className="text-lg text-slate-600 mb-8">
                 Our platform streamlines the entire transfer process from initial
@@ -653,7 +654,7 @@ const LandingPage = () => {
           >
             <h2 className="text-3xl font-bold mb-4">Global Network and Impact</h2>
             <p className="max-w-2xl mx-auto text-blue-100">
-              Futbol Connect has become the leading platform for clubs worldwide,
+              futbol conect has become the leading platform for clubs worldwide,
               facilitating transfers across all levels of professional football.
             </p>
           </motion.div>
@@ -825,7 +826,7 @@ const LandingPage = () => {
               <span className="text-blue-400">Transfer Strategy?</span>
             </h2>
             <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
-              Join over 800 clubs worldwide that are already using Futbol Connect
+              Join over 800 clubs worldwide that are already using futbol conect
               to revolutionize their transfer approach.
             </p>
             <motion.div
@@ -986,16 +987,18 @@ const LandingPage = () => {
               </div>
               <div className="flex space-x-4 pt-2">
                 {[
-                  { icon: <Facebook className="w-5 h-5" />, href: "#" },
-                  { icon: <Twitter className="w-5 h-5" />, href: "#" },
-                  { icon: <Instagram className="w-5 h-5" />, href: "#" },
-                  { icon: <Linkedin className="w-5 h-5" />, href: "#" },
+                  { icon: <Facebook className="w-5 h-5" />, href: "https://facebook.com/futbolconnect" },
+                  { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com/futbolconnect" },
+                  { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com/futbolconnect" },
+                  { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com/company/futbolconnect" },
                 ].map((social, index) => (
                   <motion.a
                     key={index}
                     whileHover={{ y: -3, scale: 1.1, color: "#ffffff" }}
                     whileTap={{ scale: 0.95 }}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-slate-800 p-2 rounded-full hover:bg-blue-600 transition-colors"
                   >
                     {social.icon}
@@ -1093,17 +1096,18 @@ const LandingPage = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-gray-400"
           >
-            <p>© {new Date().getFullYear()} Futbol Connect. All rights reserved.</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-gray-400"
-          >
-            <p>© {new Date().getFullYear()} Futbol Connect. All rights reserved.</p>
-            <p className="mt-1 text-blue-400">Developed by Arigo Technologies</p>
+            <p>© {new Date().getFullYear()} futbol conect. All rights reserved.</p>
+            <p className="mt-1 text-blue-400">
+              Developed by{" "}
+              <a
+                href="https://arigotechnologies.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-300 transition-colors duration-200"
+              >
+                Arigo Technologies
+              </a>
+            </p>
           </motion.div>
         </div>
       </footer>

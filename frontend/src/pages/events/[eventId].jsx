@@ -62,13 +62,31 @@ import {
         { time: '18:00', activity: 'Closing Remarks & Cocktail Reception' },
       ],
       speakers: [
-        { name: 'Alessandro Del Piero', role: 'Former Player & Ambassador', image: '/api/placeholder/80/80' },
-        { name: 'Emma Hayes', role: 'USWNT Head Coach', image: '/api/placeholder/80/80' },
-        { name: 'Florentino Pérez', role: 'Real Madrid President', image: '/api/placeholder/80/80' },
+        { 
+          name: 'Alessandro Del Piero', 
+          role: 'Former Player & Ambassador', 
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Alessandro_Del_Piero_2012.jpg/800px-Alessandro_Del_Piero_2012.jpg'
+        },
+        { 
+          name: 'Emma Hayes', 
+          role: 'USWNT Head Coach', 
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Emma_Hayes_%28cropped%29.jpg/800px-Emma_Hayes_%28cropped%29.jpg'
+        },
+        { 
+          name: 'Florentino Pérez', 
+          role: 'Real Madrid President', 
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Florentino_P%C3%A9rez_2019.jpg/800px-Florentino_P%C3%A9rez_2019.jpg'
+        },
       ],
       attendees: [
-        'Manchester United', 'FC Barcelona', 'Bayern Munich', 
-        'PSG', 'Inter Milan', 'Flamengo', 'Ajax', 'Celtic'
+        { name: 'Manchester United', logo: 'https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg', website: 'https://www.manutd.com' },
+        { name: 'FC Barcelona', logo: 'https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg', website: 'https://www.fcbarcelona.com' },
+        { name: 'Bayern Munich', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg', website: 'https://fcbayern.com' },
+        { name: 'PSG', logo: 'https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg', website: 'https://en.psg.fr' },
+        { name: 'Inter Milan', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg', website: 'https://www.inter.it' },
+        { name: 'Flamengo', logo: 'https://upload.wikimedia.org/wikipedia/en/2/2e/Flamengo_logo.svg', website: 'https://www.flamengo.com.br' },
+        { name: 'Ajax', logo: 'https://upload.wikimedia.org/wikipedia/en/7/79/Ajax_Amsterdam.svg', website: 'https://www.ajax.nl' },
+        { name: 'Celtic', logo: 'https://upload.wikimedia.org/wikipedia/en/1/12/Celtic_FC.svg', website: 'https://www.celticfc.com' }
       ],
       registrationFee: '€999',
       icon: Calendar,
@@ -124,8 +142,14 @@ import {
         'Quiet environment for meetings'
       ],
       attendees: [
-        'Ajax', 'Porto', 'Lyon', 'Sevilla', 'Zenit', 
-        'Palmeiras', 'Club América', 'Seattle Sounders'
+        { name: 'Ajax', logo: 'https://upload.wikimedia.org/wikipedia/en/7/79/Ajax_Amsterdam.svg', website: 'https://www.ajax.nl' },
+        { name: 'Porto', logo: 'https://upload.wikimedia.org/wikipedia/en/f/f1/FC_Porto.svg', website: 'https://www.fcporto.pt' },
+        { name: 'Lyon', logo: 'https://upload.wikimedia.org/wikipedia/en/8/81/Olympique_Lyonnais.svg', website: 'https://www.ol.fr' },
+        { name: 'Sevilla', logo: 'https://upload.wikimedia.org/wikipedia/en/3/3b/Sevilla_FC_logo.svg', website: 'https://www.sevillafc.es' },
+        { name: 'Zenit', logo: 'https://upload.wikimedia.org/wikipedia/en/8/8d/FC_Zenit_Saint_Petersburg_logo.svg', website: 'https://fc-zenit.ru' },
+        { name: 'Palmeiras', logo: 'https://upload.wikimedia.org/wikipedia/en/1/10/Palmeiras_logo.svg', website: 'https://www.palmeiras.com.br' },
+        { name: 'Club América', logo: 'https://upload.wikimedia.org/wikipedia/en/8/8b/Club_Am%C3%A9rica_logo.svg', website: 'https://www.clubamerica.com.mx' },
+        { name: 'Seattle Sounders', logo: 'https://upload.wikimedia.org/wikipedia/en/7/72/Seattle_Sounders_FC.svg', website: 'https://www.soundersfc.com' }
       ],
       faqs: [
         { 
@@ -367,7 +391,11 @@ import {
                                 <img 
                                   src={speaker.image} 
                                   alt={speaker.name} 
-                                  className="w-12 h-12 rounded-full mr-3" 
+                                  className="w-16 h-16 rounded-full object-cover mr-3"
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = 'https://placehold.co/64x64/1a365d/ffffff?text=' + speaker.name.charAt(0);
+                                  }}
                                 />
                                 <div>
                                   <h3 className="font-medium text-gray-900">{speaker.name}</h3>
@@ -541,18 +569,28 @@ import {
                   </h2>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     {event.attendees.map((club, idx) => (
-                      <motion.div
+                      <motion.a
                         key={idx}
+                        href={club.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ y: -5, boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)" }}
-                        className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-center text-center"
+                        className="bg-white border border-gray-200 rounded-lg p-4 flex flex-col items-center justify-center text-center hover:border-blue-200 transition-all"
                       >
-                        <div>
-                          <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <User className="w-6 h-6 text-gray-500" />
-                          </div>
-                          <p className="font-medium text-gray-800">{club}</p>
+                        <div className="w-16 h-16 mb-3 relative">
+                          <img 
+                            src={club.logo} 
+                            alt={`${club.name} logo`}
+                            className="w-full h-full object-contain"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = 'https://placehold.co/64x64/1a365d/ffffff?text=' + club.name.charAt(0);
+                            }}
+                          />
                         </div>
-                      </motion.div>
+                        <p className="font-medium text-gray-800">{club.name}</p>
+                        <span className="text-blue-600 text-sm mt-1">Visit Website</span>
+                      </motion.a>
                     ))}
                   </div>
                 </motion.div>

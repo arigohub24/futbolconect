@@ -6,8 +6,6 @@ import { AnimatePresence } from 'framer-motion';
 import LandingPage from './components/LandingPage';
 import LoginPage from './pages/auth/LoginPage';
 import SignUpPage from './pages/auth/SignUpPage';
-import OnboardingPage from './pages/auth/OnboardingPage';
-import WelcomePage from './pages/auth/WelcomePage';
 import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedLayout from './components/ProtectedLayout';
 
@@ -23,6 +21,8 @@ import Profile from './pages/Profile';
 import EditProfile from './components/EditProfile';
 import PaymentForm from './components/PaymentForm';
 import PaymentSuccess from './components/PaymentSuccess';
+import Okaka from './pages/Okaka';
+import Settings from './pages/Settings';
 
 // Footer Content
 import Features from './pages/FooterContent/Features';
@@ -93,6 +93,7 @@ function App() {
   }
 
   return (
+    
     <div className="w-full h-screen overflow-y-auto">
       <AnimatePresence mode="wait">
         <Routes>
@@ -117,20 +118,20 @@ function App() {
               element={authUser ? <Dashboard /> : <Navigate to="/login" />}
             />
             <Route
-              path="/onboarding"
-              element={authUser ? <OnboardingPage /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/welcome"
-              element={authUser ? <WelcomePage /> : <Navigate to="/login" />}
-            />
-            <Route
               path="/recruitment"
               element={authUser ? <Recruitment /> : <Navigate to="/login" />}
             />
             <Route
               path="/outplacement"
               element={authUser ? <Outplacement /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/okaka"
+              element={authUser ? <Okaka /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/settings"
+              element={authUser ? <Settings /> : <Navigate to="/login" />}
             />
             <Route
               path="/player/:id"
@@ -269,10 +270,10 @@ function App() {
           />
         </Routes>
       </AnimatePresence>
-
       <CookieConsent />
       <Toaster />
     </div>
+     
   );
 }
 

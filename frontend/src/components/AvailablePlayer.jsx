@@ -18,129 +18,516 @@ import {
 import { Link } from 'react-router-dom';
 
 const AvailablePlayers = () => {
-  // Sample data with added contact information
-  const [players, setPlayers] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      position: "Forward",
-      age: 24,
-      club: "City Strikers",
-      nationality: "England",
-      flag: "🇬🇧",
-      status: "Available",
-      contractEnd: "2025-06-30",
-      enquiries: 5,
-      starred: false,
-      stats: {
-        goals: 12,
-        assists: 8,
-        rating: 7.8
-      },
-      image: null,
-      contact: {
-        email: "john.doe@soccerpro.com",
-        phone: "+44 123 456 7890",
-        location: "London, England"
-      }
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      position: "Midfielder",
-      age: 22,
-      club: "Global United",
-      nationality: "USA",
-      flag: "🇺🇸",
-      status: "Available",
-      contractEnd: "2024-12-31",
-      enquiries: 3,
-      starred: false,
-      stats: {
-        goals: 5,
-        assists: 15,
-        rating: 8.2
-      },
-      image: null,
-      contact: {
-        email: "jane.smith@soccerpro.com",
-        phone: "+1 234 567 8901",
-        location: "New York, USA"
-      }
-    },
-    {
-      id: 3,
-      name: "Mike Johnson",
-      position: "Defender",
-      age: 27,
-      club: "FC Elite",
-      nationality: "France",
-      flag: "🇫🇷",
-      status: "Available",
-      contractEnd: "2025-05-15",
-      enquiries: 7,
-      starred: true,
-      stats: {
-        goals: 2,
-        assists: 4,
-        rating: 7.5
-      },
-      image: null,
-      contact: {
-        email: "mike.johnson@soccerpro.com",
-        phone: "+33 345 678 9012",
-        location: "Paris, France"
-      }
-    },
-    {
-      id: 4,
-      name: "Sophie Chen",
-      position: "Goalkeeper",
-      age: 25,
-      club: "Eastern Dragons",
-      nationality: "China",
-      flag: "🇨🇳",
-      status: "Available",
-      contractEnd: "2025-08-01",
-      enquiries: 2,
-      starred: false,
-      stats: {
-        cleanSheets: 14,
-        saves: 87,
-        rating: 8.0
-      },
-      image: null,
-      contact: {
-        email: "sophie.chen@soccerpro.com",
-        phone: "+86 456 789 0123",
-        location: "Shanghai, China"
-      }
-    },
-    {
-      id: 5,
-      name: "Carlos Mendez",
-      position: "Midfielder",
-      age: 23,
-      club: "Madrid Stars",
-      nationality: "Spain",
-      flag: "🇪🇸",
-      status: "Available",
-      contractEnd: "2025-01-15",
-      enquiries: 8,
-      starred: true,
-      stats: {
-        goals: 9,
-        assists: 11,
-        rating: 8.4
-      },
-      image: null,
-      contact: {
-        email: "carlos.mendez@soccerpro.com",
-        phone: "+34 567 890 1234",
-        location: "Madrid, Spain"
-      }
+  // Load players from localStorage or use sample data
+  const [players, setPlayers] = useState(() => {
+    const savedPlayers = localStorage.getItem('availablePlayers');
+    if (savedPlayers) {
+      return JSON.parse(savedPlayers);
     }
-  ]);
+    // Return sample data if no saved players
+    return [
+      {
+        id: 1,
+        name: "Chisom Agbodike",
+        position: "Attacking Midfielder",
+        number: 8,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.88m",
+        weight: "80kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 26,
+        starred: true,
+        stats: {
+          appearances: 26,
+          goals: 2,
+          assists: 1,
+          cleanSheets: 13,
+          rating: 7.9
+        },
+        image: "/player5.png",
+        contact: {
+          email: "chisom.agbodike@okakafc.com",
+          phone: "+234 123 456 7890",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-07-01",
+        bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness."
+      },
+      {
+        id: 2,
+        name: "Chucks Peter",
+        position: "Defender",
+        number: 5,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.80m",
+        weight: "73kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 25,
+        starred: true,
+        stats: {
+          appearances: 25,
+          goals: 1,
+          assists: 1,
+          cleanSheets: 12,
+          rating: 8.2
+        },
+        image: "/player1.png",
+        contact: {
+          email: "chucks.peter@okakafc.com",
+          phone: "+234 234 567 8901",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-10-04",
+        bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness."
+      },
+      {
+        id: 3,
+        name: "Bamidele Sunday",
+        position: "Right Back",
+        number: 2,
+        age: 14,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.78m",
+        weight: "68kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 20,
+        starred: true,
+        stats: {
+          appearances: 20,
+          goals: 2,
+          assists: 8,
+          cleanSheets: 10,
+          rating: 8.5
+        },
+        image: "/player2.png",
+        contact: {
+          email: "bamidele.sunday@okakafc.com",
+          phone: "+234 345 678 9012",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-12-16",
+        bio: "Dynamic right-back with excellent pace and crossing ability. Known for his defensive solidity and attacking contributions."
+      },
+      {
+        id: 4,
+        name: "Adebayo Sodiq",
+        position: "Defensive Midfielder",
+        number: 6,
+        age: 18,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.85m",
+        weight: "78kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 22,
+        starred: true,
+        stats: {
+          appearances: 22,
+          goals: 3,
+          assists: 12,
+          cleanSheets: 11,
+          rating: 7.8
+        },
+        image: "/player3.png",
+        contact: {
+          email: "adebayo.sodiq@okakafc.com",
+          phone: "+234 456 789 0123",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2005-12-17",
+        bio: "Strong defensive midfielder with excellent tackling and positioning. Provides solid protection for the backline."
+      },
+      {
+        id: 5,
+        name: "Emmanuel Bright",
+        position: "Striker",
+        number: 9,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.78m",
+        weight: "72kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 24,
+        starred: true,
+        stats: {
+          appearances: 24,
+          goals: 18,
+          assists: 7,
+          rating: 8.7
+        },
+        image: "/player4.png",
+        contact: {
+          email: "emmanuel.bright@okakafc.com",
+          phone: "+234 567 890 1234",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2009-12-13",
+        bio: "Young and prolific striker with exceptional finishing ability. Despite his age, he has shown remarkable composure and goal-scoring instincts."
+      },
+      {
+        id: 6,
+        name: "Ahmed Johnson",
+        position: "Attacking Midfielder",
+        number: 10,
+        age: 19,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.82m",
+        weight: "75kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 28,
+        starred: true,
+        stats: {
+          appearances: 28,
+          goals: 15,
+          assists: 10,
+          rating: 8.9
+        },
+        image: "/assets/players/victor-osimhen.jpg",
+        contact: {
+          email: "ahmed.johnson@okakafc.com",
+          phone: "+234 678 901 2345",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2004-09-27",
+        bio: "Creative attacking midfielder with exceptional vision and technical ability. Controls the tempo of the game and provides key assists."
+      },
+      {
+        id: 7,
+        name: "Victor Osimhen",
+        position: "Goalkeeper",
+        number: 1,
+        age: 16,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.90m",
+        weight: "82kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 18,
+        starred: false,
+        stats: {
+          appearances: 18,
+          cleanSheets: 8,
+          saves: 45,
+          rating: 8.1
+        },
+        image: "/assets/players/victor-osimhen.jpg",
+        contact: {
+          email: "victor.osimhen@okakafc.com",
+          phone: "+234 789 012 3456",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2007-05-15",
+        bio: "Promising young goalkeeper with excellent reflexes and shot-stopping ability. Shows great potential for his age."
+      },
+      {
+        id: 8,
+        name: "Ibrahim Musa",
+        position: "Left Back",
+        number: 3,
+        age: 18,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.80m",
+        weight: "74kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 15,
+        starred: false,
+        stats: {
+          appearances: 23,
+          goals: 2,
+          assists: 6,
+          rating: 7.7
+        },
+        image: "/assets/players/ibrahim-musa.jpg",
+        contact: {
+          email: "ibrahim.musa@okakafc.com",
+          phone: "+234 890 123 4567",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2005-08-22",
+        bio: "Attacking left-back with good pace and crossing ability. Provides width and defensive cover on the left flank."
+      },
+      {
+        id: 9,
+        name: "Daniel Johnson",
+        position: "Center Back",
+        number: 5,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.86m",
+        weight: "79kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 12,
+        starred: false,
+        stats: {
+          appearances: 21,
+          goals: 1,
+          assists: 2,
+          rating: 7.6
+        },
+        image: "/assets/players/daniel-johnson.jpg",
+        contact: {
+          email: "daniel.johnson@okakafc.com",
+          phone: "+234 901 234 5678",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-03-10",
+        bio: "Solid center-back with good positioning and tackling ability. Forms a strong partnership with the defensive line."
+      },
+      {
+        id: 10,
+        name: "Samuel Okon",
+        position: "Central Midfielder",
+        number: 7,
+        age: 18,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.83m",
+        weight: "76kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 14,
+        starred: false,
+        stats: {
+          appearances: 25,
+          goals: 4,
+          assists: 9,
+          rating: 7.8
+        },
+        image: "/assets/players/samuel-okon.jpg",
+        contact: {
+          email: "samuel.okon@okakafc.com",
+          phone: "+234 012 345 6789",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2005-11-30",
+        bio: "Versatile central midfielder with good passing range and work rate. Controls the tempo of the game effectively."
+      },
+      {
+        id: 11,
+        name: "Michael Adebayo",
+        position: "Winger",
+        number: 11,
+        age: 16,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.79m",
+        weight: "71kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 10,
+        starred: false,
+        stats: {
+          appearances: 19,
+          goals: 6,
+          assists: 7,
+          rating: 7.9
+        },
+        image: "/assets/players/michael-adebayo.jpg",
+        contact: {
+          email: "michael.adebayo@okakafc.com",
+          phone: "+234 123 456 7890",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2007-07-14",
+        bio: "Explosive winger with excellent pace and dribbling skills. Creates chances and scores important goals."
+      },
+      {
+        id: 12,
+        name: "David Okonkwo",
+        position: "Striker",
+        number: 14,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.84m",
+        weight: "77kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 16,
+        starred: false,
+        stats: {
+          appearances: 22,
+          goals: 12,
+          assists: 3,
+          rating: 8.0
+        },
+        image: "/assets/players/david-okonkwo.jpg",
+        contact: {
+          email: "david.okonkwo@okakafc.com",
+          phone: "+234 234 567 8901",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-09-25",
+        bio: "Clinical striker with good movement and finishing ability. Provides strong competition for the starting spot."
+      },
+      {
+        id: 13,
+        name: "James Okafor",
+        position: "Goalkeeper",
+        number: 13,
+        age: 16,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.88m",
+        weight: "80kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 8,
+        starred: false,
+        stats: {
+          appearances: 12,
+          cleanSheets: 5,
+          saves: 32,
+          rating: 7.5
+        },
+        image: "/assets/players/james-okafor.jpg",
+        contact: {
+          email: "james.okafor@okakafc.com",
+          phone: "+234 345 678 9012",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2007-02-18",
+        bio: "Promising young goalkeeper with good shot-stopping ability. Provides strong competition for the number one spot."
+      },
+      {
+        id: 14,
+        name: "Peter Obi",
+        position: "Defensive Midfielder",
+        number: 15,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.81m",
+        weight: "75kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 9,
+        starred: false,
+        stats: {
+          appearances: 18,
+          goals: 2,
+          assists: 4,
+          rating: 7.4
+        },
+        image: "/assets/players/peter-obi.jpg",
+        contact: {
+          email: "peter.obi@okakafc.com",
+          phone: "+234 456 789 0123",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-06-08",
+        bio: "Hard-working defensive midfielder with good tackling and positioning. Provides solid cover for the backline."
+      },
+      {
+        id: 15,
+        name: "John Okonkwo",
+        position: "Winger",
+        number: 17,
+        age: 16,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.77m",
+        weight: "70kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 11,
+        starred: false,
+        stats: {
+          appearances: 15,
+          goals: 5,
+          assists: 6,
+          rating: 7.6
+        },
+        image: "/assets/players/john-okonkwo.jpg",
+        contact: {
+          email: "john.okonkwo@okakafc.com",
+          phone: "+234 567 890 1234",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2007-04-12",
+        bio: "Skilled winger with good pace and technical ability. Creates chances and provides attacking options."
+      },
+      {
+        id: 16,
+        name: "Emmanuel Okafor",
+        position: "Center Back",
+        number: 16,
+        age: 17,
+        club: "Okaka FC",
+        nationality: "Nigeria",
+        flag: "🇳🇬",
+        height: "1.87m",
+        weight: "81kg",
+        joined: "2023",
+        contract: "2025",
+        status: "Available",
+        enquiries: 7,
+        starred: false,
+        stats: {
+          appearances: 14,
+          goals: 1,
+          assists: 1,
+          rating: 7.3
+        },
+        image: "/assets/players/emmanuel-okafor.jpg",
+        contact: {
+          email: "emmanuel.okafor@okakafc.com",
+          phone: "+234 678 901 2345",
+          location: "Lagos, Nigeria"
+        },
+        dateOfBirth: "2006-08-19",
+        bio: "Strong center-back with good aerial ability and tackling. Provides depth in the defensive line."
+      }
+    ];
+  });
 
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
@@ -164,23 +551,36 @@ const AvailablePlayers = () => {
 
   // Filtered and sorted players
   const filteredPlayers = players.filter(player => {
-    const matchesSearch = player.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         player.club.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         player.nationality.toLowerCase().includes(searchTerm.toLowerCase());
+    // Search functionality
+    const searchLower = searchTerm.toLowerCase();
+    const matchesSearch = 
+      player.name.toLowerCase().includes(searchLower) ||
+      player.club.toLowerCase().includes(searchLower) ||
+      player.nationality.toLowerCase().includes(searchLower) ||
+      player.position.toLowerCase().includes(searchLower);
     
+    // Filter functionality
     const matchesPosition = !filters.position || player.position === filters.position;
     const matchesAgeMin = !filters.ageMin || player.age >= parseInt(filters.ageMin);
     const matchesAgeMax = !filters.ageMax || player.age <= parseInt(filters.ageMax);
     const matchesNationality = !filters.nationality || 
-                              player.nationality.toLowerCase().includes(filters.nationality.toLowerCase());
+      player.nationality.toLowerCase() === filters.nationality.toLowerCase();
     
     return matchesSearch && matchesPosition && matchesAgeMin && matchesAgeMax && matchesNationality;
   }).sort((a, b) => {
-    if (sortOption === 'enquiries') return b.enquiries - a.enquiries;
-    if (sortOption === 'age') return a.age - b.age;
-    if (sortOption === 'name') return a.name.localeCompare(b.name);
-    if (sortOption === 'rating') return (b.stats.rating || 0) - (a.stats.rating || 0);
-    return 0;
+    // Sort functionality
+    switch (sortOption) {
+      case 'enquiries':
+        return b.enquiries - a.enquiries;
+      case 'age':
+        return a.age - b.age;
+      case 'name':
+        return a.name.localeCompare(b.name);
+      case 'rating':
+        return (b.stats.rating || 0) - (a.stats.rating || 0);
+      default:
+        return 0;
+    }
   });
 
   const handleFilterChange = (e) => {
@@ -188,10 +588,22 @@ const AvailablePlayers = () => {
     setFilters(prev => ({ ...prev, [name]: value }));
   };
 
+  const clearFilters = () => {
+    setFilters({
+      position: '',
+      ageMin: '',
+      ageMax: '',
+      nationality: ''
+    });
+    setSearchTerm('');
+  };
+
   const toggleStarPlayer = (id) => {
-    setPlayers(players.map(player => 
+    const updatedPlayers = players.map(player => 
       player.id === id ? {...player, starred: !player.starred} : player
-    ));
+    );
+    setPlayers(updatedPlayers);
+    localStorage.setItem('availablePlayers', JSON.stringify(updatedPlayers));
   };
 
   const openContactModal = (player) => {
@@ -449,6 +861,8 @@ const AvailablePlayers = () => {
                       name="ageMin"
                       value={filters.ageMin}
                       onChange={handleFilterChange}
+                      min="15"
+                      max="45"
                       placeholder="Min"
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -460,6 +874,8 @@ const AvailablePlayers = () => {
                       name="ageMax"
                       value={filters.ageMax}
                       onChange={handleFilterChange}
+                      min="15"
+                      max="45"
                       placeholder="Max"
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -481,7 +897,7 @@ const AvailablePlayers = () => {
                 </div>
                 <div className="flex justify-end mt-4">
                   <motion.button
-                    onClick={() => setFilters({position: '', ageMin: '', ageMax: '', nationality: ''})}
+                    onClick={clearFilters}
                     className="text-gray-600 hover:text-gray-800 mr-4"
                     whileHover={{ x: -2 }}
                     whileTap={{ scale: 0.95 }}
@@ -528,17 +944,17 @@ const AvailablePlayers = () => {
                 className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:border-blue-200 transition-all group"
               >
                 <div className="relative">
-                  <div className="h-40 bg-gradient-to-r from-blue-500 to-blue-600 relative overflow-hidden">
-                    <motion.div 
-                      className="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-20"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 0.2 }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                      <svg className="w-32 h-32 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                        <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-                      </svg>
+                  <div className="h-48 bg-white relative overflow-hidden flex items-center justify-center">
+                    <div className="h-full w-full flex items-center justify-center">
+                      <img 
+                        src={player.image} 
+                        alt={player.name}
+                        className="h-full w-full object-contain"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="absolute top-3 right-3 flex space-x-2">
@@ -555,25 +971,19 @@ const AvailablePlayers = () => {
                     </motion.button>
                   </div>
                   <div className="absolute -bottom-10 left-4">
-                    <motion.div 
-                      className="w-20 h-20 bg-gray-200 rounded-full border-4 border-white flex items-center justify-center text-blue-600 font-bold text-xl relative overflow-hidden"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      {player.image ? (
+                    <div className="w-20 h-20 bg-white rounded-full border-4 border-white flex items-center justify-center text-blue-600 font-bold text-xl relative overflow-hidden">
+                      <div className="h-full w-full flex items-center justify-center">
                         <img 
                           src={player.image} 
                           alt={player.name} 
-                          className="w-full h-full rounded-full object-cover"
+                          className="h-full w-full object-contain"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
+                          }}
                         />
-                      ) : (
-                        <span>{player.name.charAt(0)}</span>
-                      )}
-                      <motion.div 
-                        className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 0.1 }}
-                      />
-                    </motion.div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 

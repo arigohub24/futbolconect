@@ -84,7 +84,7 @@ const Marketplace = () => {
         transition={{ duration: 0.5 }}
         className="flex justify-between items-center mb-8"
       >
-        <h1 className="text-4xl font-bold text-gray-800">Futbol Connect Marketplace</h1>
+        <h1 className="text-4xl font-bold text-gray-800">futbol conect Marketplace</h1>
         <div className="flex space-x-2">
           <Link to="/browse-leagues">
             <motion.button 
@@ -138,7 +138,7 @@ const Marketplace = () => {
         animate="visible"
         className="mb-8 bg-white rounded-xl shadow-sm p-6 overflow-x-auto"
       >
-        <h2 className="text-2xl font-semibold mb-6">Top Leagues on Futbol Connect</h2>
+        <h2 className="text-2xl font-semibold mb-6">Top Leagues on futbol conect</h2>
         <div className="flex space-x-4 pb-4">
           {leagues.map((league, index) => (
             <motion.div
@@ -184,7 +184,7 @@ const Marketplace = () => {
         className="bg-white rounded-xl shadow-sm p-6"
       >
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Deals Facilitated on Futbol Connect</h2>
+          <h2 className="text-2xl font-semibold">Deals Facilitated on futbol conect</h2>
           <div className="text-3xl font-bold text-blue-600">
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
@@ -243,7 +243,7 @@ const Marketplace = () => {
               whileTap={{ scale: 0.95 }}
               className="px-4 py-2 bg-blue-600 rounded-lg text-white hover:bg-blue-700"
             >
-              Join Futbol Connect
+              Join futbol conect
             </motion.button>
           </Link>
         </div>

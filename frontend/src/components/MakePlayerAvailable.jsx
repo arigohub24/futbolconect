@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Save, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const MakePlayerAvailable = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     position: 'Forward',
@@ -11,7 +13,22 @@ const MakePlayerAvailable = () => {
     nationality: '',
     contractEnd: '',
     asking: '',
-    notes: ''
+    notes: '',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop', // Default image
+    flag: '🏳️', // Default flag
+    status: 'Available',
+    enquiries: 0,
+    starred: false,
+    stats: {
+      goals: 0,
+      assists: 0,
+      rating: 0
+    },
+    contact: {
+      email: '',
+      phone: '',
+      location: ''
+    }
   });
 
   const [errors, setErrors] = useState({});
@@ -34,7 +51,7 @@ const MakePlayerAvailable = () => {
   };
 
   const navigateBack = () => {
-    alert('Navigating back to Outplacement page');
+    navigate('/available-players');
   };
 
   const handleSubmit = (e) => {
@@ -45,6 +62,11 @@ const MakePlayerAvailable = () => {
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.age) newErrors.age = 'Age is required';
     if (!formData.club.trim()) newErrors.club = 'Current club is required';
+    if (!formData.nationality.trim()) newErrors.nationality = 'Nationality is required';
+    if (!formData.contractEnd) newErrors.contractEnd = 'Contract end date is required';
+    if (!formData.contact.email) newErrors.email = 'Email is required';
+    if (!formData.contact.phone) newErrors.phone = 'Phone is required';
+    if (!formData.contact.location) newErrors.location = 'Location is required';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -53,11 +75,31 @@ const MakePlayerAvailable = () => {
 
     setIsSubmitting(true);
 
+    // Create a new player object
+    const newPlayer = {
+      id: Date.now(), // Generate a unique ID
+      ...formData,
+      stats: {
+        goals: parseInt(formData.stats.goals) || 0,
+        assists: parseInt(formData.stats.assists) || 0,
+        rating: parseFloat(formData.stats.rating) || 0
+      }
+    };
+
+    // Get existing players from localStorage
+    const existingPlayers = JSON.parse(localStorage.getItem('availablePlayers') || '[]');
+    
+    // Add new player to the list
+    const updatedPlayers = [...existingPlayers, newPlayer];
+    
+    // Save to localStorage
+    localStorage.setItem('availablePlayers', JSON.stringify(updatedPlayers));
+
     // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       alert('Player successfully added to available list!');
-      navigateBack();
+      navigate('/available-players');
     }, 1000);
   };
 
@@ -219,7 +261,7 @@ const MakePlayerAvailable = () => {
                   htmlFor="nationality"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Nationality
+                  Nationality*
                 </label>
                 <input
                   type="text"
@@ -227,9 +269,14 @@ const MakePlayerAvailable = () => {
                   name="nationality"
                   value={formData.nationality}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className={`w-full px-4 py-2 border ${
+                    errors.nationality ? 'border-red-500' : 'border-gray-300'
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                   placeholder="Player's nationality"
                 />
+                {errors.nationality && (
+                  <p className="mt-1 text-sm text-red-500">{errors.nationality}</p>
+                )}
               </motion.div>
 
               {/* Contract End */}
@@ -238,7 +285,7 @@ const MakePlayerAvailable = () => {
                   htmlFor="contractEnd"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Contract End Date
+                  Contract End Date*
                 </label>
                 <input
                   type="date"
@@ -246,8 +293,13 @@ const MakePlayerAvailable = () => {
                   name="contractEnd"
                   value={formData.contractEnd}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className={`w-full px-4 py-2 border ${
+                    errors.contractEnd ? 'border-red-500' : 'border-gray-300'
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                 />
+                {errors.contractEnd && (
+                  <p className="mt-1 text-sm text-red-500">{errors.contractEnd}</p>
+                )}
               </motion.div>
 
               {/* Asking Price */}

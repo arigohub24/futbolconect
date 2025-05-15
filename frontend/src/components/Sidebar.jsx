@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { Menu, X } from 'lucide-react';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -10,9 +11,12 @@ const Sidebar = () => {
 
   const navItems = [
     { path: '/dashboard', name: 'Dashboard', icon: 'fas fa-home' },
-    { path: '/recruitment', name: 'Recruitment', icon: 'fas fa-search' },
-    { path: '/outplacement', name: 'Outplacement', icon: 'fas fa-sign-out-alt' },
+    { path: '/recruitment', name: 'Recruitment', icon: 'fas fa-user-plus' },
+    { path: '/outplacement', name: 'Transfer Market', icon: 'fas fa-exchange-alt' },
     { path: '/marketplace', name: 'Marketplace', icon: 'fas fa-store' },
+    { path: '/okaka', name: 'Okaka FC', icon: 'fas fa-futbol' },
+    { path: '/activity', name: 'Activity', icon: 'fas fa-chart-line' },
+    { path: '/settings', name: 'Settings', icon: 'fas fa-cog' },
     { path: '/events', name: 'Events', icon: 'fas fa-calendar' },
     { path: '/pricing', name: 'Pricing', icon: 'fas fa-credit-card' },
     { path: '/profile', name: 'Profile', icon: 'fas fa-user' },
@@ -48,12 +52,34 @@ const Sidebar = () => {
             whileTap={{ scale: 0.9 }}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
+            style={{
+              marginTop: 'env(safe-area-inset-top, 0px)',
+              marginLeft: 'env(safe-area-inset-left, 0px)'
+            }}
           >
-            <motion.i
-              className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-white text-2xl`}
-              animate={{ rotate: isOpen ? 90 : 0 }}
-              transition={{ duration: 0.3 }}
-            />
+            <AnimatePresence mode="wait">
+              {isOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X size={24} className="text-white" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu size={24} className="text-white" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.button>
 
           {/* Mobile Menu Overlay */}
@@ -65,6 +91,12 @@ const Sidebar = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setIsOpen(false)}
+                style={{
+                  paddingTop: 'env(safe-area-inset-top, 0px)',
+                  paddingLeft: 'env(safe-area-inset-left, 0px)',
+                  paddingRight: 'env(safe-area-inset-right, 0px)',
+                  paddingBottom: 'env(safe-area-inset-bottom, 0px)'
+                }}
               />
             )}
           </AnimatePresence>
@@ -78,6 +110,12 @@ const Sidebar = () => {
                 animate={{ x: 0 }}
                 exit={{ x: '-100%' }}
                 transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                style={{
+                  paddingTop: 'env(safe-area-inset-top, 0px)',
+                  paddingLeft: 'env(safe-area-inset-left, 0px)',
+                  paddingRight: 'env(safe-area-inset-right, 0px)',
+                  paddingBottom: 'env(safe-area-inset-bottom, 0px)'
+                }}
               >
                 <div className="px-5 py-6">
                   <div className="flex items-center justify-between mb-8">
@@ -85,8 +123,9 @@ const Sidebar = () => {
                     <motion.button
                       onClick={() => setIsOpen(false)}
                       whileTap={{ scale: 0.9 }}
+                      className="p-2"
                     >
-                      <i className="fas fa-times text-gray-500 text-lg" />
+                      <X size={20} className="text-gray-500" />
                     </motion.button>
                   </div>
                   <nav className="space-y-1">
