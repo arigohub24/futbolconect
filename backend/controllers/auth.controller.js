@@ -57,8 +57,8 @@ export const signup = async (req, res) => {
       
       // Create welcome message
       const welcomeMessage = {
-        title: "Welcome to FutbolConnect!",
-        message: `Welcome to FutbolConnect! You're now part of the ultimate football community platform as a ${role}.`,
+        title: "Welcome to futbolconect!",
+        message: `Welcome to futbolconect! You're now part of the ultimate football community platform as a ${role}.`,
         type: "success"
       };
 

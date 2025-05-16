@@ -124,7 +124,7 @@ const HelpCenter = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-600" />
-                <span className="text-blue-800">+44 (0) 20 1234 5678</span>
+                <span className="text-blue-800">+234 905 7403294</span>
               </div>
               <p className="text-gray-600 mt-4">
                 Our support team is available Monday to Friday, 9:00 AM - 6:00 PM GMT.
