@@ -42,12 +42,12 @@ const PaymentForm = () => {
   const plan = isPremium
     ? {
         name: 'Premium',
-        price: '₦5,000,000 / $10,000',
+        price: '$5,000',
         description: 'Complete transfer management solution',
       }
     : {
         name: 'Basic',
-        price: '₦2,500,000 / $5,000',
+        price: '$2,500',
         description: 'Essential tools for player transfers'
       };
 
@@ -246,9 +246,9 @@ const PaymentForm = () => {
             {/* Payment Method Info */}
             <motion.div variants={itemVariants}>
               <div className="bg-blue-50 p-4 rounded-lg">
-                <Banknotes className="h-6 w-6 text-blue-600 mb-2" />
+                <Banknote className="h-6 w-6 text-blue-600 mb-2" />
                 <p className="text-sm text-gray-600">
-                  Please note: We accept payments via bank transfer in Naira (₦) or Dollars ($). 
+                  Please note: We accept payments via bank transfer in Dollars ($). 
                   After submitting this form, our team will contact you with the bank details for payment.
                 </p>
               </div>

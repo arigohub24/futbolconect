@@ -23,7 +23,7 @@ const LoginPage = () => {
     setError("");
   
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,15 +38,17 @@ const LoginPage = () => {
       const data = await response.json();
   
       if (!response.ok) {
-        throw new Error(data.error || "Login failed");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Login failed");
       }
   
       // Login successful - handle redirect or state update
       console.log("Login successful", data);
-      localStorage.setItem('user', JSON.stringify(data));
+      // Don't use localStorage for auth state
+      // Instead use the authUser query from App.jsx
       
-      // Redirect to home/dashboard
-      window.location.href = '/';
+      // Redirect to dashboard
+      window.location.href = '/welcome';
       
     } catch (err) {
       setError(err.message || "Login failed. Please try again.");

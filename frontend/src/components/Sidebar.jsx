@@ -41,6 +41,8 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
   const shouldShowSidebar = !location.pathname.includes('/pricing');
 
+  if (!shouldShowSidebar) return null; // Don't render anything if we shouldn't show the sidebar
+
   // Mobile view
   const mobileView = (
     <>

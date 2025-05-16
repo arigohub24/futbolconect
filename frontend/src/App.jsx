@@ -21,6 +21,7 @@ import Profile from './pages/Profile';
 import EditProfile from './components/EditProfile';
 import PaymentForm from './components/PaymentForm';
 import PaymentSuccess from './components/PaymentSuccess';
+import WelcomePage from './components/WelcomePage';
 import Okaka from './pages/Okaka';
 import Settings from './pages/Settings';
 
@@ -97,6 +98,7 @@ function App() {
     <div className="w-full h-screen overflow-y-auto">
       <AnimatePresence mode="wait">
         <Routes>
+          <Route path="/welcome" element={<WelcomePage />} />
           {/* Public Routes */}
           <Route
             path="/"
