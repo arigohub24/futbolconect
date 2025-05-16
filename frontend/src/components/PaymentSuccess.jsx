@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
-import { useNavigate, useLocation, useEffect } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const PaymentSuccess = () => {
   const navigate = useNavigate();
