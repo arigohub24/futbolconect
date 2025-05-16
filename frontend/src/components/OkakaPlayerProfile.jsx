@@ -38,15 +38,16 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
       animate="visible"
       exit="exit"
       variants={containerVariants}
-      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-start sm:items-center justify-center p-0 sm:p-4 overflow-y-auto"
     >
       <motion.div
-        initial={{ scale: 0.95 }}
-        animate={{ scale: 1 }}
-        className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.95, opacity: 0 }}
+        className="bg-white rounded-none sm:rounded-xl w-full sm:max-w-4xl max-h-screen sm:max-h-[90vh] overflow-y-auto"
       >
         {/* Header */}
-        <div className="relative h-64 bg-gradient-to-r from-blue-600 to-blue-800 rounded-t-xl overflow-hidden">
+        <div className="relative h-56 sm:h-64 bg-gradient-to-r from-blue-600 to-blue-800 rounded-none sm:rounded-t-xl overflow-hidden">
           <img
             src={player.image}
             alt={player.name}
@@ -65,9 +66,9 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
             <X className="w-6 h-6 text-white" />
           </button>
 
-          <div className="absolute bottom-0 left-0 right-0 p-6">
-            <div className="flex items-end gap-6">
-              <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden">
+          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 sm:gap-6">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full border-4 border-white overflow-hidden">
                 <img
                   src={player.image}
                   alt={player.name}
@@ -78,16 +79,17 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
                   }}
                 />
               </div>
-              <div className="text-white">
-                <h1 className="text-3xl font-bold mb-1">{player.name}</h1>
-                <div className="flex items-center gap-4 text-white/80">
+              <div className="text-white text-center sm:text-left w-full">
+                <h1 className="text-2xl sm:text-3xl font-bold mb-1">{player.name}</h1>
+                <div className="flex flex-wrap justify-center sm:justify-start items-center gap-2 sm:gap-4 text-sm sm:text-base text-white/80">
                   <span className="flex items-center">
-                    <span className="mr-2">#{player.number}</span>
-                    <span>{player.position}</span>
+                    <span className="mr-1 sm:mr-2">#{player.number}</span>
+                    <span className="text-sm sm:text-base">{player.position}</span>
                   </span>
+                  <span className="hidden sm:inline-block">•</span>
                   <span className="flex items-center">
-                    <span className="mr-2">{player.flag}</span>
-                    <span>{player.nationality}</span>
+                    <span className="mr-1 sm:mr-2">{player.flag}</span>
+                    <span className="text-sm sm:text-base">{player.nationality}</span>
                   </span>
                 </div>
               </div>
@@ -96,9 +98,9 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Tabs */}
-          <div className="flex gap-4 border-b mb-6">
+          <div className="flex gap-2 sm:gap-4 border-b mb-4 sm:mb-6 overflow-x-auto pb-1 -mx-2 px-2">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -124,20 +126,20 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
                 exit={{ opacity: 0, y: -10 }}
                 className="space-y-6"
               >
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  <div className="bg-gray-50 p-4 rounded-lg">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+                  <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
                     <div className="text-sm text-gray-500 mb-1">Age</div>
                     <div className="font-semibold">{player.age}</div>
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
+                  <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
                     <div className="text-sm text-gray-500 mb-1">Height</div>
                     <div className="font-semibold">{player.height}</div>
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
+                  <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
                     <div className="text-sm text-gray-500 mb-1">Weight</div>
                     <div className="font-semibold">{player.weight}</div>
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
+                  <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
                     <div className="text-sm text-gray-500 mb-1">Joined</div>
                     <div className="font-semibold">{player.joined}</div>
                   </div>
@@ -150,7 +152,7 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
 
                 <div>
                   <h3 className="text-lg font-semibold mb-3">Current Season</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                     <div className="bg-blue-50 p-4 rounded-lg text-center">
                       <div className="text-sm text-blue-600 mb-1">Appearances</div>
                       <div className="text-2xl font-bold text-blue-700">{player.stats.appearances}</div>
@@ -180,10 +182,10 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
                 exit={{ opacity: 0, y: -10 }}
                 className="space-y-6"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                  <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
                     <h3 className="text-lg font-semibold mb-4">Performance Stats</h3>
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       <div>
                         <div className="flex justify-between mb-1">
                           <span className="text-sm text-gray-600">Passing Accuracy</span>
@@ -214,9 +216,9 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
                     </div>
                   </div>
 
-                  <div className="bg-gray-50 p-6 rounded-lg">
+                  <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
                     <h3 className="text-lg font-semibold mb-4">Match Stats</h3>
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-600">Minutes Played</span>
                         <span className="font-medium">3,240</span>
@@ -250,9 +252,9 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-lg font-semibold mb-4">Career History</h3>
                   <div className="space-y-4">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                        <span className="text-blue-600 font-bold">OK</span>
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 flex-shrink-0 flex items-center justify-center">
+                        <span className="text-blue-600 font-bold text-sm sm:text-base">OK</span>
                       </div>
                       <div>
                         <div className="font-medium">Okaka FC</div>
@@ -262,9 +264,9 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
-                        <span className="text-gray-600 font-bold">PC</span>
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
+                        <span className="text-gray-600 font-bold text-sm sm:text-base">PC</span>
                       </div>
                       <div>
                         <div className="font-medium">Previous Club</div>
@@ -287,18 +289,18 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
                 exit={{ opacity: 0, y: -10 }}
                 className="space-y-6"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                  <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
                     <h3 className="text-lg font-semibold mb-4">Team Achievements</h3>
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
+                    <div className="space-y-3 sm:space-y-4">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <Trophy className="w-5 h-5 text-yellow-500" />
                         <div>
                           <div className="font-medium">League Champions</div>
                           <div className="text-sm text-gray-500">2022</div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <Trophy className="w-5 h-5 text-yellow-500" />
                         <div>
                           <div className="font-medium">Cup Winners</div>
@@ -308,17 +310,17 @@ const OkakaPlayerProfile = ({ player, onClose }) => {
                     </div>
                   </div>
 
-                  <div className="bg-gray-50 p-6 rounded-lg">
+                  <div className="bg-gray-50 p-4 sm:p-6 rounded-lg">
                     <h3 className="text-lg font-semibold mb-4">Individual Awards</h3>
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
+                    <div className="space-y-3 sm:space-y-4">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <Award className="w-5 h-5 text-blue-500" />
                         <div>
                           <div className="font-medium">Player of the Season</div>
                           <div className="text-sm text-gray-500">2022</div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <Star className="w-5 h-5 text-yellow-500" />
                         <div>
                           <div className="font-medium">Top Scorer</div>

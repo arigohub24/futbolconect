@@ -471,10 +471,10 @@ const Okaka = () => {
       animate="visible"
       className="min-h-screen bg-gray-50"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         {/* Team Header */}
-        <motion.div variants={itemVariants} className="bg-white rounded-xl shadow-sm p-8 mb-8">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+        <motion.div variants={itemVariants} className="bg-white rounded-xl shadow-sm p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
+          <div className="flex flex-col md:flex-row items-start justify-between gap-4">
             <div>
               <h1 className="text-3xl font-bold text-blue-900 mb-2">{teamInfo.name}</h1>
               <div className="flex flex-wrap gap-4 text-gray-600">
@@ -507,8 +507,8 @@ const Okaka = () => {
         </motion.div>
 
         {/* Search and Filter */}
-        <motion.div variants={itemVariants} className="flex flex-col md:flex-row gap-4 mb-8">
-          <div className="flex-1 relative">
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="w-full sm:flex-1 relative">
             <input
               type="text"
               placeholder="Search players..."
@@ -518,12 +518,12 @@ const Okaka = () => {
             />
             <Search className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
             {positions.map((position) => (
               <button
                 key={position.id}
                 onClick={() => setSelectedPosition(position.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                   selectedPosition === position.id
                     ? 'bg-blue-600 text-white'
                     : 'bg-white text-gray-600 hover:bg-gray-50'
@@ -536,7 +536,7 @@ const Okaka = () => {
         </motion.div>
 
         {/* Players Grid */}
-        <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div variants={containerVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
           {filteredPlayers.map((player) => (
             <motion.div
               key={player.id}
@@ -545,7 +545,7 @@ const Okaka = () => {
               className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:border-blue-200 transition-all"
             >
               <div className="relative">
-                <div className="h-48 bg-white relative overflow-hidden flex items-center justify-center">
+                <div className="h-40 sm:h-48 bg-white relative overflow-hidden flex items-center justify-center">
                   <div className="h-full w-full flex items-center justify-center">
                     <img 
                       src={player.image} 
@@ -575,7 +575,7 @@ const Okaka = () => {
                 </div>
               </div>
               
-              <div className="pt-12 p-6">
+              <div className="pt-12 p-4 sm:p-6">
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h3 className="font-semibold text-lg text-gray-900">{player.name}</h3>
@@ -588,7 +588,7 @@ const Okaka = () => {
                   <span className="text-2xl">{player.flag}</span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 my-4">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 my-3 sm:my-4">
                   <div>
                     <div className="text-xs text-gray-500">Age</div>
                     <div className="font-medium">{player.age}</div>
@@ -665,38 +665,38 @@ const Okaka = () => {
 
       {/* Share Options Modal */}
       {showShareOptions && sharePlayer && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-start sm:items-center justify-center z-50 p-4 overflow-y-auto">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-xl p-6 w-96"
+            className="bg-white rounded-xl p-4 sm:p-6 w-full max-w-sm sm:max-w-md md:max-w-lg"
           >
             <h3 className="text-lg font-semibold mb-4">Share {sharePlayer.name}Profile</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <button
                 onClick={() => shareProfile('twitter')}
-                className="flex items-center justify-center gap-2 p-3 bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors"
+                className="flex items-center justify-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors"
               >
                 <Twitter className="w-5 h-5" />
                 Twitter
               </button>
               <button
                 onClick={() => shareProfile('facebook')}
-                className="flex items-center justify-center gap-2 p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="flex items-center justify-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 <Facebook className="w-5 h-5" />
                 Facebook
               </button>
               <button
                 onClick={() => shareProfile('linkedin')}
-                className="flex items-center justify-center gap-2 p-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
+                className="flex items-center justify-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
                 LinkedIn
               </button>
               <button
                 onClick={() => shareProfile('copy')}
-                className="flex items-center justify-center gap-2 p-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                className="flex items-center justify-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
               >
                 <Link className="w-5 h-5" />
                 Copy Link
