@@ -121,9 +121,14 @@ const PaymentForm = () => {
       navigate('/payment/success', { 
         state: { 
           plan,
-          message: 'Our team will contact you shortly with payment details.'
+          message: 'Payment successful! Welcome to Futbol Connect.'
         } 
       });
+
+      // After payment success, redirect to dashboard
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 2000); // 2 second delay before redirecting to dashboard
     } catch (error) {
       toast.error(error.message || 'Failed to request payment details. Please try again.');
       setIsProcessing(false);

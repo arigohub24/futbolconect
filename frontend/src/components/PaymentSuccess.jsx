@@ -1,11 +1,21 @@
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const PaymentSuccess = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const plan = location.state?.plan || { name: 'Unknown', price: 'Unknown' };
+  const message = location.state?.message || 'Payment successful!';
+
+  // Automatically redirect to dashboard after 2 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/dashboard');
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [navigate]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -54,7 +64,10 @@ const PaymentSuccess = () => {
           Payment Successful!
         </h2>
         <p className="text-gray-600 mb-6">
-          Welcome to futbol conect {plan.name}. Your account is ready to go!
+          {message}
+        </p>
+        <p className="text-gray-600 mb-6">
+          You will be redirected to your dashboard shortly...
         </p>
         <motion.button
           whileHover={{ scale: 1.05 }}
