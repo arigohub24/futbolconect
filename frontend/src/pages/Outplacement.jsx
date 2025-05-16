@@ -485,7 +485,7 @@ const Outplacement = () => {
     try {
       switch (method) {
         case 'email':
-          window.location.href = `mailto:contact@futbolconnect.com?subject=Contact Request for ${entity.name}&body=${encodeURIComponent(contactInfo)}`;
+          window.location.href = `mailto:contact@futbolconect.com?subject=Contact Request for ${entity.name}&body=${encodeURIComponent(contactInfo)}`;
           break;
         case 'phone':
           // You can replace this with actual phone number handling

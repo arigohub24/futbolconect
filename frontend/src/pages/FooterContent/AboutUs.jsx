@@ -91,8 +91,17 @@ const AboutUs = () => {
             About Futbol Conect
             <div className="absolute w-24 h-1 bg-blue-600 bottom-0 left-1/2 transform -translate-x-1/2 mt-2"></div>
           </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+            FutbolConect.com is a global platform built to revolutionize how footballers, scouts, and clubs connect. Our goal is to break down barriers and make football opportunities accessible to talent everywhere, regardless of geography or background.
+          </p>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+            We provide a professional space where players can showcase their skills, scouts can discover promising talents, and clubs can recruit the right players to strengthen their squads. Whether you're an aspiring footballer seeking visibility, a scout looking for fresh talent, or a club searching for the next big star, FutbolConect.com brings the entire football community to your fingertips.
+          </p>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+            We believe football is a universal language — and through technology, we are making it easier, faster, and smarter for talent and opportunity to meet on a global scale.
+          </p>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Futbol Conect is dedicated to connecting the global football community through innovative technology and passionate collaboration.
+            FutbolConect.com – Where Talent Meets Opportunity.
           </p>
         </motion.section>
 

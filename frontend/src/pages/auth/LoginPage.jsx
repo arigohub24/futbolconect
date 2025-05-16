@@ -215,7 +215,7 @@ const LoginPage = () => {
           <div className="absolute w-full h-full">
             <div className="absolute inset-0 bg-black opacity-20"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white z-10 w-full max-w-lg px-6">
-              <h2 className="text-4xl font-bold mb-4">The Premier Football Transfer Marketplace</h2>
+              <h2 className="text-4xl font-bold mb-4">The Prenuim Football Transfer Marketplace</h2>
               <p className="text-xl mb-8">Connect directly with clubs, players and agents worldwide</p>
               <div className="flex flex-wrap justify-center gap-6 max-w-md mx-auto">
                 <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-4 w-32 text-center">

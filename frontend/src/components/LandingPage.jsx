@@ -407,7 +407,7 @@ const LandingPage = () => {
 
                   {/* Subheading */}
                   <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mb-8 leading-relaxed">
-                    FutbolConect.com is a global platform built to revolutionize how footballers, scouts, and clubs connect. Our goal is to break down barriers and make football opportunities accessible to talent everywhere, regardless of geography or background.
+                    FutbolConect.com is a global platform built to revolutionize how footballers, scouts, and clubs connect. Our goal is to break down barriers and make football opportunities accessible to talents everywhere, regardless of geography or background.
                   </p>
 
                   {/* Buttons */}
@@ -622,7 +622,7 @@ const LandingPage = () => {
                   "Secure and confidential",
                   "Global reach",
                   "Time-efficient process",
-                  "Data-driven decisions",
+                  "",
                 ].map((benefit, index) => (
                   <motion.div
                     key={index}
@@ -975,20 +975,20 @@ const LandingPage = () => {
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-blue-400" />
                   <span className="text-gray-400">
-                    contact@footballconnect.com
+                    info@futbolConect@gmail.com
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-400">+44 (0) 20 1234 5678</span>
+                  <span className="text-gray-400">+234 905 7403294</span>
                 </div>
               </div>
               <div className="flex space-x-4 pt-2">
                 {[
-                  { icon: <Facebook className="w-5 h-5" />, href: "https://facebook.com/futbolconnect" },
-                  { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com/futbolconnect" },
-                  { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com/futbolconnect" },
-                  { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com/company/futbolconnect" },
+                  { icon: <Facebook className="w-5 h-5" />, href: "https://facebook.com/futbolconect" },
+                  { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com/futbolconect" },
+                  { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com/futbolconect" },
+                  { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com/company/futbolconect" },
                 ].map((social, index) => (
                   <motion.a
                     key={index}
