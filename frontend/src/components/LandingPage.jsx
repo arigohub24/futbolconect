@@ -975,7 +975,7 @@ const LandingPage = () => {
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-blue-400" />
                   <span className="text-gray-400">
-                    info@futbolConect@gmail.com
+                    info@futbolconect.com
                   </span>
                 </div>
                 <div className="flex items-center gap-3">

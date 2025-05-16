@@ -18,7 +18,6 @@ const Sidebar = () => {
     { path: '/activity', name: 'Activity', icon: 'fas fa-chart-line' },
     { path: '/settings', name: 'Settings', icon: 'fas fa-cog' },
     { path: '/events', name: 'Events', icon: 'fas fa-calendar' },
-    { path: '/pricing', name: 'Pricing', icon: 'fas fa-credit-card' },
     { path: '/profile', name: 'Profile', icon: 'fas fa-user' },
   ];
 
@@ -40,6 +39,7 @@ const Sidebar = () => {
   }, [isOpen, isMobile]);
 
   const isActive = (path) => location.pathname === path;
+  const shouldShowSidebar = !location.pathname.includes('/pricing');
 
   // Mobile view
   const mobileView = (
