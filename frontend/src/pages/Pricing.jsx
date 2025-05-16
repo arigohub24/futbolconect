@@ -7,7 +7,7 @@ const Pricing = () => {
     {
       name: 'Premium',
       tagline: 'Complete transfer management solution',
-      price: '£10,000',
+      price: '£5,000',
       period: 'per year',
       cta: 'Get Premium',
       popular: true,
@@ -27,7 +27,7 @@ const Pricing = () => {
     {
       name: 'Basic',
       tagline: 'Essential tools for player transfers',
-      price: '£5,000',
+      price: '£2,500',
       period: 'per year',
       cta: 'Get Started',
       features: [

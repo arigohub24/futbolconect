@@ -407,9 +407,7 @@ const LandingPage = () => {
 
                   {/* Subheading */}
                   <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mb-8 leading-relaxed">
-                    futbol conect streamlines the transfer process by connecting clubs,
-                    scouts, and agents directly, eliminating intermediaries and
-                    accelerating deals.
+                    FutbolConect.com is a global platform built to revolutionize how footballers, scouts, and clubs connect. Our goal is to break down barriers and make football opportunities accessible to talent everywhere, regardless of geography or background.
                   </p>
 
                   {/* Buttons */}
