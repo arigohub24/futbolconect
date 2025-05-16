@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import {  ArrowLeft, Banknotes, Phone, Mail } from 'lucide-react';
+import {  ArrowLeft, Banknote, Phone, Mail } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
