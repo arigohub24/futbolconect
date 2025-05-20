@@ -56,7 +56,7 @@ const SignUpPage = () => {
         throw error;
       }
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success("Account created successfully");
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
       navigate("/welcome");

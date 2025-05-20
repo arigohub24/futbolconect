@@ -1,18 +1,18 @@
-import { motion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { motion } from "framer-motion";
+import { CheckCircle } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const PaymentSuccess = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const plan = location.state?.plan || { name: 'Unknown', price: 'Unknown' };
-  const message = location.state?.message || 'Payment successful!';
+  const message = location.state?.message || "Payment successful!";
 
-  // Automatically redirect to dashboard after 2 seconds
+  // Set onboarding completed flag and redirect to dashboard
   useEffect(() => {
+    localStorage.setItem("onboardingCompleted", "true");
     const timer = setTimeout(() => {
-      navigate('/dashboard');
+      navigate("/dashboard");
     }, 2000);
     return () => clearTimeout(timer);
   }, [navigate]);
@@ -22,7 +22,7 @@ const PaymentSuccess = () => {
     visible: {
       opacity: 1,
       transition: {
-        when: 'beforeChildren',
+        when: "beforeChildren",
         staggerChildren: 0.1,
         delay: 0.2,
       },
@@ -36,7 +36,7 @@ const PaymentSuccess = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 150,
         damping: 15,
       },
@@ -54,25 +54,16 @@ const PaymentSuccess = () => {
         variants={itemVariants}
         className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 max-w-lg w-full text-center"
       >
-        <motion.div
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 0.5, repeat: 1 }}
-        >
+        <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 0.5, repeat: 1 }}>
           <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
         </motion.div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-          Payment Successful!
-        </h2>
-        <p className="text-gray-600 mb-6">
-          {message}
-        </p>
-        <p className="text-gray-600 mb-6">
-          You will be redirected to your dashboard shortly...
-        </p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Successful!</h2>
+        <p className="text-gray-600 mb-6">{message}</p>
+        <p className="text-gray-600 mb-6">You will be redirected to your dashboard shortly...</p>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate("/dashboard")}
           className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg hover:bg-blue-700 transition-all"
         >
           Go to Dashboard

@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
 import { Users, Building2, Briefcase, UserCircle, Search, Filter, MapPin, Star, MessageCircle, X, Mail, Phone, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 
 const Outplacement = () => {
-  const [activeTab, setActiveTab] = useState('players');
+  const [activeTab, setActiveTab] = useState('clubs');
   const [searchQuery, setSearchQuery] = useState('');
   const [showContactOptions, setShowContactOptions] = useState(false);
   const [selectedContactEntity, setSelectedContactEntity] = useState(null);
@@ -38,7 +39,8 @@ const Outplacement = () => {
         rating: 7.9
       },
       image: "/player5.png",
-      bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness."
+      bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness.",
+      club: "Okaka FC"
     },
     {
       id: 2,
@@ -61,7 +63,8 @@ const Outplacement = () => {
         rating: 8.2
       },
       image: "/player1.png",
-      bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness."
+      bio: "Strong and commanding center-back who leads the defensive line. Known for his aerial ability and tactical awareness.",
+      club: "Okaka FC"
     },
     {
       id: 3,
@@ -84,7 +87,8 @@ const Outplacement = () => {
         rating: 8.5
       },
       image: "/player2.png",
-      bio: "Dynamic right-back with excellent pace and crossing ability. Known for his defensive solidity and attacking contributions."
+      bio: "Dynamic right-back with excellent pace and crossing ability. Known for his defensive solidity and attacking contributions.",
+      club: "Okaka FC"
     },
     {
       id: 4,
@@ -107,7 +111,8 @@ const Outplacement = () => {
         rating: 7.8
       },
       image: "/player3.png",
-      bio: "Strong defensive midfielder with excellent tackling and positioning. Provides solid protection for the backline."
+      bio: "Strong defensive midfielder with excellent tackling and positioning. Provides solid protection for the backline.",
+      club: "Okaka FC"
     },
     {
       id: 5,
@@ -129,7 +134,8 @@ const Outplacement = () => {
         rating: 8.7
       },
       image: "/player4.png",
-      bio: "Young and prolific striker with exceptional finishing ability. Despite his age, he has shown remarkable composure and goal-scoring instincts."
+      bio: "Young and prolific striker with exceptional finishing ability. Despite his age, he has shown remarkable composure and goal-scoring instincts.",
+      club: "Okaka FC"
     },
   ];
 
@@ -414,7 +420,6 @@ const Outplacement = () => {
     }
   };
 
-  // Filter data based on search query and active tab
   const getFilteredData = () => {
     const searchLower = searchQuery.toLowerCase();
     
@@ -485,14 +490,12 @@ const Outplacement = () => {
     try {
       switch (method) {
         case 'email':
-          window.location.href = `mailto:contact@futbolconect.com?subject=Contact Request for ${entity.name}&body=${encodeURIComponent(contactInfo)}`;
+          window.location.href = `mailto:contact@futbolconnect.com?subject=Contact Request for ${entity.name}&body=${encodeURIComponent(contactInfo)}`;
           break;
         case 'phone':
-          // You can replace this with actual phone number handling
           alert('Phone contact information will be provided through email.');
           break;
         case 'message':
-          // You can replace this with actual messaging system
           alert('Messaging system will be available soon.');
           break;
       }
@@ -637,7 +640,13 @@ const Outplacement = () => {
                   <div className="flex items-center mb-4">
                     <img src={club.image} alt={club.name} className="w-16 h-16 rounded-lg mr-4" />
                     <div>
-                      <h3 className="font-semibold text-lg text-gray-900">{club.name}</h3>
+                      {club.name === "Okaka FC" ? (
+                        <NavLink to="/okaka" className="font-semibold text-lg text-gray-900 hover:text-blue-600">
+                          {club.name}
+                        </NavLink>
+                      ) : (
+                        <h3 className="font-semibold text-lg text-gray-900">{club.name}</h3>
+                      )}
                       <div className="flex items-center text-gray-500 text-sm">
                         <span className="mr-2">{club.division}</span>
                         <span className="mr-2">•</span>
@@ -667,10 +676,23 @@ const Outplacement = () => {
                   </div>
 
                   <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                    <button className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center">
-                      <MessageCircle className="w-4 h-4 mr-1" />
-                      Contact
-                    </button>
+                    {club.name === "Okaka FC" ? (
+                      <NavLink 
+                        to="/okaka" 
+                        className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center"
+                      >
+                        <MessageCircle className="w-4 h-4 mr-1" />
+                        View Profile
+                      </NavLink>
+                    ) : (
+                      <button 
+                        onClick={() => handleContact(club)} 
+                        className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center"
+                      >
+                        <MessageCircle className="w-4 h-4 mr-1" />
+                        Contact
+                      </button>
+                    )}
                     <button className="text-gray-600 text-sm font-medium hover:text-gray-800 transition-colors flex items-center">
                       <Star className="w-4 h-4 mr-1" />
                       Save
@@ -735,7 +757,10 @@ const Outplacement = () => {
                     <div className="font-medium">{agent.status}</div>
                   </div>
                   <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                    <button className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center">
+                    <button 
+                      onClick={() => handleContact(agent)} 
+                      className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center"
+                    >
                       <MessageCircle className="w-4 h-4 mr-1" />
                       Contact
                     </button>
@@ -801,7 +826,10 @@ const Outplacement = () => {
                     <div className="font-medium">{member.country}</div>
                   </div>
                   <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                    <button className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center">
+                    <button 
+                      onClick={() => handleContact(member)} 
+                      className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center"
+                    >
                       <MessageCircle className="w-4 h-4 mr-1" />
                       Contact
                     </button>
@@ -863,7 +891,10 @@ const Outplacement = () => {
                     <div className="font-medium">{scout.country}</div>
                   </div>
                   <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                    <button className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center">
+                    <button 
+                      onClick={() => handleContact(scout)} 
+                      className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors flex items-center"
+                    >
                       <MessageCircle className="w-4 h-4 mr-1" />
                       Contact
                     </button>
@@ -962,7 +993,6 @@ const Outplacement = () => {
         {renderContent()}
       </div>
 
-      {/* Contact Options Modal */}
       {showContactOptions && selectedContactEntity && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <motion.div
