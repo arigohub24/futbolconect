@@ -93,7 +93,7 @@ const SignUpPage = () => {
               className="text-4xl font-bold text-gray-900 cursor-pointer hover:text-blue-800 transition-colors"
               onClick={() => navigate("/")}
             >
-              Futbol<span className="text-blue-800">Connect</span>
+              Futbol<span className="text-blue-800">Conect</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0 }}
