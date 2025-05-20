@@ -86,7 +86,7 @@ const Sidebar = () => {
             </motion.button>
           </div>
           <div className="flex items-center">
-            <span className="text-xl font-bold">Futbol Connect</span>
+            <span className="text-xl font-bold">futbol conect</span>
           </div>
           <div className="flex items-center">
             {/* Add any additional navigation items here */}
@@ -218,7 +218,7 @@ const Sidebar = () => {
             animate={{ height: [24, 28, 24] }}
             transition={{ repeat: Infinity, duration: 2 }}
           />
-          Futbol Connect
+          futbol conect
         </motion.h2>
         <nav className="space-y-1">
           <AnimatePresence>

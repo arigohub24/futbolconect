@@ -46,10 +46,10 @@ const WelcomePage = () => {
           <FiArrowRight className="h-16 w-16 text-blue-600 mx-auto mb-4" />
         </motion.div>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-          Welcome to Futbol Connect!
+          Welcome to futbol conect!
         </h1>
         <p className="text-gray-600 mb-6">
-          Thank you for joining Futbol Connect. We’re excited to help you connect with football opportunities worldwide.
+          Thank you for joining futbol conect. We’re excited to help you connect with football opportunities worldwide.
         </p>
         <motion.button
           whileHover={{ scale: 1.05 }}
