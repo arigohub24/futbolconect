@@ -214,7 +214,7 @@ const LoginPage = () => {
         </div>
         <div className="absolute bottom-6 right-6 flex items-center text-white text-sm">
           <div className="mr-1 font-bold">Futbol</div>
-          <div className="text-blue-300">Connect</div>
+          <div className="text-blue-300">Conect</div>
         </div>
       </div>
     </div>

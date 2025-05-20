@@ -204,7 +204,7 @@ const LandingPage = () => {
                 Futbol
               </motion.span>
               <span className={`${scrolled ? 'text-blue-600' : 'text-white'} transition-colors duration-300`}>
-                Connect
+                Conect
               </span>
             </motion.span>
           </motion.div>
