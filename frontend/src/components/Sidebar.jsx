@@ -14,7 +14,6 @@ const Sidebar = () => {
     { path: '/recruitment', name: 'Recruitment', icon: 'fas fa-user-plus' },
     { path: '/outplacement', name: 'Transfer Market', icon: 'fas fa-exchange-alt' },
     { path: '/marketplace', name: 'Marketplace', icon: 'fas fa-store' },
-    { path: '/okaka', name: 'Okaka FC', icon: 'fas fa-futbol' },
     { path: '/activity', name: 'Activity', icon: 'fas fa-chart-line' },
     { path: '/settings', name: 'Settings', icon: 'fas fa-cog' },
     { path: '/events', name: 'Events', icon: 'fas fa-calendar' },
@@ -87,7 +86,7 @@ const Sidebar = () => {
             </motion.button>
           </div>
           <div className="flex items-center">
-            <span className="text-xl font-bold">Futbol Connect</span>
+            <span className="text-xl font-bold">futbol conect</span>
           </div>
           <div className="flex items-center">
             {/* Add any additional navigation items here */}
@@ -219,7 +218,7 @@ const Sidebar = () => {
             animate={{ height: [24, 28, 24] }}
             transition={{ repeat: Infinity, duration: 2 }}
           />
-          Futbol Connect
+          futbol conect
         </motion.h2>
         <nav className="space-y-1">
           <AnimatePresence>

@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { FiArrowRight } from 'react-icons/fi';
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
 
 const WelcomePage = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const WelcomePage = () => {
     visible: {
       opacity: 1,
       transition: {
-        when: 'beforeChildren',
+        when: "beforeChildren",
         staggerChildren: 0.1,
         delay: 0.2,
       },
@@ -24,7 +24,7 @@ const WelcomePage = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 150,
         damping: 15,
       },
@@ -42,25 +42,22 @@ const WelcomePage = () => {
         variants={itemVariants}
         className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 max-w-lg w-full text-center"
       >
-        <motion.div
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 0.5, repeat: 1 }}
-        >
+        <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 0.5, repeat: 1 }}>
           <FiArrowRight className="h-16 w-16 text-blue-600 mx-auto mb-4" />
         </motion.div>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-          Welcome to Futbol Connect!
+          Welcome to futbol conect!
         </h1>
         <p className="text-gray-600 mb-6">
-          Thank you for joining Futbol Connect. We're excited to help you connect with football opportunities worldwide.
+          Thank you for joining futbol conect. We’re excited to help you connect with football opportunities worldwide.
         </p>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => navigate('/pricing')}
+          onClick={() => navigate("/pricing")}
           className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg hover:bg-blue-700 transition-all"
         >
-          Proceed to Payment
+          Proceed to Pricing
         </motion.button>
       </motion.div>
     </motion.div>

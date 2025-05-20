@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { Search,  Trophy, Users, Calendar, MapPin, Share2, Twitter, Facebook, Linkedin, Link } from 'lucide-react';
+import { Search, Trophy, Users, Calendar, MapPin, Share2, Twitter, Facebook, Linkedin, Link, ArrowLeft } from 'lucide-react';
 import OkakaPlayerProfile from '../components/OkakaPlayerProfile';
 
 const Okaka = () => {
@@ -23,7 +24,8 @@ const Okaka = () => {
       "League Champions 2021",
       "Cup Winners 2021",
       "Super Cup 2023"
-    ]
+    ],
+    logo: "https://placehold.co/400x400/1a365d/ffffff?text=Okaka+FC"
   };
 
   const players = [
@@ -143,7 +145,7 @@ const Okaka = () => {
     },
     {
       id: 6,
-      name: "ahmed johnson",
+      name: "Ahmed Johnson",
       position: "Attacking Midfielder",
       number: 10,
       age: 19,
@@ -471,62 +473,102 @@ const Okaka = () => {
       animate="visible"
       className="min-h-screen bg-gray-50"
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
-        {/* Team Header */}
-        <motion.div variants={itemVariants} className="bg-white rounded-xl shadow-sm p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
-          <div className="flex flex-col md:flex-row items-start justify-between gap-4">
+      {/* Hero Section */}
+      <div className="relative h-64 sm:h-80 md:h-96 bg-gradient-to-r from-blue-600 to-indigo-800">
+        <img
+          src={teamInfo.logo}
+          alt={teamInfo.name}
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = `https://placehold.co/400x400/1a365d/ffffff?text=Okaka+FC`;
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+        <div className="absolute top-6 left-6 sm:top-8 sm:left-8">
+          <NavLink
+            to="/outplacement"
+            className="flex items-center text-white hover:text-blue-200 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Back to Transfer Market
+          </NavLink>
+        </div>
+        <div className="absolute bottom-8 left-6 sm:left-8 right-6 sm:right-8">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <img
+              src={teamInfo.logo}
+              alt={teamInfo.name}
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg border-2 border-white"
+            />
             <div>
-              <h1 className="text-3xl font-bold text-blue-900 mb-2">{teamInfo.name}</h1>
-              <div className="flex flex-wrap gap-4 text-gray-600">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">{teamInfo.name}</h1>
+              <p className="text-sm sm:text-base text-white/80">{teamInfo.location}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Team Info */}
+        <motion.div variants={itemVariants} className="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">Club Information</h2>
+              <div className="space-y-3 text-gray-600">
                 <div className="flex items-center">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Founded {teamInfo.founded}
+                  <Calendar className="w-5 h-5 mr-3 text-blue-600" />
+                  <span>Founded: {teamInfo.founded}</span>
                 </div>
                 <div className="flex items-center">
-                  <MapPin className="w-4 h-4 mr-2" />
-                  {teamInfo.location}
+                  <MapPin className="w-5 h-5 mr-3 text-blue-600" />
+                  <span>Location: {teamInfo.location}</span>
                 </div>
                 <div className="flex items-center">
-                  <Users className="w-4 h-4 mr-2" />
-                  Manager: {teamInfo.manager}
+                  <Users className="w-5 h-5 mr-3 text-blue-600" />
+                  <span>Manager: {teamInfo.manager}</span>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-5 h-5 mr-3 text-blue-600" />
+                  <span>Stadium: {teamInfo.stadium} ({teamInfo.capacity})</span>
                 </div>
               </div>
             </div>
-            <div className="mt-4 md:mt-0">
-              <div className="flex items-center gap-2 text-yellow-500">
-                <Trophy className="w-5 h-5" />
-                <span className="font-semibold">Recent Achievements</span>
-              </div>
-              <ul className="mt-2 text-sm text-gray-600">
+            <div>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">Achievements</h2>
+              <div className="space-y-3">
                 {teamInfo.achievements.map((achievement, index) => (
-                  <li key={index}>{achievement}</li>
+                  <div key={index} className="flex items-center text-gray-600">
+                    <Trophy className="w-5 h-5 mr-3 text-yellow-500" />
+                    <span>{achievement}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </motion.div>
 
         {/* Search and Filter */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="w-full sm:flex-1 relative">
             <input
               type="text"
               placeholder="Search players..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
             />
             <Search className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
           </div>
-          <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
+          <div className="flex flex-wrap gap-2">
             {positions.map((position) => (
               <button
                 key={position.id}
                 onClick={() => setSelectedPosition(position.id)}
-                className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   selectedPosition === position.id
                     ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                    : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
                 }`}
               >
                 {position.label}
@@ -536,7 +578,7 @@ const Okaka = () => {
         </motion.div>
 
         {/* Players Grid */}
-        <motion.div variants={containerVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+        <motion.div variants={containerVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPlayers.map((player) => (
             <motion.div
               key={player.id}
@@ -545,10 +587,21 @@ const Okaka = () => {
               className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:border-blue-200 transition-all"
             >
               <div className="relative">
-                <div className="h-40 sm:h-48 bg-white relative overflow-hidden flex items-center justify-center">
-                  <div className="h-full w-full flex items-center justify-center">
-                    <img 
-                      src={player.image} 
+                <div className="h-48 bg-white relative overflow-hidden flex items-center justify-center">
+                  <img
+                    src={player.image}
+                    alt={player.name}
+                    className="h-full w-full object-contain"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
+                    }}
+                  />
+                </div>
+                <div className="absolute -bottom-10 left-4">
+                  <div className="w-20 h-20 bg-white rounded-full border-4 border-white flex items-center justify-center text-blue-600 font-bold text-xl relative overflow-hidden">
+                    <img
+                      src={player.image}
                       alt={player.name}
                       className="h-full w-full object-contain"
                       onError={(e) => {
@@ -558,24 +611,9 @@ const Okaka = () => {
                     />
                   </div>
                 </div>
-                <div className="absolute -bottom-10 left-4">
-                  <div className="w-20 h-20 bg-white rounded-full border-4 border-white flex items-center justify-center text-blue-600 font-bold text-xl relative overflow-hidden">
-                    <div className="h-full w-full flex items-center justify-center">
-                      <img 
-                        src={player.image} 
-                        alt={player.name} 
-                        className="h-full w-full object-contain"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `https://ui-avatars.com/api/?name=${player.name.replace(' ', '+')}&background=random&size=400`;
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
               </div>
-              
-              <div className="pt-12 p-4 sm:p-6">
+
+              <div className="pt-12 p-6">
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h3 className="font-semibold text-lg text-gray-900">{player.name}</h3>
@@ -588,7 +626,7 @@ const Okaka = () => {
                   <span className="text-2xl">{player.flag}</span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 my-3 sm:my-4">
+                <div className="grid grid-cols-2 gap-4 my-4">
                   <div>
                     <div className="text-xs text-gray-500">Age</div>
                     <div className="font-medium">{player.age}</div>
@@ -605,7 +643,6 @@ const Okaka = () => {
                     <div className="text-xs text-gray-500">Joined</div>
                     <div className="font-medium">{player.joined}</div>
                   </div>
-
                 </div>
 
                 <div className="mb-4">
@@ -630,18 +667,16 @@ const Okaka = () => {
                   </div>
                 </div>
 
-                <div className="text-sm text-gray-600 mb-4">
-                  {player.bio}
-                </div>
+                <div className="text-sm text-gray-600 mb-4">{player.bio}</div>
 
                 <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                  <button 
+                  <button
                     onClick={() => setSelectedPlayer(player)}
                     className="text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors"
                   >
                     View Full Profile
                   </button>
-                  <button 
+                  <button
                     onClick={() => handleShare(player)}
                     className="text-gray-600 text-sm font-medium hover:text-gray-800 transition-colors flex items-center"
                   >
@@ -653,6 +688,17 @@ const Okaka = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {filteredPlayers.length === 0 && (
+          <motion.div
+            variants={itemVariants}
+            className="bg-white rounded-xl shadow-sm p-8 text-center"
+          >
+            <Users className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-700 mb-2">No players found</h3>
+            <p className="text-gray-500">Try adjusting your search or position filter</p>
+          </motion.div>
+        )}
       </div>
 
       {/* Player Profile Modal */}
@@ -669,34 +715,34 @@ const Okaka = () => {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-xl p-4 sm:p-6 w-full max-w-sm sm:max-w-md md:max-w-lg"
+            className="bg-white rounded-xl p-6 w-full max-w-sm sm:max-w-md"
           >
-            <h3 className="text-lg font-semibold mb-4">Share {sharePlayer.name}Profile</h3>
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <h3 className="text-lg font-semibold mb-4">Share {sharePlayer.name}s Profile</h3>
+            <div className="grid grid-cols-2 gap-4">
               <button
                 onClick={() => shareProfile('twitter')}
-                className="flex items-center justify-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors"
+                className="flex items-center justify-center gap-2 p-3 text-sm bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors"
               >
                 <Twitter className="w-5 h-5" />
                 Twitter
               </button>
               <button
                 onClick={() => shareProfile('facebook')}
-                className="flex items-center justify-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="flex items-center justify-center gap-2 p-3 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 <Facebook className="w-5 h-5" />
                 Facebook
               </button>
               <button
                 onClick={() => shareProfile('linkedin')}
-                className="flex items-center justify-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
+                className="flex items-center justify-center gap-2 p-3 text-sm bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
                 LinkedIn
               </button>
               <button
                 onClick={() => shareProfile('copy')}
-                className="flex items-center justify-center gap-1 sm:gap-2 p-2 sm:p-3 text-xs sm:text-sm bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                className="flex items-center justify-center gap-2 p-3 text-sm bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
               >
                 <Link className="w-5 h-5" />
                 Copy Link
@@ -715,4 +761,4 @@ const Okaka = () => {
   );
 };
 
-export default Okaka; 
+export default Okaka;
